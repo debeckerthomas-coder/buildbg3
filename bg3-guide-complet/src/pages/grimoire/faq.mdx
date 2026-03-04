@@ -1,0 +1,268 @@
+---
+title: "FAQ — Questions fréquentes & Cheat Sheet"
+description: "FAQ complète du Lockadin en Mode Honneur : build, serments, mécanique de combat, erreurs fatales, recovery et cheat sheet de référence rapide."
+section: grimoire
+part: 9
+layout: ../../layouts/PageLayout.astro
+---
+
+import Tooltip from '../../components/Tooltip';
+import Checklist from '../../components/Checklist';
+import Encart from '../../components/Encart.astro';
+import CalloutBlock from '../../components/CalloutBlock.astro';
+import StatBlock from '../../components/StatBlock.astro';
+import StatRow from '../../components/StatRow.astro';
+
+<Encart type="info" title="Cheat Sheet — Actions optimales" slot="encarts">
+
+| Action | Priorité |
+|---|---|
+| **Action** | 2× attaques mêlée + Smite Occ Niv.3 |
+| **Action Bonus** | Souffrance Malveillante (Tour 1) · Sort Anneau Vaurien |
+| **Réaction** | Contresort (Occ) · Bouclier (GOO) |
+| **Concentration** | Bénédiction (Sombrecœur) · Immobilisation (Gale) |
+
+</Encart>
+
+<Encart type="danger" title="Erreurs fatales — Top 6" slot="encarts">
+
+<StatBlock compact>
+  <StatRow label="1. Pack de 4"            value="Boule de Feu → wipe"       danger note="→ 4-6m d'espacement" />
+  <StatRow label="2. Marquage Gortash"     value="110 dégâts Force"          danger note="→ Délivrance immédiate" />
+  <StatRow label="3. Légendaires ignorées" value="Riposte hors tour"         danger note="→ Examiner avant combat" />
+  <StatRow label="4. Dos au vide"          value="Poussée = mort"            danger note="→ Dos au mur plein" />
+  <StatRow label="5. Usure Myrkul"         value="Bone Chill bloque soins"   danger note="→ Alpha Strike tour 1-3" />
+  <StatRow label="6. Concentration perdue" value="Hâte tombe → ralenti"      danger note="→ Potions jetées" />
+</StatBlock>
+
+</Encart>
+
+<Encart type="tip" title="Recovery — Ne paniquez pas" slot="encarts">
+
+**Compagnon mort :**
+- En combat : Parchemin de Revivifier immédiatement
+- Hors combat : Flétrissure au camp — 200 PO
+
+**Serment brisé par accident :**
+- Le Chevalier Parjure apparaît au prochain repos
+- Pour ce build → **embrassez l'Oathbreaker** (c'est le cœur du build)
+
+**Malus Zaith'isk (−2 stats) :**
+- Consommez une larve pour débloquer "Chance des Royaumes Lointains" — compense largement
+
+</Encart>
+
+<section id="faq-build">
+
+## 9.1 — FAQ Build & Multiclassage
+
+**Pourquoi Paladin 7 et pas Paladin 6 pour économiser un niveau ?**
+
+Le niveau 7 de Paladin (Briseur de Serment) apporte l'**Aura de Haine** : +CHA (soit +5) à TOUS les dégâts de mêlée. Sur une run de 12 niveaux, cette aura représente des centaines de dégâts supplémentaires sur l'ensemble de la partie. Impossible d'y renoncer.
+
+**Pourquoi pas Paladin 8 / Occultiste 4 ?**
+
+Avec Pal 8 / Occ 4, vous gagnez un Don supplémentaire mais perdez les **Smites de Niveau 3 sur repos court** (qui nécessitent Occ 5). Ce sont ces emplacements récupérables rapidement qui font du Lockadin une machine inépuisable. Le tradeoff ne vaut pas.
+
+**L'Extra Attaque se cumule-t-elle avec l'Invocation de la Lame ?**
+
+Non, pas en Mode Honneur. Larian Studios a spécifiquement patché cette interaction. Votre attaque supplémentaire de Paladin ne se cumulera pas avec celle de l'Occultiste — une seule Extra Attaque s'applique.
+
+**Le Sorcadin est-il meilleur ?**
+
+Le Sorcadin a un burst théorique supérieur sur un seul round grâce à la Métamagie. Mais il exige de jouer avec la Force (pas de Pacte de la Lame), gère deux caractéristiques, et est plus fragile. Pour le Mode Honneur, la robustesse du Lockadin (CA 25+, Auras) est préférable à la puissance brute ponctuelle.
+
+</section>
+
+---
+
+<section id="faq-oath">
+
+## 9.2 — Serments & Briseur de Serment
+
+**Comment briser mon Serment de façon fiable dès le début ?**
+
+Selon votre Serment de départ :
+- **Vengeance :** Épargner un grand méchant, ou s'allier avec les forces du mal (ex: pactiser avec Gortash).
+- **Dévotion :** Mentir, trahir, attaquer des innocents, ou attaquer dans le dos sans provocation.
+- **Anciens :** Détruire la nature, tuer des animaux non hostiles (ex: l'Ours-hibou mère).
+
+**L'Aura de Haine n'est-elle pas dangereuse pour l'équipe ?**
+
+Oui. En Acte 2, les ombres et goules bénéficient de +5 à leurs dégâts si elles sont à 3m de vous. Votre CA (22+) et vos PV massifs compensent largement. **Désactivez l'Aura** via les passifs lors des combats de masse contre les zombies — rallumez-la contre les boss.
+
+**Vaut-il mieux jouer Sombres Pulsions (Dark Urge) pour ce build ?**
+
+Au-delà du RP parfait (un enfant de Bhaal qui brise son Serment), le Dark Urge reçoit la <Tooltip name="Cape du Traqueur de Mort" type="Cape de Quête" stats="Invisibilité 2 tours après un kill" client:idle>Sur un Paladin spécialisé dans le One-Shot, cette cape est exceptionnelle : vous tuez le boss (ou un sbire) → vous devenez invisible 2 tours → vous vous repositionnez librement.</Tooltip> en Acte 1. Excellent, mais pas obligatoire.
+
+</section>
+
+---
+
+<section id="faq-combat">
+
+## 9.3 — FAQ Combat & Mécaniques
+
+**Dois-je déclarer le Châtiment Divin AVANT ou APRÈS l'attaque ?**
+
+**Après.** Vous attaquez, et seulement si vous **touchez**, le jeu vous propose (via l'onglet Réactions) de dépenser un emplacement pour Smiter. Vous ne gaspillez jamais un sort dans le vide.
+
+**Comment évolue la Décharge Occulte ?**
+
+Les sorts mineurs évoluent avec votre **niveau de personnage global**, pas votre niveau de classe. Au niveau 10, Décharge Occulte lance **3 rayons**. Avec Décharge Agonisante, vous ajoutez +5 dégâts par rayon (+15 total). C'est votre arme à distance principale pour gérer les ennemis hors de portée.
+
+**Quels emplacements de sorts prioriser pour les Smites ?**
+
+Utilisez vos emplacements d'**Occultiste Niveau 3** en priorité — ils reviennent après un simple Repos Court. Conservez les emplacements Paladin pour les situations d'urgence ou les combats sans repos court disponible à proximité.
+
+</section>
+
+---
+
+<section id="faq-honour">
+
+## 9.4 — FAQ Mode Honneur
+
+**Les sauvegardes automatiques écrasent-elles l'ancienne save ?**
+
+Oui. Le jeu sauvegarde automatiquement à chaque événement majeur, changement de zone, vol raté et repos long. Si votre groupe entier meurt (Hécatombe / TPK), l'écran de Game Over apparaît et la sauvegarde est **définitivement supprimée**. Il n'existe qu'une seule sauvegarde à la fois.
+
+**Peut-on fuir un combat qu'on est en train de perdre ?**
+
+**Oui.** Tant qu'un seul membre est en vie, s'il s'éloigne suffisamment de la zone de combat (hors ligne de vue), il peut utiliser l'action "Fuir le combat". Il retourne au camp avec les alliés tombés — qui peuvent être ressuscités chez Flétrissure pour 200 PO chacun.
+
+</section>
+
+---
+
+<section id="mistakes">
+
+## 9.5 — Erreurs fatales & Pièges courants
+
+<CalloutBlock type="danger" title="Les 6 causes principales de Hécatombe">
+Chaque erreur listée ici a terminé des centaines de runs en Mode Honneur.
+</CalloutBlock>
+
+| Erreur | Conséquence | Parade absolue |
+|---|---|---|
+| **1. Le Pack de 4** | Boule de Feu touche les 4 personnages simultanément | 4 à 6m d'espacement permanent |
+| **2. Marquage Gortash** | ~110 dégâts de Force à la fin du tour | <Tooltip name="Délivrance des malédictions" type="Sort Clerc Niv.3" stats="Retire toute malédiction immédiatement" client:idle>À conserver spécifiquement pour Gortash. Lancez en réaction ou action immédiatement après que le Lockadin a attaqué Gortash.</Tooltip> immédiatement |
+| **3. Légendaires ignorées** | Riposte boss hors de son tour — surprise mortelle | Examinez (T) toujours les buffs du boss AVANT |
+| **4. Dos au vide** | Vague Tonnante / flèche de recul = chute fatale | Dos au mur plein — évitez les ponts |
+| **5. Usure contre Myrkul** | Bone Chill bloque toute guérison au CàC | Alpha Strike Tour 1-3. Aveuglir au Sunbeam Tour 1 |
+| **6. Concentration perdue sur Hâte** | Le Paladin devient Ralenti (−2 attaques) | Privilégiez les Potions de Vitesse jetées (sans concentration) |
+
+</section>
+
+---
+
+<section id="recovery">
+
+## 9.6 — Recovery : Rattraper une erreur
+
+**Malus de la chaise Zaith'isk (−2 stats) :**
+
+Si vous échouez aux jets de sauvegarde de la machine de la Crèche Y'llek, vous subissez un malus permanent à certaines caractéristiques. Solution : consommez une larve pour débloquer **Chance des Royaumes Lointains** (critique forcé 1×/repos) — cela compense très largement le malus.
+
+**Serment brisé par accident :**
+
+Ne paniquez pas. Le Chevalier Briseur de Serment apparaîtra au camp lors de votre prochain repos. Pour ce build, **embrassez l'Oathbreaker** — c'est exactement ce que vous voulez. Si vous n'aviez pas prévu de briser votre serment à ce moment précis, vérifiez simplement que vous avez les PO pour racheter le serment chez Flétrissure avant la respécialisation du Niveau 8.
+
+**Compagnon mort en combat :**
+- En combat : Parchemin de **Revivifier** immédiatement.
+- Hors combat / corps inaccessible : Flétrissure au camp — 200 PO.
+- Attention : les morts narratives (ex : sacrifier Gale via un dialogue) sont définitives.
+
+</section>
+
+---
+
+<section id="faq-companions">
+
+## 9.7 — FAQ Compagnons
+
+**Quels sont les 3 meilleurs compagnons en Mode Honneur ?**
+
+**Sombrecœur** (Clerc), **Gale** (Magicien) et **Lae'zel** (Guerrière) — le Golden Trio du Mode Honneur. Sombrecœur gère les soins et débuffs (Orbe Radiant). Gale gère le contrôle et le Globe d'invulnérabilité indispensable contre Raphaël/Ansur. Lae'zel assure un DPS mêlée constant via Sursaut d'Action.
+
+**Peut-on finir le Mode Honneur sans Clerc ?**
+
+Très risqué. Sans Aide, Bénédiction et Mot de Guérison de groupe, votre marge d'erreur face à l'inattendu est quasi nulle. Si vous n'aimez pas Sombrecœur, respécialisez un autre compagnon (comme Jaheira) en Clerc.
+
+</section>
+
+---
+
+<section id="faq-loot">
+
+## 9.8 — FAQ Loot & Équipement
+
+**Quelle est la meilleure arme pour le Lockadin ?**
+
+Pour la survie (Acte 1 et 2) : le **Sang de Lathandre**. En fin d'Acte 3 : **Nyrulna** (Trident +3, Tonnerre de zone, revient en main). Pour l'affaiblissement des boss : L'Étoile Sacrée (Orbes Radiants sur chaque frappe — synergy Sombrecœur).
+
+**Où se trouve le Sang de Lathandre ?**
+
+Dans la **Crèche Y'llek** (Acte 1), sur l'Inquisitrice Ch'r'ai W'wargaz. Cet objet est le Saint Graal du Lockadin Acte 1-2 : il ajoute votre modificateur de Charisme à vos dégâts d'arme chaque fois que vous infligez des dégâts radiants — et la masse est déjà contondante (vulnérabilité des squelettes).
+
+**Les Cheveux d'Ethel (+1 caractéristique) sont-ils obligatoires ?**
+
+Ce n'est pas obligatoire pour finir le jeu, mais un bonus gratuit de +1 en Charisme (pour passer de 20 à 21 avec un Don) est bien trop puissant pour être ignoré. Préparez vos sorts de Guidance et sauvegardez avant la scène.
+
+</section>
+
+---
+
+<section id="checklist-boss">
+
+## 9.8b — Checklist pré-combat — Boss majeur
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-boss"
+  title="Prêt à attaquer un boss ?"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "faq-boss-01", label: "Repos Court ou Long effectué — emplacements Occultiste Niv.3 au maximum.", priority: "critical", tag: "Obligatoire" },
+      { id: "faq-boss-02", label: "Compagnon de secours laissé au camp (obligatoire si vous doutez face à Raphaël/Ansur/Myrkul).", priority: "critical", tag: "Failsafe" },
+      { id: "faq-boss-03", label: "Potions de Vitesse prêtes en barre d'accès rapide.", priority: "important" },
+      { id: "faq-boss-04", label: "Élixirs bus par toute l'équipe (Viciosité ou Sang pour le Lockadin, Force pour les autres martiaux).", priority: "critical" },
+      { id: "faq-boss-05", label: "<strong>Arme Liée (Pacte de la Lame) :</strong> avez-vous bien cliqué sur « Lier l'arme de pacte » ce matin ?!", priority: "critical", tag: "Obligatoire" },
+      { id: "faq-boss-06", label: "Magie de Camp : Aide (Niv.5+) et Festin des Héros actifs sur le groupe.", priority: "important" },
+      { id: "faq-boss-07", label: "Lien de Protection actif sur votre Lockadin via le Clerc resté au camp.", priority: "important" },
+      { id: "faq-boss-08", label: "Parchemins vitaux distribués : Globe d'Invulnérabilité, Revivifier et Délivrance des malédictions.", priority: "important" },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="cheatsheet">
+
+## 9.9 — Cheat Sheet : Référence rapide Lockadin 7/5
+
+**Chaque round de combat — Ordre de priorité :**
+
+| Ressource | Action optimale | Alternative |
+|---|---|---|
+| **Action** | 2× attaques (Smite Occ Niv.3 si boss paralysé) | Décharge Occulte ×3 (cibles à distance) |
+| **Action Bonus** | Souffrance Malveillante (Tour 1 sur boss) | Sort Anneau Vaurien Mystique (Enchantement) |
+| **Réaction** | Contresort (si sort ennemi menaçant) | Sort Bouclier (+5 CA si patron GOO) |
+
+**Slots de sorts — Ordre de dépense :**
+
+1. Emplacements **Occultiste Niv.3** en premier (repos court → rechargés vite)
+2. Emplacements **Paladin Niv.2** ensuite
+3. Emplacements **Paladin Niv.1** en dernier (urgence)
+
+**Rappels de survie :**
+
+- Toujours vérifier : **arme de pacte liée** après chaque repos long.
+- Toujours conserver : **Contresort** en réaction pour les sorts de boss (Boule de Feu, Tempête de Grêle).
+- Toujours maintenir : **Bénédiction** par Sombrecœur pendant les combats majeurs.
+- Toujours lire : **Examiner (T)** les buffs du boss avant d'engager.
+
+</section>

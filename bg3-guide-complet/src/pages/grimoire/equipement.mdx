@@ -1,0 +1,298 @@
+---
+title: "Équipement — BiS par acte"
+description: "Guide complet de l'équipement du Lockadin par acte : armes, armures, boucliers, casques, gants, bottes, capes, amulettes, anneaux, élixirs et loadouts recommandés."
+section: grimoire
+part: 2
+layout: ../../layouts/PageLayout.astro
+---
+
+import PageLayout from '../../layouts/PageLayout.astro';
+import Tooltip from '../../components/Tooltip';
+import Encart from '../../components/Encart.astro';
+import LootItem from '../../components/LootItem.astro';
+import Checklist from '../../components/Checklist';
+import CalloutBlock from '../../components/CalloutBlock.astro';
+import StatBlock from '../../components/StatBlock.astro';
+import StatRow from '../../components/StatRow.astro';
+
+<Encart type="warning" title="Rituel du matin — obligatoire" slot="encarts">
+
+À partir du **Niveau 8**, liez votre arme **chaque matin** après un repos long :
+
+> Action → **Lier l'arme de pacte**
+
+Sans cette action, votre personnage frappe avec sa Force de 10 et rate tout. Ne l'oubliez jamais.
+
+</Encart>
+
+<Encart type="loot" title="Priorités absolues — Acte 1" slot="encarts">
+  <LootItem name="Sang de Lathandre" type="Masse légendaire" rarity="legendary" stats="+3 · Sunbeam 1×/repos" location="Crèche Y'llek" bis />
+  <LootItem name="Armure d'attelle adamantine" type="Armure lourde" rarity="very-rare" stats="18 CA · −2 dégâts · immunité crits" location="Forge adamantine" bis />
+  <LootItem name="Bouclier adamantine" type="Bouclier" rarity="very-rare" stats="+2 CA · Reeling · immunité crits" location="Forge adamantine" bis />
+  <LootItem name="Anneau de Protection" type="Anneau" rarity="uncommon" stats="+1 CA · +1 JS" location="Mol (voler l'Idole)" />
+</Encart>
+
+<Encart type="loot" title="BiS Final — Acte 3" slot="encarts">
+  <LootItem name="Nyrulna" type="Trident légendaire" rarity="legendary" stats="+3 · Attaque CHA · Tonnerre zone" location="Cirque (voler Akabi)" bis />
+  <LootItem name="Armure du Crépuscule Infernal" type="Armure lourde" rarity="legendary" stats="21 CA · −3 dégâts · Immunité Feu & Crits" location="Raphaël (Maison de l'Espoir)" bis />
+  <LootItem name="Forteresse Ambulante de Viconia" type="Bouclier" rarity="legendary" stats="+3 CA · Avantage JS sorts · Renvoi" location="Viconia (Temple de Shar)" bis />
+  <LootItem name="Heaume de Balduran" type="Casque" rarity="legendary" stats="Immunité Stun & Crits · +2 PV/tour" location="Ansur (Wyrmway)" bis />
+  <LootItem name="Héritage des Maîtres" type="Gants" rarity="very-rare" stats="+2 attaque & dégâts" location="Dammon (Acte 3)" bis />
+  <LootItem name="Bottes Crépuscule Infernal" type="Bottes" rarity="very-rare" stats="Téléportation 12m + Immunité poussée" location="Coffre Gortash" bis />
+</Encart>
+
+<section id="equipement-intro">
+
+## Introduction — Philosophie d'équipement du Lockadin
+
+Le Lockadin utilise le **Charisme** comme statistique d'attaque via le Pacte de la Lame. Cela signifie que les armes qui ajoutent un bonus basé sur la Force sont **inutiles** — seules les armes liables via le Pacte sont pertinentes.
+
+Deux styles d'équipement :
+- **Épée + Bouclier (recommandé) :** CA maximale (20–30+), une main libre pour le bouclier. Armes compatibles : épées longues, masses, fléaux d'armes, lances, tridents.
+- **Arme à deux mains :** Dégâts plus élevés (2d6 base), sans bouclier. Requiert le don Maître des Armes de Guerre. Moins défensif.
+
+<CalloutBlock type="warning" title="Lier l'arme chaque matin">
+N'oubliez jamais d'utiliser l'action <Tooltip name="Lier l'arme de pacte" type="Action de Classe — Occultiste Niv.3" stats="Lie l'arme · Attaques utilisent CHA" client:idle>L'arme liée utilise votre Charisme pour les jets d'attaque ET de dégâts. Elle revient en main si vous la jetez. Elle ne peut pas vous être volée. À refaire après chaque repos long.</Tooltip> après chaque repos long. Sans cela, vous frappez à la Force 10 — vous ratez tout.
+</CalloutBlock>
+
+</section>
+
+---
+
+<section id="armes">
+
+## 2.1 — Armes
+
+**Acte 1 — Recommandations :**
+
+Commencez avec la <Tooltip name="Lame Éternelle" type="Espadon Inhabituel" rarity="uncommon" stats="+1d4 Feu" client:idle>Récupérée au Nautiloïde via Injonction sur Zhalk. Excellente arme de départ pour les niveaux 1-4.</Tooltip> (Nautiloïde), puis passez au <Tooltip name="Sang de Lathandre" type="Masse Légendaire +3" rarity="legendary" stats="Sunbeam 1×/repos · Survie 1× si PV → 0" client:idle>Votre arme principale pour l'Acte 1 et 2. Les dégâts radiants sont dévastateurs contre les morts-vivants de l'Acte 2. Le Sunbeam peut aveugler les boss.</Tooltip> + bouclier dès la Crèche Y'llek.
+
+| Arme | Type | Propriétés clés | Obtention |
+|---|---|---|---|
+| **Sang de Lathandre** | Masse 1H | +3 · Survie (1 PV si KO) · Sunbeam | Crèche Y'llek |
+| Phalar Aluve | Épée longue 1H/2H | Shriek (AoE tonnerre) / Sing (buff alliés) | Outreterre |
+| Lame Éternelle | Espadon 2H | +1d4 Feu — arme de départ | Nautiloïde |
+| Épée longue adamantine | Épée 1H | Ignore résistance tranchant | Forge adamantine |
+| Épée de Justice | Épée longue | +2 CA buff si 2H | Anders (Route Résurrection) |
+
+<CalloutBlock type="danger" title="Piège — Épée de Voss (Col de Montagne)">
+Certains guides recommandent l'Épée d'argent du plan astral. La cibler avec Injonction sur Kith'rak Voss au Col de Montagne déclenche **immédiatement** un combat contre toute la garnison Githyanki — extrêmement dangereux en Mode Honneur aux niveaux 6-7.
+</CalloutBlock>
+
+<CalloutBlock type="danger" title="Piège — Tueur de Géants de Balduran">
+Bien que souvent citée comme la meilleure épée, votre Lockadin attaque au **Charisme** (pas à la Force). Le bonus de Force de cette épée est donc totalement inutile. Préférez Nyrulna (Trident +3, bonus au Charisme via Pacte) pour le slot Acte 3.
+</CalloutBlock>
+
+**Acte 2 :** Sang de Lathandre reste excellent (anti-morts-vivants). Si vous sauvez Chantsenuit, la Lance de la Nuit de Séluné (+3) est une alternative solide pour Sombrecœur.
+
+**Acte 3 :** <Tooltip name="Nyrulna" type="Trident Légendaire" rarity="legendary" stats="+3 · Revient en main · 1d6 Tonnerre zone · Immunité chute" client:idle>Obtenu en volant l'anneau du Génie Akabi au cirque de Rivington. L'arme revient en main après avoir été lancée. Inflige 1d6 Tonnerre de zone à chaque frappe.</Tooltip> est la meilleure arme Lockadin Vanilla. +3, dégâts tonnerre de zone, revient en main.
+
+</section>
+
+---
+
+<section id="armures">
+
+## 2.2 — Armures
+
+<CalloutBlock type="danger" title="Forge adamantine — Choix critique (2 objets max)">
+Vous ne pouvez forger que **2 objets** par partie. Priorité absolue : **Armure d'attelle en adamantine** (Craft 1) + **Bouclier en adamantine** (Craft 2). Ces deux objets vous accompagneront jusqu'au milieu de l'Acte 3.
+</CalloutBlock>
+
+**Parcours recommandé :** Cotte de mailles (début Acte 1) → Armure d'attelle adamantine (Grymforge, fin Acte 1) → Gardez l'adamantine tout l'Acte 2 → Armure de Persistance (début Acte 3, achat) → Armure du Crépuscule Infernal (Raphaël, optionnel).
+
+| Armure | CA | Propriétés clés | Obtention |
+|---|---|---|---|
+| **Armure d'attelle adamantine** | 18 | −2 dégâts · immunité crits · Reeling attaquants | Forge adamantine |
+| Armure de Persistance | 20 | −2 dégâts · immunité poussée | Achat Acte 3 |
+| **Armure Crépuscule Infernal** | 21 | −3 dégâts · immunité Feu & crits | Raphaël (optionnel) |
+| Demi-plate Githyanki | 17 | Départ Acte 1 si pas encore d'adamantine | Lae'zel (Prologue) |
+
+</section>
+
+---
+
+<section id="boucliers">
+
+## 2.3 — Boucliers
+
+| Bouclier | CA | Propriétés clés | Acte |
+|---|---|---|---|
+| **Bouclier adamantine** | +2 | Reeling · immunité crits | Acte 1 |
+| Bouclier de Dévotion | +2 | Lance Aide · +1 slot sort Niv.1 | Acte 2 |
+| Bouclier Sentinelle | +2 | Avantage Initiative & Perception | Acte 2 |
+| **Forteresse Ambulante de Viconia** | +3 | Avantage JS sorts · Renvoi de sorts | Acte 3 |
+
+</section>
+
+---
+
+<section id="casques">
+
+## 2.4 — Casques
+
+**Astuce crit-stacking :** Cumulez les réductions du seuil de critique pour maximiser vos Smites. Élixir de Viciosité + Casque cornu de Sarevok = critique sur 18-19-20.
+
+| Casque | Propriétés clés | Obtention | Tier |
+|---|---|---|---|
+| Casque de châtiment | PV temp = CHA par Smite | Outreterre (Acte 1) | S |
+| **Heaume de Balduran** | Immunité Stun & Crits · +2 PV/tour | Wyrmway/Ansur (Acte 3) | S+ |
+| Casque cornu de Sarevok | Immunité Effrayé · Critique −1 seuil | Sarevok (Acte 3) | S |
+| Heaume de la Lance Sacrée | 1d4 Radiant si ennemi rate | Monastère d'Auberosée | A |
+
+</section>
+
+---
+
+<section id="gants">
+
+## 2.5 — Gants
+
+| Gants | Propriétés clés | Obtention | Tier |
+|---|---|---|---|
+| **Héritage des Maîtres** | +2 attaque & +2 dégâts | Dammon (Acte 3) | S+ |
+| Gants Crépuscule Infernal | +1d6 Feu sur attaques | Haarlep (Maison de l'Espoir) | S |
+| Gants d'Héroïsme | Héroïsme sur Canalisation | Cave du péage (Acte 1) | A |
+| Gants du Mage de guerre | +Bonus atq si concentration | Marchands (Acte 2-3) | A |
+
+</section>
+
+---
+
+<section id="bottes">
+
+## 2.6 — Bottes
+
+| Bottes | Propriétés clés | Obtention | Tier |
+|---|---|---|---|
+| **Bottes Crépuscule Infernal** | Téléportation 12m · Immunité poussée | Coffre Gortash (Acte 3) | S+ |
+| Marchenocturnes | Pas Brumeux 1×/repos court · Immunité toile | Loot Nere (Acte 1) | S |
+| Bottes de Vitesse | Double mouvement (Action Bonus) | Thulla (Acte 1) | A |
+
+</section>
+
+---
+
+<section id="capes">
+
+## 2.7 — Capes
+
+| Cape | Propriétés clés | Obtention | Tier |
+|---|---|---|---|
+| **Cape de Déplacement** | Désavantage constant sur attaques ennemies | Danthelon (Acte 3) | S+ |
+| Manteau du Saint Guerrier | Aura +1d4 Radiant alliés (sans dépenser de slot) | Humbletoes (Acte 3) | S |
+| Cape de Protection | +1 CA · +1 tous JS | Talli (Acte 2) | A |
+
+</section>
+
+---
+
+<section id="amulettes">
+
+## 2.8 — Amulettes
+
+| Amulette | Propriétés clés | Obtention | Tier |
+|---|---|---|---|
+| **Amulette de Santé Supérieure** | CON fixée à 23 · Avantage JS CON | Maison de l'Espoir (Acte 3) | S+ |
+| Amulette de Soumission du Chirurgien | Paralysie sur critique (1×/jour) | Malus Thorm (Acte 2) | S |
+| Amulette du Savant | Restaure 1 sort (n'importe quel niveau) | Marchands (Acte 3) | A |
+| Amulette de Pas Brumeux | Pas Brumeux 1×/repos court | Sanctuaire Profané (Acte 1) | A |
+
+</section>
+
+---
+
+<section id="anneaux">
+
+## 2.9 — Anneaux (2 emplacements)
+
+| Anneau | Propriétés clés | Obtention | Tier |
+|---|---|---|---|
+| **Anneau du Vaurien Mystique** | Sort Illusion/Enchantement en Action Bonus | Jungle Chult (Acte 3) | S+ |
+| **Bien-aimée du Tueur** | Critique garanti après un kill | Gauntlet of Shar (Acte 2) | S |
+| Anneau de Protection | +1 CA · +1 tous JS | Mol (Acte 1) | S |
+| Anneau du Conduit Étrange | +1d4 psychique si concentration active | Crèche Y'llek | A |
+| Anneau de Broyeur | +3m déplacement | Camp Gobelin (Acte 1) | A |
+
+</section>
+
+---
+
+<section id="elixirs">
+
+## 2.10 — Élixirs & Consommables clés
+
+Un seul élixir actif à la fois (durent jusqu'au repos long). Les potions se cumulent.
+
+<CalloutBlock type="danger" title="Nerf Mode Honneur — Potions de Vitesse">
+Les attaques gagnées via la Potion de Vitesse (action supplémentaire) ne permettent **pas** de déclencher un Châtiment Divin en Mode Honneur. La potion reste utile pour le déplacement, pas pour le burst de Smites.
+</CalloutBlock>
+
+| Élixir | Effet | Priorité |
+|---|---|---|
+| **Élixir de Force de Géant des Collines** | Force fixée à 21 — obligatoire Niv.1–7 | S+ |
+| Élixir de Viciosité | Critique −1 seuil (s'empile avec casque) | S+ |
+| Élixir de Soif de Sang | Kill → 1 action supp + 5 PV temp | S |
+| Élixir d'Héroïsme | +10 PV temp + Bénédiction jusqu'au repos | A |
+
+</section>
+
+---
+
+<section id="loadouts">
+
+## 2.11 — Loadouts recommandés par acte
+
+**Acte 1 — CA cible : 22**
+
+| Emplacement | Objet | Effet |
+|---|---|---|
+| Arme | Sang de Lathandre | +3 · Sunbeam · Survie |
+| Armure | Adamantine Splint | 18 CA · −2 dégâts · imm. crits |
+| Bouclier | Bouclier adamantine | +2 CA · Reeling |
+| Casque | Casque de châtiment | PV temp par Smite |
+| Gants | Gants d'Héroïsme | Héroïsme sur Canalisation |
+| Bottes | Marchenocturnes | Pas Brumeux |
+| Anneau 1 | Anneau de Broyeur | +3m mouvement |
+| Anneau 2 | Anneau de Protection | +1 CA · +1 JS |
+| Élixir | Élixir de Force (Collines) | FOR 21 — obligatoire |
+
+**Acte 2 — CA cible : 23**
+
+| Emplacement | Objet | Effet |
+|---|---|---|
+| Arme | Sang de Lathandre | Reste BiS anti-morts-vivants |
+| Armure | Adamantine Splint (gardée) | 18 CA · −2 dégâts |
+| Bouclier | Bouclier de Dévotion | +2 CA · +1 slot Smite |
+| Amulette | Amulette de Soumission | Paralysie sur critique |
+| Anneau 1 | Bien-aimée du Tueur | Critique garanti après kill |
+| Élixir | Élixir de Viciosité | Critique sur 19-20 |
+
+</section>
+
+---
+
+<section id="checklist-equip">
+
+## ✓ Checklist équipement — Prêt par acte ?
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-equip"
+  title="Équipement par acte"
+  showProgress={true}
+  groups={[{
+    items: [
+      { id: "eq-01", label: "<strong>Acte 1 :</strong> Sang de Lathandre sécurisé (Crèche Y'llek).", priority: "critical", tag: "BiS Acte 1-2" },
+      { id: "eq-02", label: "<strong>Acte 1 :</strong> Armure d'attelle adamantine forgée.", priority: "critical" },
+      { id: "eq-03", label: "<strong>Acte 1 :</strong> Bouclier adamantine forgé.", priority: "important" },
+      { id: "eq-04", label: "<strong>Acte 1 :</strong> Anneau de Protection (Mol).", },
+      { id: "eq-05", label: "<strong>Acte 2 :</strong> Bien-aimée du Tueur (Gauntlet of Shar).", priority: "important" },
+      { id: "eq-06", label: "<strong>Acte 2 :</strong> Amulette de Soumission du Chirurgien (Malus Thorm).", },
+      { id: "eq-07", label: "<strong>Acte 3 :</strong> Nyrulna acquise (Cirque — voler Akabi).", priority: "critical", tag: "BiS Acte 3" },
+      { id: "eq-08", label: "<strong>Acte 3 :</strong> Héritage des Maîtres (Dammon).", priority: "important" },
+    ]
+  }]}
+/>
+
+</section>
