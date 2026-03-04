@@ -1,0 +1,42 @@
+---
+// src/components/StatRow.astro
+// Ligne de stats pour StatBlock
+//
+// Usage :
+//   <StatRow label="PV du boss" value="666" danger />
+//   <StatRow label="Résistance" value="Feu, Froid, Foudre" />
+//   <StatRow label="Smite max"  value="4d8 Radiant" highlight note="Emplacement Occ.3" />
+
+interface Props {
+  label: string;
+  value: string;
+  note?: string;          // info secondaire en gris
+  highlight?: boolean;    // valeur en or
+  danger?: boolean;       // valeur en rouge (pour les stats boss)
+  success?: boolean;      // valeur en vert
+}
+
+const { label, value, note, highlight, danger, success } = Astro.props;
+
+const valueColor =
+  danger    ? 'text-danger font-semibold' :
+  success   ? 'text-emerald font-semibold' :
+  highlight ? 'text-gold-light font-semibold' :
+              'text-text-primary';
+---
+
+<tr class="hover:bg-gold/3 transition-colors">
+  <td class="px-4 py-2 font-ui text-xs text-text-muted align-top w-[45%]">
+    {label}
+  </td>
+  <td class="px-4 py-2 text-right align-top">
+    <span class:list={['font-mono text-xs', valueColor]}>
+      {value}
+    </span>
+    {note && (
+      <span class="block font-ui text-[10px] text-text-dim mt-0.5 text-right">
+        {note}
+      </span>
+    )}
+  </td>
+</tr>

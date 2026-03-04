@@ -1,0 +1,668 @@
+---
+# src/pages/playthrough/acte1.mdx
+title: "Acte 1 — La Forêt interdite"
+description: "Walkthrough complet de l'Acte 1 en Mode Honneur : Pacifist Route pour atteindre le niveau 4 sans risque, bonus permanents, et stratégies pour chaque boss tueur de run."
+section: playthrough
+act: 1
+part: 4
+layout: ../../layouts/PageLayout.astro
+---
+
+import PageLayout from '../../layouts/PageLayout.astro';
+import Checklist from '../../components/Checklist';
+import Tooltip from '../../components/Tooltip';
+import Encart from '../../components/Encart.astro';
+import LootItem from '../../components/LootItem.astro';
+import CalloutBlock from '../../components/CalloutBlock.astro';
+import StatBlock from '../../components/StatBlock.astro';
+import StatRow from '../../components/StatRow.astro';
+import BossFiche from '../../components/BossFiche.astro';
+import BossWeakness from '../../components/BossWeakness.astro';
+
+{/* ════════════════════════════════════════════════════════════
+    COLONNE DROITE — Encarts contextuels (slot "encarts")
+    Ils sont déclarés ici en haut mais rendus dans la colonne 35%
+    ════════════════════════════════════════════════════════════ */}
+
+<Encart type="danger" title="Bosses tueurs de run — Acte 1" slot="encarts">
+
+**5 combats à risque maximal :**
+
+<StatBlock>
+  <StatRow label="Zhalk (Prologue)"          value="195 PV"  danger note="Optionnel — Ne pas combattre" />
+  <StatRow label="Reine des Araignées"        value="138 PV"  danger note="Niv. 5 requis" />
+  <StatRow label="Auntie Ethel"               value="145 PV"  danger note="Niv. 5 requis" />
+  <StatRow label="Nere (Grymforge)"           value="~120 PV" danger note="Niv. 5-6 requis" />
+  <StatRow label="Grym (Forge)"               value="450 PV"  danger note="Niv. 6 requis" />
+</StatBlock>
+
+</Encart>
+
+<Encart type="levelup" title="Palier de puissance — Acte 1" slot="encarts">
+
+Objectif : atteindre **Paladin pur Niv. 7** avant la transition Acte 2.
+
+<StatBlock compact>
+  <StatRow label="Niv. 4"  value="Feat : ASI CHA → 20" highlight />
+  <StatRow label="Niv. 5"  value="Extra Attaque active" highlight />
+  <StatRow label="Niv. 6"  value="Aura de Dévotion (+CHA aux saves)" highlight />
+  <StatRow label="Niv. 7"  value="Aura de Protection (+CHA à tous)" highlight />
+</StatBlock>
+
+</Encart>
+
+<BossFiche
+  name="Grym — Gardien de la Forge"
+  hp={450}
+  location="Grymforge — Forge adamantine"
+  legendary="Réverbération : +10m mvt + PV temp quand touché. Onde de choc tonnerre massive quand les PV sautent."
+  difficulty={4}
+  slot="encarts"
+>
+  <BossWeakness priority="critical">Invulnérable SAUF dans la lave (état Surchauffé)</BossWeakness>
+  <BossWeakness priority="critical">Lancez Silence sur lui → annule l'onde de choc Tonnerre</BossWeakness>
+  <BossWeakness>Frappez → il gagne l'immunité physique → Châtiment Divin (Radiant) perce l'immunité</BossWeakness>
+  <BossWeakness>Dégâts contondants ×2 quand Surchauffé — marteau de la forge</BossWeakness>
+</BossFiche>
+
+<BossFiche
+  name="Auntie Ethel — Sorcière des marais"
+  hp={145}
+  location="Putrid Bog"
+  legendary="Weird Magic Surge : dès qu'un personnage lance un sort, crée de nouvelles copies."
+  difficulty={3}
+  slot="encarts"
+>
+  <BossWeakness priority="critical">Attaques physiques UNIQUEMENT — aucun sort offensif</BossWeakness>
+  <BossWeakness priority="critical">Laissez-la à ~20 PV → elle propose son marché → +1 CON permanent</BossWeakness>
+  <BossWeakness>Châtiment Divin compte comme physique — utilisez-le sans restriction</BossWeakness>
+  <BossWeakness>Élixir de Force requis si Niv. 5 seulement</BossWeakness>
+</BossFiche>
+
+<Encart type="loot" title="Loot prioritaire — Acte 1" slot="encarts">
+  <LootItem
+    name="Sang de Lathandre"
+    type="Masse légendaire +3"
+    rarity="legendary"
+    stats="Sunbeam 1×/long repos"
+    location="Crèche Githyanki — Bibliothèque"
+    note="Insérez d'abord le Cimier du Maître de l'Aube !"
+    bis
+  />
+  <LootItem
+    name="Armure d'attelle adamantine"
+    type="Armure lourde"
+    rarity="very-rare"
+    stats="18 CA · −2 dégâts · immunité crits"
+    location="Grymforge — Forge adamantine (2 crafts max)"
+    bis
+  />
+  <LootItem
+    name="Lame Éternelle"
+    type="Épée longue inhabituelle"
+    rarity="uncommon"
+    stats="+1d4 Feu"
+    location="Nautiloïde — Commandant Zhalk (Injonction)"
+  />
+  <LootItem
+    name="Anneau de Protection"
+    type="Anneau"
+    rarity="uncommon"
+    stats="+1 CA"
+    location="Bosquet — voler l'Idole de Sylvanus pour Mol"
+  />
+  <LootItem
+    name="Élixirs de Force de Géant"
+    type="Consommable"
+    rarity="uncommon"
+    stats="Force 21 jusqu'au prochain repos"
+    location="Outreterre — Derryth Bonecloak (Myconides)"
+    note="Achetez-en un stock pour tous les boss d'Acte 1"
+  />
+</Encart>
+
+
+{/* ════════════════════════════════════════════════════════════
+    COLONNE GAUCHE — Contenu principal (slot "content")
+    ════════════════════════════════════════════════════════════ */}
+
+<section id="overview">
+
+## 4.0 — Vue d'ensemble & Route optimale
+
+L'Acte 1 est la phase la plus dangereuse de votre run Mode Honneur. Votre personnage est bas niveau, vos ressources limitées, et un simple coup critique peut mettre fin à votre campagne. La priorité absolue est **d'atteindre le niveau 5** (Extra Attaque) aussi vite et aussi prudemment que possible.
+
+<CalloutBlock type="danger" title="Combats tueurs de run — Acte 1">
+- **Commandant Zhalk** (Prologue) — 195 PV. Optionnel : utilisez <Tooltip name="Injonction : Lâcher" type="Sort Paladin Niv.1" stats="Force DC 14" client:idle>Cible lâche son arme. Gratuit si la cible est au corps à corps avec un allié.</Tooltip> avec Sombrecœur. Ne le combattez PAS directement.
+- **Reine des Araignées** (Village Maudit) — 138 PV. Légendaire : **Gossamer Tomb** (80 dégâts acide). Détruisez tous les œufs avant.
+- **Auntie Ethel** (Putrid Bog) — 145 PV. Légendaire : sorts = nouvelles copies. Attaques physiques uniquement.
+- **Nere** (Grymforge) — Légendaire : immunité physique + AoE Tonnerre. Tuez les Duergars en petits groupes d'abord.
+- **Grym** (Forge adamantine) — 450 PV. Invulnérable sauf dans la lave. Ne lancez aucun sort offensif pendant la Réverbération.
+</CalloutBlock>
+
+</section>
+
+---
+
+<section id="pacifist-route">
+
+## 4.1 — La "Pacifist Route" : Atteindre le Niveau 4 sans combattre
+
+**L'astuce anti-wipe ultime.** En Mode Honneur, les niveaux 1 à 3 sont mortels : vos PV sont trop faibles, vos ressources inexistantes. La Pacifist Route consiste à accumuler de l'expérience **uniquement via l'exploration et les dialogues** pour passer niveau 4 en moins d'une heure — sans jamais risquer votre run.
+
+En suivant ce chemin, votre Paladin aura 18 en Charisme, davantage de PV, et pourra commencer à combattre les monstres normaux en sécurité.
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Pacifist Route — Niv. 1 → 4"
+  showProgress={true}
+  groups={[
+    {
+      title: "Route sans combat",
+      items: [
+        {
+          id: "pacifist-01",
+          label: "<strong>Nautiloïde :</strong> Fuyez le Prologue sans affronter les Cambions. Utilisez l'<em>Injonction : Lâcher</em> sur Zhalk.",
+          priority: "critical",
+          tag: "Priorité absolue"
+        },
+        {
+          id: "pacifist-02",
+          label: "<strong>Plage :</strong> Recrutez Astarion et Gale. Explorez les alentours sans entrer dans la Crypte.",
+        },
+        {
+          id: "pacifist-03",
+          label: "<strong>Bosquet d'Émeraude (Portes) :</strong> Laissez Zevlor et les Tieffelins faire le travail. Restez en retrait.",
+        },
+        {
+          id: "pacifist-04",
+          label: "<strong>Intérieur du Bosquet :</strong> Parlez à tout le monde. Sauvez Arabella par le dialogue (Persuasion DC 15). XP gratuite.",
+        },
+        {
+          id: "pacifist-05",
+          label: "<strong>Village Maudit :</strong> Utilisez votre Charisme (Persuasion / Parasite) sur les Gobelins à l'entrée. Le village devient pacifique.",
+        },
+        {
+          id: "pacifist-06",
+          label: "<strong>Ogres du Village :</strong> Utilisez la Tromperie pour recruter Lump l'Éclairé (Cor de Guerre). XP de dialogue.",
+        },
+        {
+          id: "pacifist-07",
+          label: "<strong>Camp Gobelin :</strong> Entrez via la porte principale en Persuasion. Découvrez le sanctuaire, parlez aux marchands, explorez.",
+        },
+        {
+          id: "pacifist-08",
+          label: "<strong>Outreterre (Entrée) :</strong> Faufilez-vous dans les sous-sols du Sanctuaire Gobelin pour « découvrir » l'Outreterre (XP d'exploration).",
+        },
+        {
+          id: "pacifist-09",
+          label: "<strong>Auberge en Feu (Waukeen's Rest) :</strong> Courez sauver Florrick sans combattre. XP massive de résolution de quête.",
+          priority: "important",
+          tag: "XP importante"
+        },
+      ]
+    }
+  ]}
+/>
+
+</section>
+
+---
+
+<section id="bonus-permanents">
+
+## 4.2 — Bonus permanents récupérables en Acte 1
+
+Ces bonus sont **définitifs** et ne peuvent être obtenus qu'une seule fois. Ils sont particulièrement précieux pour un Lockadin dont les stats sont calculées au plus juste.
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Bonus permanents"
+  showProgress={false}
+  groups={[
+    {
+      items: [
+        {
+          id: "bonus-01",
+          label: "<strong>Cheveu de Tante Ethel</strong> — Laissez-la à ~20% PV et acceptez son marché (Intimidation DC 20). Lockadin → choisissez <em>+1 CON</em> pour les points de vie supplémentaires.",
+          priority: "critical",
+          tag: "Obligatoire"
+        },
+        {
+          id: "bonus-02",
+          label: "<strong>Œil de substitution de Volo</strong> — Vision de l'invisibilité (9m) permanent. Laissez Volo vous opérer au camp. À faire après l'avoir sauvé du Camp Gobelin.",
+          priority: "important",
+          tag: "Important"
+        },
+        {
+          id: "bonus-03",
+          label: "<strong>Amour de Loviatar</strong> — +2 aux jets quand PV &lt; 30%. Laissez Abdirak vous fouetter au Camp Gobelin (3 jets de Résistance à réussir).",
+          tag: "Utile"
+        },
+        {
+          id: "bonus-04",
+          label: "<strong>Marque de l'Absolue</strong> — Par Prêtresse Gut. Donne accès aux équipements marqués de l'Absolue.",
+          tag: "Optionnel"
+        },
+        {
+          id: "bonus-05",
+          label: "<strong>Éveillé (Awakened)</strong> — Pouvoirs Illithid en Action Bonus. Réussissez les 3 jets de sauvegarde de la machine Zaith'isk (Crèche Githyanki).",
+          priority: "important",
+          tag: "Important"
+        },
+      ]
+    }
+  ]}
+/>
+
+</section>
+
+---
+
+<section id="prologue">
+
+## 4.3 — Prologue : Le Nautiloïde
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Prologue"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "prologue-01", label: "Recruter <strong>Sombrecœur</strong> (capsule d'éjection)." },
+      { id: "prologue-02", label: "Recruter <strong>Lae'zel</strong>." },
+    ]
+  }]}
+/>
+
+**Commandant Zhalk (195 PV) — Stratégie :**
+
+- **Ne pas le combattre directement.** Lancez <Tooltip name="Injonction : Lâcher" type="Sort Paladin / Clerc Niv.1" stats="Force DC 14" client:idle>Cible lâche son arme. Fonctionne comme une réaction sur un ennemi engagé au corps à corps.</Tooltip> avec Sombrecœur sur Zhalk. Il lâche la <Tooltip name="Lame Éternelle" type="Épée longue inhabituelle" rarity="uncommon" stats="+1d4 Feu" client:idle>Votre arme de Pacte idéale jusqu'en Acte 2.</Tooltip>.
+- Ramassez l'arme avec **Lae'zel** et fuyez vers la console d'activation.
+- **Astuce Honneur :** Placez 3 coffres cartilagineux dans le couloir derrière vous pour bloquer les 2 Cambions en renfort.
+
+</section>
+
+---
+
+<section id="plage">
+
+## 4.4 — Plage & Ruines (Ravaged Beach)
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Plage & Ruines"
+  showProgress={false}
+  groups={[{
+    items: [
+      {
+        id: "plage-01",
+        label: "<strong>Piège du sarcophage :</strong> Le sarcophage central est piégé (Graisse + Feu). Désarmez ou déclenchez de loin avec une flèche.",
+        priority: "important"
+      },
+      {
+        id: "plage-02",
+        label: "<strong>Flétrissure (Withers) :</strong> Bouton secret derrière la statue. Tuez les scribes. Débloque les respécialisations et les Mercenaires.",
+        priority: "critical",
+        tag: "Priorité absolue"
+      },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="grove">
+
+## 4.5 — Bosquet d'émeraude
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Bosquet d'émeraude"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "grove-01", label: "Recruter <strong>Wyll</strong> (zone d'entraînement)." },
+      {
+        id: "grove-02",
+        label: "Sauver <strong>Arabella</strong> (Persuasion DC 15 face à Kagha).",
+        priority: "important",
+        tag: "XP + quête"
+      },
+      {
+        id: "grove-03",
+        label: "Voler l'<strong>Idole de Sylvanus</strong> pour Mol → obtenir l'<em>Anneau de Protection (+1 CA)</em>. Faites-le <em>après</em> avoir démasqué Kagha ou cela brise la quête du Bosquet.",
+        priority: "important",
+        tag: "+1 CA"
+      },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="blighted">
+
+## 4.6 — Village maudit (Blighted Village)
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Village maudit"
+  showProgress={false}
+  groups={[{
+    items: [
+      {
+        id: "blighted-01",
+        label: "Recruter les <strong>Ogres (Lump)</strong> par la Tromperie pour obtenir le Cor de guerre (renfort de combat).",
+      },
+      {
+        id: "blighted-02",
+        label: "Forger une <strong>arme de Sussur</strong> (silence sur toucher) si vous avez l'écorce de l'Outreterre.",
+        tag: "Optionnel"
+      },
+    ]
+  }]}
+/>
+
+**Reine des Araignées Phase Spider Matriarch (138 PV) — Stratégie :**
+
+<CalloutBlock type="danger" title="Légendaire : Gossamer Tomb">
+En réaction, enveloppe une cible dans une toile d'acide. Si vous ne la détruisez pas immédiatement au feu : **80 dégâts d'acide** (mort quasi certaine aux niveaux 3-4). Maintenez une torche ou une flèche de feu prête.
+</CalloutBlock>
+
+- **Furtivité obligatoire !** Détruisez **tous les œufs** avant d'engager le combat.
+- **Astuce dégâts de chute :** Attendez qu'elle se téléporte sur un pont de toile. Tirez une flèche de feu sur la toile — elle tombe (45 dégâts gratuits).
+
+</section>
+
+---
+
+<section id="risen">
+
+## 4.7 — Route de la Résurrection & Waukeen's Rest
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Route de la Résurrection"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "risen-01", label: "Recruter <strong>Karlach</strong>." },
+      {
+        id: "risen-02",
+        label: "Combattre les faux Paladins de Tyr pour récupérer l'<strong>Épée de Justice</strong> (Paladin +1 ou don de quête à Wyll).",
+        priority: "important"
+      },
+      {
+        id: "risen-03",
+        label: "<strong>Planque des Zhentarims :</strong> accès via la cave de l'auberge, marchands excellents si vous les aidez avec le convoi des Gnolls.",
+      },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="bog">
+
+## 4.8 — Putrid Bog : Auntie Ethel
+
+<CalloutBlock type="danger" title="Combat tueur de run">
+Soyez **Niveau 5 minimum** avec votre Paladin pur (et sous <Tooltip name="Élixir de Force de Géant" type="Consommable" stats="Force 21 jusqu'au prochain repos" client:idle>Indispensable pour les boss d'Acte 1. Achetez un stock chez Derryth Bonecloak (Myconides, Outreterre).</Tooltip>).
+</CalloutBlock>
+
+**Action Légendaire — Weird Magic Surge :** Dès qu'un personnage lance un **sort**, Ethel crée de nouvelles copies d'elle-même (illusions).
+
+- **Contre-stratégie :** Bannissez la magie offensive. Attaques physiques pures uniquement. Le <Tooltip name="Châtiment Divin" type="Capacité Paladin" stats="2d8 Radiant + modificateur" client:idle>Déclenché après un toucher. Dépense un emplacement de sort. Compte comme une attaque, pas un sort — ne déclenche PAS la Légendaire d'Ethel.</Tooltip> compte comme une **attaque** et ne déclenche pas la Légendaire.
+- **Le Cheveu :** À ~20 PV (début de son tour), elle propose son marché. Jet d'Intimidation DC 20 → **+1 CON permanent**. Ne la tuez pas avant !
+
+</section>
+
+---
+
+<section id="owlbear">
+
+## 4.9 — Grotte de l'Ours-hibou (Owlbear Cave)
+
+<CalloutBlock type="tip" title="Mode Honneur : deux Ours-hiboux">
+L'Ours-hibou mère appelle son compagnon (Mate) en Mode Honneur ! Préparez-vous à combattre **DEUX Ours-hiboux**. Positionnez-vous en hauteur. Smitez quand ils arrivent au corps à corps après leur saut.
+</CalloutBlock>
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Grotte de l'Ours-hibou"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "owlbear-01", label: "Combattre (ou éviter) la Mère Ours-hibou." },
+      {
+        id: "owlbear-02",
+        label: "<strong>NE TUEZ PAS</strong> le bébé (Owlbear Cub). Il viendra à votre camp et deviendra un familier.",
+        priority: "important",
+        tag: "Ne pas tuer"
+      },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="goblin">
+
+## 4.10 — Camp Gobelin & Sanctuaire brisé
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Camp Gobelin"
+  showProgress={false}
+  groups={[
+    {
+      title: "Objectifs principaux",
+      items: [
+        {
+          id: "goblin-01",
+          label: "Tuer <strong>Prêtresse Gut</strong>. Stratégie : acceptez de la suivre dans sa chambre, fermez la porte, tuez-la en 1 round avec un Smite (Élixir de Force) avant qu'elle n'appelle à l'aide.",
+          priority: "important"
+        },
+        {
+          id: "goblin-02",
+          label: "Tuer <strong>Dror Ragzlin</strong>. Légendaire : Galvanisme Dévoué (Sursaut d'action à tous les gobelins dans 5m). Tuez ses gardes en furtivité AVANT d'engager.",
+          priority: "important"
+        },
+        {
+          id: "goblin-03",
+          label: "<strong>Assommer Minthara</strong> (dégâts non-létaux) pour la recruter comme compagnon à l'Acte 2.",
+          tag: "Optionnel"
+        },
+        {
+          id: "goblin-04",
+          label: "Libérer <strong>Halsin</strong>.",
+        },
+      ]
+    },
+    {
+      title: "Bonus permanents",
+      items: [
+        {
+          id: "goblin-05",
+          label: "<strong>Amour de Loviatar :</strong> Laissez Abdirak vous fouetter (3 jets Résistance à réussir) → +2 aux jets quand PV &lt; 30%.",
+          tag: "Bonus permanent"
+        },
+      ]
+    }
+  ]}
+/>
+
+</section>
+
+---
+
+<section id="underdark">
+
+## 4.11 — Outreterre (Underdark)
+
+<CalloutBlock type="tip" title="Colonie des Myconides — Achats prioritaires">
+- **Derryth Bonecloak :** <Tooltip name="Élixirs de Force de Géant" type="Consommable" stats="Force 21 jusqu'au prochain repos" client:idle>Achetez-en un stock conséquent. Indispensables pour tous les boss d'Acte 1 et 2.</Tooltip> + Anneau caustique (Caustic Band).
+- **Omeluum :** Amulette de la perle de pouvoir (récupère un emplacement de sort 1 ou 2 après un court repos).
+</CalloutBlock>
+
+**Zones clés de l'Outreterre :**
+
+| Zone | Contenu clé |
+|---|---|
+| Avant-poste Sélunite | Détruisez la gemme lunaire en furtivité pour éviter le combat de groupe |
+| Colonie des Myconides | Marchands (Derryth, Blurg, Omeluum). Hub sécurisé |
+| Arbre de Sussur | Écorce pour l'arme anti-magie. Attention aux Bulettes |
+| Tour arcanique | Bâton de bénédiction arcanique — utilisez les fleurs de Sussur |
+
+</section>
+
+---
+
+<section id="grymforge">
+
+## 4.12 — Grymforge & Forge adamantine
+
+<CalloutBlock type="danger" title="Nere — Ne faites pas de repos long !">
+Nere mourra asphyxié si vous faites un **repos long** après être arrivé à Grymforge et qu'il est encore piégé. Tuez les Duergars en **petits groupes isolés** AVANT de détruire l'éboulement.
+</CalloutBlock>
+
+**Forge adamantine — Limité à 2 objets par run.**
+
+<CalloutBlock type="loot" title="Craft optimaux pour le Lockadin">
+- **Craft 1 :** Armure d'attelle en adamantine (18 CA, −2 dégâts reçus, immunité aux coups critiques)
+- **Craft 2 :** Bouclier en adamantine (+2 CA, immunité aux coups critiques)
+</CalloutBlock>
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Grymforge"
+  showProgress={false}
+  groups={[{
+    items: [
+      {
+        id: "grym-01",
+        label: "<strong>Craft 1 :</strong> Armure d'attelle en adamantine (18 CA, −2 dégâts, immunité crits).",
+        priority: "critical",
+        tag: "BiS Acte 1-2"
+      },
+      {
+        id: "grym-02",
+        label: "<strong>Craft 2 :</strong> Bouclier en adamantine (+2 CA, immunité crits).",
+        priority: "important"
+      },
+    ]
+  }]}
+/>
+
+**Grym (450 PV) — Stratégie détaillée :**
+
+- **Mécanique de base :** Invulnérable à TOUT sauf si dans la lave (état **Surchauffé** = Vulnérable aux dégâts Contondants).
+- **Légendaire — Réverbération :** Gagne +10m de mouvement et PV temporaires quand touché. Quand les PV temporaires sautent : **Onde de choc Tonnerre massive** (zone entière).
+- **LE CONTRE ABSOLU :** Lancez <Tooltip name="Silence" type="Sort Barде/Rôdeur Niv.2" stats="Zone 4.5m — aucun sort, aucun son" client:idle>Annule tous les sorts dans la zone ET annule les dégâts de Tonnerre. Indispensable contre Grym.</Tooltip> sur Grym → l'Onde de choc Tonnerre n'inflige plus de dégâts. Frappez-le avec le marteau de la forge (interaction environnementale).
+
+</section>
+
+---
+
+<section id="creche">
+
+## 4.13 — Crèche Githyanki (Monastère d'Auberosée)
+
+<CalloutBlock type="danger" title="Piège : Chaise Zaith'isk">
+N'asseyez **JAMAIS** votre Lockadin dans la chaise sans préparation totale. Un échec = **−2 permanent aux stats**. Lancez Bénédiction + Guidance + Inspirations Bardiques pour réussir les 3 jets de sauvegarde et gagner le trait **Éveillé** (pouvoirs Illithid en Action Bonus).
+</CalloutBlock>
+
+**Sang de Lathandre (Masse Légendaire +3) :**
+
+Ne retirez **PAS** la masse sans avoir inséré le <Tooltip name="Cimier du Maître de l'Aube" type="Objet de quête" client:idle>Dawnmaster's Crest. Trouvé dans la Bibliothèque de la Crèche. Sans lui, retirer la masse déclenche un rayon solaire fatal (Game Over).</Tooltip> dans son socle. Le faire déclenche un rayon solaire qui vaporise tout le groupe.
+
+**Inquisiteur W'wargaz (Action Légendaire — Griffe Mentale de Tu'narath) :** 2×/round, si attaqué, invoque une Épée Psionique vivante. Stratégie : il doit **mourir au Tour 1 ou 2**. Utilisez <Tooltip name="Hâte" type="Sort Magicien/Ensorceleur Niv.3" stats="+1 Action · ×2 vitesse · +2 CA" client:idle>Ou une Potion de Vitesse jetée sur le sol (touche plusieurs alliés). Nécessite concentration.</Tooltip> ou une Potion de Vitesse jetée. Ignorez les sbires jusqu'à la mort de l'Inquisiteur.
+
+</section>
+
+---
+
+<section id="mountain">
+
+## 4.14 — Transition vers l'Acte 2 (Col de Montagne)
+
+<CalloutBlock type="danger" title="Point de non-retour">
+Entrer dans l'Acte 2 via l'ascenseur de Grymforge **ou** le Col de Montagne résout automatiquement les quêtes temporelles de l'Acte 1 (le Bosquet sera scellé/détruit). N'y allez que lorsque votre journal de quêtes est **entièrement vide**.
+</CalloutBlock>
+
+**Bilan attendu en quittant l'Acte 1 :**
+
+| Caractéristique | Valeur attendue |
+|---|---|
+| Niveau | 7 (Paladin 7) — prêt pour la respécialisation Acte 2 |
+| Aura de Protection | Paladin + alliés à 3m gagnent +4/+5 à tous les JS |
+| CA | 22–24 (Adamantine 18 + Bouclier 2 + Style Défense 1 + anneau) |
+| Arme | Sang de Lathandre +3 (sous Élixir de Force pour les attaques) |
+
+</section>
+
+---
+
+<section id="checklist-acte1">
+
+## ✓ Checklist finale — Prêt pour l'Acte 2 ?
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte1"
+  title="Validation — Acte 1 complet"
+  showProgress={true}
+  collapsible={false}
+  groups={[{
+    title: "Objectifs obligatoires",
+    items: [
+      {
+        id: "final-01",
+        label: "<strong>Pacifist Route réussie</strong> — Niveau 4 atteint sans mourir.",
+        priority: "critical",
+        tag: "Obligatoire"
+      },
+      {
+        id: "final-02",
+        label: "<strong>Niveau 7 de Paladin Pur</strong> atteint, <em>Aura de Protection</em> active.",
+        priority: "critical",
+        tag: "Obligatoire"
+      },
+      {
+        id: "final-03",
+        label: "<strong>Sang de Lathandre</strong> en main (Crèche Githyanki).",
+        priority: "critical",
+        tag: "BiS Acte 2"
+      },
+      {
+        id: "final-04",
+        label: "<strong>Armure d'attelle adamantine</strong> équipée (Forge — 18 CA, immunité crits).",
+        priority: "critical",
+        tag: "BiS Acte 1-2"
+      },
+    ]
+  }]}
+/>
+
+La Partie 5 couvrira le Walkthrough **Acte 2** (Terres Maudites, Tours de Hautelune) et la fameuse respécialisation Lockadin !
+
+</section>

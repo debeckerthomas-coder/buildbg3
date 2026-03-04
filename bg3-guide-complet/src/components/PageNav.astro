@@ -1,0 +1,88 @@
+---
+// src/components/PageNav.astro
+// Navigation Précédent / Suivant entre les pages du guide
+
+import { allPages, type NavPage } from '../data/navigation';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const currentIndex = allPages.findIndex(p => currentPath.startsWith(p.href));
+const prev = currentIndex > 0 ? allPages[currentIndex - 1] : null;
+const next = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+
+// Icônes
+const arrowLeft  = `<polyline points="15 18 9 12 15 6"/>`;
+const arrowRight = `<polyline points="9 18 15 12 9 6"/>`;
+---
+
+{(prev || next) && (
+  <nav
+    class="flex items-center justify-between gap-4 mt-12 pt-6
+           border-t border-gold/15"
+    aria-label="Navigation entre les pages"
+  >
+    {/* Précédent */}
+    {prev ? (
+      <a
+        href={prev.href}
+        class="group flex items-center gap-3 px-4 py-3 rounded-lg flex-1
+               border border-gold/15 hover:border-gold/35
+               bg-bg-raised/50 hover:bg-bg-surface
+               transition-all duration-200 max-w-[48%]"
+        rel="prev"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="w-4 h-4 text-gold/50 group-hover:text-gold shrink-0 transition-colors"
+             aria-hidden="true">
+          <Fragment set:html={arrowLeft} />
+        </svg>
+        <div class="overflow-hidden">
+          <div class="font-ui text-[10px] uppercase tracking-widest text-text-muted mb-0.5">
+            Précédent
+          </div>
+          <div class="font-ui text-sm text-text-secondary group-hover:text-text-primary
+                      truncate transition-colors">
+            {prev.shortLabel ?? prev.label}
+          </div>
+        </div>
+      </a>
+    ) : (
+      <div class="flex-1 max-w-[48%]" aria-hidden="true"></div>
+    )}
+
+    {/* Suivant */}
+    {next ? (
+      <a
+        href={next.href}
+        class="group flex items-center gap-3 px-4 py-3 rounded-lg flex-1
+               border border-gold/15 hover:border-gold/35
+               bg-bg-raised/50 hover:bg-bg-surface
+               transition-all duration-200 max-w-[48%] text-right ml-auto"
+        rel="next"
+      >
+        <div class="overflow-hidden flex-1">
+          <div class="font-ui text-[10px] uppercase tracking-widest text-text-muted mb-0.5">
+            Suivant
+          </div>
+          <div class="font-ui text-sm text-text-secondary group-hover:text-text-primary
+                      truncate transition-colors">
+            {next.shortLabel ?? next.label}
+          </div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="w-4 h-4 text-gold/50 group-hover:text-gold shrink-0 transition-colors"
+             aria-hidden="true">
+          <Fragment set:html={arrowRight} />
+        </svg>
+      </a>
+    ) : (
+      <div class="flex-1 max-w-[48%]" aria-hidden="true"></div>
+    )}
+  </nav>
+)}
