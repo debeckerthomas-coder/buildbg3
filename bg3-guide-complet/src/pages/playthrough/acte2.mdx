@@ -1,0 +1,496 @@
+---
+# src/pages/playthrough/acte2.mdx
+title: "Acte 2 — Les Terres maudites"
+description: "Walkthrough complet de l'Acte 2 en Mode Honneur : Terres maudites, Hautelune, Épreuve de Shar, Chantsenuit, et l'Apôtre de Myrkul. Inclut la respécialisation Lockadin au niveau 8."
+section: playthrough
+act: 2
+part: 5
+layout: ../../layouts/PageLayout.astro
+---
+
+import PageLayout from '../../layouts/PageLayout.astro';
+import Checklist from '../../components/Checklist';
+import Tooltip from '../../components/Tooltip';
+import Encart from '../../components/Encart.astro';
+import LootItem from '../../components/LootItem.astro';
+import CalloutBlock from '../../components/CalloutBlock.astro';
+import StatBlock from '../../components/StatBlock.astro';
+import StatRow from '../../components/StatRow.astro';
+import BossFiche from '../../components/BossFiche.astro';
+import BossWeakness from '../../components/BossWeakness.astro';
+
+{/* ════════════════════════════════════════════════════════════
+    COLONNE DROITE — Encarts contextuels (slot "encarts")
+    ════════════════════════════════════════════════════════════ */}
+
+<Encart type="warning" title="Mécanique : Malédiction des Ombres" slot="encarts">
+
+Sans protection lumineuse active, vous subissez des **dégâts nécrotiques** à chaque tour.
+
+<StatBlock compact>
+  <StatRow label="Torche / sort Lumière"    value="Protection partielle" />
+  <StatRow label="Lanterne lunaire (Pixie)" value="Protection totale"   highlight />
+  <StatRow label="Bénédiction d'Isobel"     value="Protection de zone"  />
+  <StatRow label="Zones ombre profonde"     value="Torche insuffisante" danger note="Lanterne lunaire requise" />
+</StatBlock>
+
+</Encart>
+
+<Encart type="warning" title="Aura de Haine — Attention Parjure !" slot="encarts">
+
+L'**Aura de Haine** du Parjure accorde `+CHA` aux dégâts de mêlée à **TOUS** les morts-vivants dans 3m — y compris les ennemis.
+
+- Restez à **plus de 3m** ou utilisez une arme à Allonge
+- Utilisez **Aspect terrifiant** pour les repousser
+- **Désactivez l'Aura** via les passifs pendant les combats de masse contre les zombies — rallumez-la contre Myrkul
+</Encart>
+
+<Encart type="levelup" title="Respécialisation Niv. 8 — Lockadin complet" slot="encarts">
+
+C'est au **Niveau 8** que vous effectuez la respécialisation majeure chez Flétrissure :
+
+<StatBlock>
+  <StatRow label="Build final"      value="Pal 7 / Occ 5"   highlight />
+  <StatRow label="Attaque avec"     value="Charisme (CHA)"   highlight />
+  <StatRow label="Extra Attaque"    value="Lame Assoiffée"   note="Invocation Occ. Niv.5" />
+  <StatRow label="Sorts Occ."       value="Niv. 3 × 2/repos" />
+  <StatRow label="Maléfice (Hex)"   value="+1d6 Néc/toucher" />
+  <StatRow label="Aura Protection"  value="+CHA à tous"      note="Pal Niv.7 — permanent" />
+</StatBlock>
+
+</Encart>
+
+<BossFiche
+  name="Apôtre de Myrkul — Boss final Acte 2"
+  hp={350}
+  location="Colonie Illithid — sous Hautelune"
+  legendary="Regard des Morts : en réaction à la PREMIÈRE attaque chaque round, riposte avec un regard nécrotique massif."
+  difficulty={5}
+  slot="encarts"
+>
+  <BossWeakness priority="critical">Rayon de soleil (Sang de Lathandre) → Aveuglé = Avantage total</BossWeakness>
+  <BossWeakness priority="critical">Tuez les Nécromites aux bords AVANT qu'ils l'atteignent (Doigt de Mort)</BossWeakness>
+  <BossWeakness priority="critical">Bone Chill = aucune guérison au corps à corps — gardez vos distances en Phase 3</BossWeakness>
+  <BossWeakness>Smite Radiant annule la Fortitude des Morts-Vivants des Nécromites</BossWeakness>
+  <BossWeakness>Immunisé : Froid, Poison, Nécrotique. Aucune vulnérabilité au Radiant</BossWeakness>
+</BossFiche>
+
+<BossFiche
+  name="Ketheric Thorm Phase 1"
+  hp={300}
+  location="Toit des Tours de Hautelune"
+  legendary="Consume the Faithful : marque une cible, les Nécromites concentrent leurs attaques dessus."
+  difficulty={4}
+  slot="encarts"
+>
+  <BossWeakness priority="critical">Libérez Aylin (Action d'Aide) → Ketheric invulnérable sans elle</BossWeakness>
+  <BossWeakness priority="critical">Tuez le Flagelleur mental en priorité en Phase 2</BossWeakness>
+  <BossWeakness>Briseur de Serment — CA 22+. Vos Smites Radiants sont ravageurs</BossWeakness>
+  <BossWeakness>Persuasion DC 21 en Phase 2 pour le forcer au suicide (évite le combat)</BossWeakness>
+</BossFiche>
+
+<Encart type="loot" title="Loot prioritaire — Acte 2" slot="encarts">
+  <LootItem
+    name="Lance de la Nuit de Séluné"
+    type="Lance +3"
+    rarity="legendary"
+    stats="Avantage aux JS Sagesse + Perception"
+    location="Shadowfell — Sauver Chantsenuit"
+    note="Requiert de sauver Dame Aylin (recommandé)"
+    bis
+  />
+  <LootItem
+    name="Bouclier de Ketheric"
+    type="Bouclier +2"
+    rarity="very-rare"
+    stats="+2 CA · Résistance Nécrotique"
+    location="Loot Ketheric / Colonie"
+  />
+  <LootItem
+    name="Anneau de la Bien-aimée du Tueur"
+    type="Anneau"
+    rarity="rare"
+    stats="1×/repos : prochaine attaque = critique forcé"
+    location="Reithwin — Thisobald Thorm"
+    note="Combo parfait avec un Smite de Niveau 3"
+    bis
+  />
+  <LootItem
+    name="Potion de Force Éternelle"
+    type="Consommable permanent"
+    rarity="rare"
+    stats="Force +2 permanent"
+    location="Hautelune — Araj Oblodra (Astarion doit la mordre)"
+    note="Donnez à Lae'zel pour maximiser les dégâts"
+  />
+  <LootItem
+    name="Amulette de la Perle de Pouvoir"
+    type="Amulette"
+    rarity="rare"
+    stats="Récupère 1 sort Niv.1-2 après court repos"
+    location="Outreterre — Omeluum (Myconides)"
+  />
+</Encart>
+
+
+{/* ════════════════════════════════════════════════════════════
+    COLONNE GAUCHE — Contenu principal
+    ════════════════════════════════════════════════════════════ */}
+
+<section id="overview">
+
+## 5.0 — Vue d'ensemble de l'Acte 2
+
+L'Acte 2 se déroule dans les **Terres maudites par l'ombre**, un territoire infesté d'une malédiction qui inflige des dégâts nécrotiques à quiconque n'est pas protégé par une source de lumière. C'est aussi ici que vous effectuez la **respécialisation majeure au Niveau 8** pour finaliser le build Lockadin (Pal 7 / Occ 5).
+
+<CalloutBlock type="tip" title="Avantage Lockadin en Acte 2">
+Les squelettes sont **vulnérables au Contondant** — double dégâts avec le <Tooltip name="Sang de Lathandre" type="Masse Légendaire +3" rarity="legendary" stats="Sunbeam 1×/long repos + Radiant passif" client:idle>Votre arme principale jusqu'à la fin du jeu. La Masse inflige des dégâts contondants ET radiants — parfaite contre les squelettes et les morts-vivants.</Tooltip>. En revanche, Myrkul et ses Nécromites n'ont **aucune vulnérabilité au Radiant** — ne vous y fiez pas contre le boss final.
+</CalloutBlock>
+
+**Points de non-retour :**
+- Entrer dans le Shadowfell → ferme définitivement l'Acte 1 et les quêtes de sauvetage.
+- Sauter dans le trou après Ketheric Phase 1 → **impossible de faire un Repos Long** jusqu'à la fin de l'Acte 2.
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte2"
+  title="Route Acte 2 — Vue d'ensemble"
+  showProgress={true}
+  collapsible={true}
+  defaultCollapsed={true}
+  groups={[{
+    title: "Ordre optimal",
+    items: [
+      { id: "a2-route-01", label: "1. Obtenir la <strong>Lanterne lunaire</strong> (Pixie) dès l'entrée des Terres maudites.", priority: "critical" },
+      { id: "a2-route-02", label: "2. <strong>Auberge de la Dernière Lumière</strong> : protéger Isobel, parler à Jaheira, Dammon, Art Cullagh." },
+      { id: "a2-route-03", label: "3. <strong>Reithwin Town</strong> : éliminer Thisobald, Malus et Gerringothe par le dialogue." },
+      { id: "a2-route-04", label: "4. <strong>Hautelune (Infiltration)</strong> : reconnaissance + libérer les captifs de la prison." },
+      { id: "a2-route-05", label: "5. <strong>Épreuve de Shar</strong> : puzzles, Balthazar, Chantsenuit. ⚠️ Point de non-retour." },
+      { id: "a2-route-06", label: "6. <strong>Assaut Hautelune</strong> : avec Jaheira, nettoyage, Ketheric Phase 1." },
+      { id: "a2-route-07", label: "7. <strong>Colonie Illithid</strong> : exploration complète AVANT le Pod de restauration, puis Myrkul.", priority: "important" },
+      { id: "a2-route-08", label: "8. <strong>Transition Acte 3</strong> : équipement, recruter Jaheira, route vers Baldur's Gate." },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="shadow-entry">
+
+## 5.1 — Entrée dans les Terres maudites par l'ombre
+
+La <Tooltip name="Lanterne lunaire" type="Objet — protection de zone" stats="Protège contre toute la Malédiction des Ombres" client:idle>Donne la Bénédiction de la Fée (Pixie's Blessing) si vous libérez la fée : protection personnelle permanente pour tout l'Acte 2, indépendante de la lanterne.</Tooltip> est **indispensable**. Obtenez-la dès votre arrivée.
+
+**Drider Kar'niss — Action Légendaire (Sanctuaire de Toile-fuseau) :** Quand attaqué, s'enveloppe dans un dôme. Si le dôme est brisé par une **nombreuse attaque**, les alliés adjacents subissent des dégâts massifs. Ne déclenchez pas sa légendaire avec des petites attaques.
+
+- **Méthode classique :** Tuez Kar'niss avec votre plus grosse frappe d'ouverture (Smite + Maléfice) en un tour si possible, récupérez sa lanterne.
+- **Le Secret du Pixie (fortement recommandé) :** Utilisez l'action d'interaction sur la lanterne pour libérer la fée. Elle vous accorde la <Tooltip name="Bénédiction de la Fée" type="Buff Permanent — Acte 2" stats="Protège de toute malédiction des ombres, en permanence" client:idle>Protection personnelle permanente contre toutes les formes de Malédiction des Ombres — même les zones d'ombre profonde. Ne s'applique pas aux compagnons.</Tooltip> permanente pour tout l'Acte 2.
+
+</section>
+
+---
+
+<section id="last-light">
+
+## 5.2 — Auberge de la Dernière Lumière (Last Light Inn)
+
+<CalloutBlock type="danger" title="Combat Isobel — Préparez-vous AVANT de lui parler">
+Parler à Isobel (1er étage) **déclenche le combat** avec Marcus. Si Isobel tombe à 0 PV ou est enlevée, le bouclier de l'Auberge s'effondre : tous les PNJ meurent (Dammon, Jaheira, Tieffelins). **Game Over narratif.**
+</CalloutBlock>
+
+**Préparation avant de parler à Isobel :**
+- Bloquez les accès à sa chambre avec des **caisses** avant d'initier le dialogue.
+- Tour 1 : Utilisez <Tooltip name="Injonction : Halte" type="Sort Contrôle Niv.1" stats="Force DC 14 — cible passe son tour" client:idle>Parfait pour paralyser Marcus dès le départ. Laissez vos alliés gérer les Horreurs Ailées pendant ce temps.</Tooltip> sur Marcus ou détruisez-le avec un critique + Smite.
+- Lancez <Tooltip name="Sanctuaire" type="Sort Clerc Niv.1" stats="Protège la cible — JS Constitution DC si attaquée" client:idle>Sur Isobel : les ennemis doivent réussir un jet pour pouvoir l'attaquer.</Tooltip> sur Isobel si possible.
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte2"
+  title="Auberge de la Dernière Lumière"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "ll-01", label: "Rencontrer <strong>Jaheira</strong>." },
+      { id: "ll-02", label: "Parler à <strong>Dammon</strong> (réparer Karlach, acheter équipement).", priority: "important" },
+      { id: "ll-03", label: "Parler à <strong>Art Cullagh</strong> (déclencher la quête de Halsin — chanson de la boîte à musique)." },
+      {
+        id: "ll-04",
+        label: "Parler à <strong>Isobel</strong> (1er étage) — ⚠️ Préparez-vous : cela déclenche immédiatement le combat avec Marcus !",
+        priority: "critical",
+        tag: "Combat déclenché"
+      },
+    ]
+  }]}
+/>
+
+**Loot & achats à Last Light Inn :**
+
+| Objet | Source | Utilité |
+|---|---|---|
+| **Bouclier de Dévotion** | Talli (achat) | +2 CA · Aide gratuit · +1 slot Smite Niv.1 |
+| Cape de Protection | Talli (achat) | +1 CA · +1 tous JS — s'empile avec l'anneau |
+| Robe Puissante | Alfira (libérée de la prison) | Essentielle pour Wyll/Gale — Décharge Occulte +3 dés |
+
+</section>
+
+---
+
+<section id="reithwin">
+
+## 5.3 — Reithwin Town : Les 3 Boss Thorm
+
+En Mode Honneur, utilisez le **Charisme massif de votre Lockadin** (18 ou 20 CHA) pour forcer les trois boss Thorm à se suicider via les dialogues. C'est toujours préférable au combat direct.
+
+**Thisobald Thorm — Taverne de la Lune Décroissante (~225 PV)**
+
+Buvez avec lui ! Tests de Représentation ou Sauvegarde de Constitution. Les Paladins excellent ici grâce à l'Aura de Protection (+CHA aux sauvegardes de tout le groupe). Racontez-lui des histoires. Il explosera d'indigestion. En combat d'urgence : attaques physiques pures — il absorbe les dégâts élémentaires et les renvoie. Détruisez les tonneaux autour de lui.
+
+**Loot notable :** <Tooltip name="Anneau de la Bien-aimée du Tueur" type="Anneau" rarity="rare" stats="1×/repos : critique forcé sur la prochaine attaque" client:idle>Activez-le avant un gros Smite de Warlock Niveau 3. Les dés d'arme, de Smite ET du Radiant critent simultanément : dégâts colossaux garantis.</Tooltip> — excellent combo avec un Smite de Niveau 3.
+
+</section>
+
+---
+
+<section id="moonrise-infiltration">
+
+## 5.4 — Tours de Hautelune (Moonrise Towers) : Infiltration
+
+<CalloutBlock type="tip" title="Stratégie Honneur : Nettoyage préventif">
+Lors de l'assaut final, les Tours seront remplies de cultistes. Pendant votre infiltration, **tuez méthodiquement** les gardes isolés en furtivité. Le rez-de-chaussée sera presque vide lors de l'assaut — gain de temps et d'actions de combat considérable.
+</CalloutBlock>
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte2"
+  title="Infiltration Hautelune"
+  showProgress={false}
+  groups={[{
+    items: [
+      {
+        id: "moon-01",
+        label: "<strong>Bluff :</strong> Entrez en vous faisant passer pour une Âme Absolue. Assistez à l'audience de Ketheric.",
+      },
+      {
+        id: "moon-02",
+        label: "<strong>Reconnaissance :</strong> Parlez à Z'rell pour obtenir l'accès à la chambre de Balthazar (puzzle bibliothèque menant à des secrets).",
+      },
+      {
+        id: "moon-03",
+        label: "<strong>Araj Oblodra :</strong> Si Astarion la mord, elle offre une <em>Potion de Force Éternelle</em> (+2 Force permanent). Donnez à Lae'zel.",
+        priority: "important",
+        tag: "Bonus permanent"
+      },
+      {
+        id: "moon-04",
+        label: "<strong>Sauvetage URGENT :</strong> Allez dans les prisons (sous-sol) et libérez Wulbren et les Tieffelins <strong>MAINTENANT</strong>. Si vous attendez, il sera trop tard.",
+        priority: "critical",
+        tag: "Urgence"
+      },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="gauntlet">
+
+## 5.5 — Épreuve de Shar (Gauntlet of Shar)
+
+<CalloutBlock type="danger" title="Point de non-retour critique — Le Shadowfell">
+Entrer dans le Shadowfell (portail d'eau au fond du Gauntlet) a des conséquences **irréversibles** :
+- Fermeture de l'Acte 1 (impossible de retourner)
+- **Hécatombe à la prison** : quêtes de sauvetage de Hautelune échouent instantanément — Tieffelins et Wulbren exécutés si vous ne les avez pas libérés
+- Les quêtes temporelles de l'Acte 2 se résolvent automatiquement
+
+**Faites-le uniquement quand tout est accompli.**
+</CalloutBlock>
+
+Le Gauntlet se trouve sous le **Grand Mausolée Thorm**. Résolvez le puzzle des portraits (Hautelune → Chagrin → Général) pour accéder à l'ascenseur. Il contient 3 épreuves :
+
+- **Épreuve du Dédoublement :** Combattez des copies de vos personnages. Retirez l'équipement de vos personnages **AVANT** d'affronter leurs doubles — les copies ne seront pas équipées.
+- **Épreuve du Pas Léger :** Labyrinthe furtif. Utilisez une Potion d'Invisibilité ou envoyez Astarion seul. Le Lockadin en armure lourde a un désavantage maximal — ne le prenez pas.
+- **Épreuve de l'Assaut de la Foi :** Plateformes invisibles. Astuce infaillible : dégroupez un personnage, utilisez la vue tactique, avancez pas à pas.
+
+**Balthazar — Action Légendaire (Le Mort Impardonné) :** Quand un mort-vivant allié meurt, crée un miasme nécrotique persistant qui soigne Balthazar. **Stratégie absolue : ne le combattez PAS dans le Shadowfell** (risque de chutes dans le vide). Tuez-le dans son bureau lors de votre infiltration préalable.
+
+**Chantsenuit (Dame Aylin) — Le choix de Sombrecœur :**
+
+<CalloutBlock type="danger" title="Choix irréversible — Conséquences majeures">
+- **SAUVER Chantsenuit (recommandé) :** Sombrecœur rejette Shar → obtient la <Tooltip name="Lance de la Nuit de Séluné" type="Arme +3 Légendaire" rarity="legendary" stats="Avantage JS Sagesse + Perception" client:idle>Excellente arme pour Sombrecœur. Aylin devient alliée lors de l'assaut de Hautelune. Ketheric perd son invulnérabilité.</Tooltip>. Aylin devient alliée pour l'assaut.
+- **TUER Chantsenuit :** Obtient la Lance du Soir de Shar (+3). Ketheric reste vulnérable, mais **TOUS les PNJ de l'Auberge meurent instantanément** (Dammon, Jaheira). Perte définitive de compagnons et marchands critiques.
+</CalloutBlock>
+
+**Loot clé du Gauntlet :**
+
+| Objet | Source | Utilité |
+|---|---|---|
+| **Bien-aimée du Tueur** | Zone secrète (Épreuve du Dédoublement) | Critique garanti après un kill — pièce maîtresse du burst |
+| Lance de la Nuit de Séluné | Chantsenuit (voie bienveillante) | +3 · Avantage JS SAG · Excellent pour Sombrecœur |
+
+</section>
+
+---
+
+<section id="moonrise-assault">
+
+## 5.6 — Assaut des Tours de Hautelune
+
+Après le Shadowfell, Chantsenuit attaque Hautelune directement. Jaheira et les Ménestrels vous attendent. Si vous avez nettoyé les gardes pendant l'infiltration, le rez-de-chaussée sera presque vide.
+
+<CalloutBlock type="danger" title="Point de non-retour — Ressources finales">
+Ketheric s'échappe dans la tour creuse menant à la Colonie Illithid. Une fois que vous sautez dans le trou, **vous ne pouvez plus faire de Repos Long** jusqu'à la fin de l'Acte 2. Quittez brièvement Hautelune pour faire un Repos Long **AVANT** de sauter.
+</CalloutBlock>
+
+**Ketheric Thorm Phase 1 — Action Légendaire (Consume the Faithful) :** Marque une cible, les Nécromites concentrent leurs attaques dessus.
+
+1. Libérez **Aylin** (Action d'Aide depuis sa cage) — Ketheric est invulnérable tant qu'elle est prisonnière.
+2. Tuez le **Flagelleur mental** en priorité en Phase 2.
+3. Ketheric est un Briseur de Serment — CA 22+. Vos Smites radiants sont particulièrement ravageurs.
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte2"
+  title="Assaut Hautelune"
+  showProgress={false}
+  groups={[{
+    items: [
+      {
+        id: "assault-01",
+        label: "<strong>Repos Long AVANT</strong> de lancer l'assaut final.",
+        priority: "critical",
+        tag: "Obligatoire"
+      },
+      {
+        id: "assault-02",
+        label: "<strong>Pré-buffs de Camp :</strong> Lien de Protection, Aide. Liez votre arme de pacte !",
+        priority: "important"
+      },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="colony">
+
+## 5.7 — Colonie de flagelleurs mentaux & Apôtre de Myrkul
+
+<CalloutBlock type="danger" title="Pod de Restauration — Usage unique en Mode Honneur">
+Le Pod (qui restaure comme un Repos Long) situé juste avant l'ascenseur du boss final est à **usage unique** en Mode Honneur. N'utilisez-le qu'une fois la Colonie entièrement explorée, juste avant de monter combattre Myrkul.
+</CalloutBlock>
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte2"
+  title="Colonie Illithid"
+  showProgress={false}
+  groups={[{
+    title: "Exploration avant le boss",
+    items: [
+      { id: "col-01", label: "Prison : Sauvez <strong>Mizora</strong> (indispensable pour Wyll) et <strong>Zevlor</strong>.", priority: "important" },
+      { id: "col-02", label: "<strong>Nous (Us)</strong> : Libérez le Dévoreur d'Intellect de sa cage → invocation permanente disponible." },
+      { id: "col-03", label: "Laboratoire Nécrotique : Résolvez le puzzle cérébral pour déverrouiller la <strong>Lame de l'Âme Opprimée</strong> et l'Esprit Éveillé.", priority: "important" },
+      { id: "col-04", label: "<strong>L'Esprit Éveillé (Waking Mind)</strong> : Placez-le dans l'interface d'archives. Choisissez de le Purger → trait <em>Barrière mentale githzeraï</em>." },
+    ]
+  }]}
+/>
+
+**Apôtre de Myrkul — Stratégie complète :**
+
+**Phase 3 — Résistances :** Immunisé Froid/Poison/Nécrotique. Aucune vulnérabilité au Radiant (contrairement à la légende).
+
+<CalloutBlock type="tip" title="Ouverture parfaite : l'Aveuglissement">
+Myrkul n'est **pas immunisé** à l'état Aveuglé. Lancez le <Tooltip name="Rayon de Soleil" type="Sort Niv.6 — Sang de Lathandre" stats="Aveugle les ennemis dans la zone, 1×/long repos" client:idle>Sunbeam : rayon de lumière brillante. Aveugle toutes les cibles touchées. Sur Myrkul = Avantage à toutes vos attaques contre lui pour tout le combat.</Tooltip> dès le tour 1 → il sera **Aveuglé** = Avantage à toutes vos attaques pour toute la durée.
+</CalloutBlock>
+
+- **Bone Chill (Froid Sépulcral) :** L'aura au corps à corps empêche **toute guérison**. Impossible de boire une potion si vous êtes adjacent. Gardez vos distances en Phase 3.
+- **Doigt de Mort :** S'il absorbe un Nécromite, il lance Doigt de Mort (~60+ dégâts). Tuez les Nécromites sur les bords **avant** qu'ils l'atteignent — un Smite Radiant annule leur Fortitude des Morts-Vivants.
+- **Le Bait du Regard :** Le Lockadin est le plus résistant. Frappez Myrkul en **premier** chaque round pour déclencher et encaisser sa riposte du Regard — protégeant les alliés plus fragiles.
+- **Le Crit de la Bien-aimée :** Activez l'Anneau de la Bien-aimée du Tueur avant un Smite de Warlock Niv.3. Les dés d'arme + Smite + Radiant critent simultanément.
+
+</section>
+
+---
+
+<section id="checklist-act2">
+
+## 5.8 — Checklist & Transition vers l'Acte 3
+
+**Loadout recommandé en quittant l'Acte 2 :**
+
+| Emplacement | Objet | Note |
+|---|---|---|
+| Arme | Sang de Lathandre +3 **ou** Lance de la Nuit +3 | À lier via Pacte de la Lame |
+| Armure | Adamantine Splint (18 CA) ou Étreinte du Faucheur (19 CA) | |
+| Bouclier | Bouclier de Ketheric (+2 CA) ou Bouclier Adamantine | |
+| Bottes | Marchenocturnes de désintégration | Pas Brumeux gratuit |
+| Gants | Gants du crépuscule infernal défectueux | +1d6 feu |
+| Casque | Casque de châtiment | PV temp par Smite |
+| Cape / Amulette | Cape de Protection / Amulette de Pas Brumeux | |
+| Anneaux | Bien-aimée du Tueur + Anneau de Protection | |
+
+<CalloutBlock type="warning" title="Point de non-retour final — Acte 2">
+Partez vers la route de la Porte de Baldur. Vous ferez un arrêt au Belvédère de la Vouivre (Wyrm's Lookout). Quitter ce camp déclenche l'**Acte 3** : vous ne pourrez plus jamais revenir dans les Terres maudites.
+</CalloutBlock>
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-acte2"
+  title="Validation — Acte 2 complet"
+  showProgress={true}
+  groups={[
+    {
+      title: "Objectifs obligatoires",
+      items: [
+        {
+          id: "final2-01",
+          label: "<strong>Niveau 10-11 atteint</strong> (niveau 10 minimum recommandé pour l'Acte 3).",
+          priority: "critical",
+          tag: "Obligatoire"
+        },
+        {
+          id: "final2-02",
+          label: "<strong>Ketheric vaincu</strong>, Pierre Néthérienne récupérée.",
+          priority: "critical",
+          tag: "Obligatoire"
+        },
+        {
+          id: "final2-03",
+          label: "<strong>Chantsenuit sauvée</strong> — alliée précieuse pour l'Acte 3.",
+          priority: "critical",
+          tag: "Recommandé fort"
+        },
+        {
+          id: "final2-04",
+          label: "<strong>Jaheira & Halsin</strong> recrutés au camp.",
+          priority: "important"
+        },
+        {
+          id: "final2-05",
+          label: "<strong>Tieffelins libérés</strong> (Robe Puissante d'Alfira obtenue pour Wyll/Gale).",
+          priority: "important"
+        },
+        {
+          id: "final2-06",
+          label: "<strong>Barrière mentale githzeraï</strong> acquise (Colonie — Waking Mind purgé).",
+        },
+        {
+          id: "final2-07",
+          label: "<strong>Loot de Myrkul</strong> ramassé : Bouclier de Ketheric + Étreinte du Faucheur.",
+          priority: "important",
+          tag: "Loot"
+        },
+      ]
+    }
+  ]}
+/>
+
+L'un des combats les plus durs du jeu est derrière vous. Le build est **complètement en place**. La Partie 6 couvrira l'Acte 3 : Rivington, Baldur's Gate, Orin, Gortash, Ansur — et le Dé d'Or.
+
+</section>

@@ -1,0 +1,105 @@
+---
+// src/components/TopBar.astro
+// Barre de navigation globale : Accueil | Aventure | Grimoire
+// + indicateur de section active + progression globale (React island)
+
+import { navigationBySection, sectionLabels, type SectionKey } from '../data/navigation';
+import GlobalProgress from './GlobalProgress';
+
+interface Props {
+  currentSection: SectionKey | 'home';
+  currentPath: string;
+}
+
+const { currentSection, currentPath } = Astro.props;
+
+// Icônes SVG inline (Lucide) — évite l'import JS au build pour la topbar statique
+const icons: Record<string, string> = {
+  Home: `<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+  BookOpen: `<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
+  Map: `<polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/>`,
+  Swords: `<polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/>`,
+  Trophy: `<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>`,
+};
+
+const navItems = [
+  { href: '/',            label: 'Accueil',   key: 'home',        iconPath: icons.Home },
+  { href: '/playthrough/acte1', label: 'Aventure', key: 'playthrough', iconPath: icons.Map },
+  { href: '/grimoire/build',    label: 'Grimoire',  key: 'grimoire',    iconPath: icons.BookOpen },
+];
+---
+
+<header
+  id="topbar"
+  class="fixed top-0 left-0 right-0 z-50 h-14 flex items-center
+         bg-bg-deep/90 backdrop-blur-md
+         border-b border-gold/10"
+  style="box-shadow: 0 1px 24px rgba(0,0,0,0.6), 0 1px 0 rgba(212,168,87,0.08);"
+>
+  <!-- Filet or décoratif en haut -->
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+
+  <div class="flex items-center w-full max-w-content mx-auto px-4 gap-0">
+
+    <!-- ── Logo / titre ─────────────────────────────────────── -->
+    <a
+      href="/"
+      class="flex items-center gap-2.5 mr-6 group shrink-0"
+      aria-label="Guide Lockadin BG3 — Accueil"
+    >
+      <div class="w-8 h-8 rounded flex items-center justify-center
+                  bg-gold/15 border border-gold/30 group-hover:border-gold/60
+                  transition-all duration-200 group-hover:bg-gold/25">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+             class="w-4 h-4 text-gold" aria-hidden="true">
+          <path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/>
+        </svg>
+      </div>
+      <div class="hidden sm:block">
+        <div class="font-display text-xs tracking-widest text-gold leading-none">LOCKADIN</div>
+        <div class="font-ui text-[10px] text-text-muted tracking-wider leading-none mt-0.5">MODE HONNEUR</div>
+      </div>
+    </a>
+
+    <!-- Séparateur vertical -->
+    <div class="hidden sm:block w-px h-6 bg-gold/15 mx-4 shrink-0"></div>
+
+    <!-- ── Navigation principale ────────────────────────────── -->
+    <nav class="flex items-center gap-1 flex-1" aria-label="Navigation principale">
+      {navItems.map(item => {
+        const isActive = currentSection === item.key ||
+          (item.key === 'playthrough' && currentSection === 'playthrough') ||
+          (item.key === 'grimoire' && currentSection === 'grimoire');
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'flex items-center gap-2 px-3 py-1.5 rounded font-ui text-sm transition-all duration-150',
+              isActive
+                ? 'bg-gold/15 text-gold-light border border-gold/30'
+                : 'text-text-secondary border border-transparent hover:text-text-primary hover:bg-gold/8 hover:border-gold/15',
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                 class="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+              <Fragment set:html={item.iconPath} />
+            </svg>
+            <span class="hidden md:inline">{item.label}</span>
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- ── Progression globale (React island) ───────────────── -->
+    <div class="shrink-0 ml-2">
+      <GlobalProgress client:load />
+    </div>
+
+  </div>
+</header>
+
+<!-- Spacer pour compenser la fixed topbar -->
+<div class="h-14" aria-hidden="true"></div>

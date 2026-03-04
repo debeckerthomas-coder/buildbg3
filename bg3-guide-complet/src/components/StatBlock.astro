@@ -1,0 +1,47 @@
+---
+// src/components/StatBlock.astro
+// Tableau de stats compact — utilisé dans la colonne encarts
+// Pour les boss, les résumés de build, les comparatifs d'objets
+//
+// Usage MDX :
+//   <StatBlock title="Lockadin Niv.12 — Rotation optimale" slot="encarts">
+//     <StatRow label="Attaques / tour"  value="2" />
+//     <StatRow label="Dégâts base"      value="1d8 + CHA +5" highlight />
+//     <StatRow label="Smite max"        value="4d8 Radiant" highlight />
+//     <StatRow label="Maléfice"         value="+1d6 Néc./coup" />
+//     <StatRow label="Crit 19-20"       value="Lame de Balduran" note="BiS" />
+//   </StatBlock>
+
+interface Props {
+  title?: string;
+  compact?: boolean;       // réduit les paddings pour les petits encarts
+  class?: string;
+}
+
+const { title, compact = false, class: extraClass = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'stat-block rounded-xl overflow-hidden',
+    'border border-gold/15',
+    extraClass,
+  ]}
+  style="background: rgba(12,14,24,0.7);"
+>
+  {title && (
+    <div class="px-4 py-2.5 border-b border-gold/10"
+         style="background: rgba(212,168,87,0.06);">
+      <div class="font-heading text-sm text-gold-light">
+        {title}
+      </div>
+    </div>
+  )}
+
+  <table class="w-full"
+         role="table">
+    <tbody class:list={['divide-y divide-white/4', compact && 'text-xs']}>
+      <slot />
+    </tbody>
+  </table>
+</div>

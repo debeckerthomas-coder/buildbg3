@@ -1,0 +1,380 @@
+---
+title: "Stratégies de Combat — Mode Honneur"
+description: "Philosophie, économie d'actions, Alpha Strike, Actions Légendaires, pouvoirs Illithid, protocoles d'urgence et tactiques avancées du Mode Honneur pour le Lockadin."
+section: grimoire
+part: 7
+layout: ../../layouts/PageLayout.astro
+---
+
+import Tooltip from '../../components/Tooltip';
+import Encart from '../../components/Encart.astro';
+import Checklist from '../../components/Checklist';
+import CalloutBlock from '../../components/CalloutBlock.astro';
+import StatBlock from '../../components/StatBlock.astro';
+import StatRow from '../../components/StatRow.astro';
+
+<Encart type="danger" title="Les 3 Piliers — Mode Honneur" slot="encarts">
+
+<StatBlock>
+  <StatRow label="1. Zéro RNG"          value="Ne laissez jamais les dés décider"    danger note="Paralysez — puis frappez" />
+  <StatRow label="2. Terminer vite"      value="Burst tour 1-2 maximum"               danger note="Plus long = plus risqué" />
+  <StatRow label="3. Contrôler l'init."  value="Agir AVANT le boss"                  danger note="Initiative Syncing" />
+</StatBlock>
+
+</Encart>
+
+<Encart type="info" title="Économie des Smites — Lockadin 7/5" slot="encarts">
+
+<StatBlock>
+  <StatRow label="Slots Paladin Niv.1" value="4 × 2d8 = moy. 9"    note="Repos long" />
+  <StatRow label="Slots Paladin Niv.2" value="3 × 3d8 = moy. 13"   note="Repos long" />
+  <StatRow label="Slots Occultiste Niv.3 ⭐" value="2 × 4d8 = moy. 18" highlight note="Repos COURT" />
+  <StatRow label="Total simultané"     value="9 Smites disponibles" highlight />
+  <StatRow label="DPS passif (sans Smite)" value="~22/attaque"       note="+CHA arme + Aura de Haine" />
+</StatBlock>
+
+</Encart>
+
+<Encart type="warning" title="MATRICE — Contrer les Légendaires" slot="encarts">
+
+| Boss | Action Légendaire | Contre |
+|---|---|---|
+| Myrkul | Regard des Morts | Aura de Courage (immunité peur) |
+| Balthazar | Le Mort Impardonné | Contresort Occultiste |
+| Ansur | Nova Tempête | Globe d'invulnérabilité |
+| Orin | Implacable ×12 | Projectile Magique upcasté |
+| Raphaël | Représailles Envoûtantes | Globe + Résistance Feu |
+
+</Encart>
+
+<Encart type="tip" title="Pouvoirs Illithid — Tier List" slot="encarts">
+
+<StatBlock>
+  <StatRow label="Chance des Royaumes" value="Critique forcé 1×/repos"  highlight note="S — Le meilleur" />
+  <StatRow label="Incantation Gratuite" value="Smite sans slot"          highlight note="S" />
+  <StatRow label="Trou Noir"            value="Aspire + ralentit tous"   highlight note="S" />
+  <StatRow label="Commencements Favorables" value="+Maîtrise 1er jet"   note="A" />
+  <StatRow label="Vol (Fly)"            value="Mobilité parfaite"        note="A" />
+</StatBlock>
+
+</Encart>
+
+<section id="philosophy">
+
+## 7.0 — Philosophie du combat en Mode Honneur
+
+La différence entre un run réussi et une Hécatombe est rarement la seule puissance du build — c'est la **discipline** avant et pendant le combat.
+
+<CalloutBlock type="danger" title="Règle d'or — Ne combattez que si vous êtes certain">
+Si vous n'êtes pas absolument sûr de gagner, **ne l'engagez pas**. Revenez après un niveau de plus, du meilleur équipement, ou une stratégie peaufinée. Un boss raté signifie la mort définitive de votre run.
+</CalloutBlock>
+
+| Pilier | Principe | Application Lockadin |
+|---|---|---|
+| **1. Zéro RNG** | Ne laissez jamais les dés décider de votre survie | Paralysie → critique garanti = dégâts sans lancer |
+| **2. Terminer vite** | Plus un combat dure, plus les catastrophes augmentent | Burst tour 1-2 : Smites Niv.3 × 2 sur le boss principal |
+| **3. Contrôler l'engagement** | Décidez quand, où, et comment le combat commence | Pré-buffs en Mode Tour par Tour avant d'ouvrir la porte |
+
+</section>
+
+---
+
+<section id="action-economy">
+
+## 7.1 — L'Économie d'Actions & Le Nerf Hâte
+
+L'économie d'actions est le concept mathématique le plus important du jeu : l'équipe qui génère le plus d'actions utiles et annule celles de l'adversaire gagne systématiquement.
+
+<CalloutBlock type="danger" title="Nerf Hâte — Mode Honneur">
+En Tacticien, la Potion de Vitesse accordait une série complète de 2 attaques + Smite supplémentaires. En Mode Honneur, **l'action supplémentaire ne permet qu'une seule attaque** (sans Smite). Utilisez les potions pour le déplacement et le repositionnement — pas pour augmenter le burst.
+</CalloutBlock>
+
+| Ressource | Utilisation optimale | Note |
+|---|---|---|
+| **Action** | 2 attaques (Pal 5). Chaque attaque peut déclencher un Smite | Ne gaspillez jamais une action |
+| **Action Bonus** | <Tooltip name="Pas Brumeux" type="Sort Niv.2" stats="Téléportation vers espace visible" client:idle>L'outil de repositionnement absolu du Lockadin. Utilisez-le pour fuir un encerclement ou atteindre un archer perché hors de portée.</Tooltip> · Anneau du Vaurien Mystique (sort Enchantement) | En Acte 3, l'Anneau libère l'Action Bonus pour contrôle |
+| **Réaction** | <Tooltip name="Bouclier" type="Sort Niv.1 — Réaction" stats="+5 CA + bloque Projectile Magique" client:idle>Utilisez en réaction quand une attaque vous toucherait. +5 CA jusqu'au début de votre prochain tour. Bloque aussi Projectile Magique.</Tooltip> ou **Contresort** (Occ 5) | Vous êtes la première ligne de Contresort de l'équipe |
+| **Mouvement** | Positionner AVANT le combat — pendant, minimiser le déplacement | Longues Foulées avant tout boss |
+
+</section>
+
+---
+
+<section id="smite-economy">
+
+## 7.2 — L'Économie des Châtiments
+
+Le Châtiment Divin est la ressource offensive nucléaire du build — mais elle est **limitée**. Dépenser tous ses Smites sur les sbires est la première cause de mort contre les boss.
+
+**Règle de gestion :**
+- Sbires (ennemis normaux) : **0 Smite** — votre DPS passif (~22/attaque) suffit largement.
+- Menaces sérieuses (ennemis élites) : **Smite Niv.1-2** pour accélérer.
+- Boss principal : **Smites Niv.3** en rafale dès que paralysé ou vulnérable.
+
+**Le secret du DPS Passif :** L'Aura de Haine offre +5 dégâts fixes à chaque frappe (CHA 20). Ajouté à l'arme liée (+5), l'enchantement (+3 sur Nyrulna) et au Maléfice (+1d6), chaque attaque inflige ~22 dégâts minimum **sans dépenser un seul emplacement**. Gardez vos Smites pour les moments décisifs.
+
+</section>
+
+---
+
+<section id="initiative-sync">
+
+## 7.3 — Synchronisation d'Initiative (Initiative Syncing)
+
+C'est la mécanique secrète pour vaincre la RNG du Mode Honneur. Dans BG3, l'initiative se joue avec un **d4** (pas un d20). Les scores d'initiative se regroupent naturellement en clusters — si toute votre équipe a le même bonus, ils jouent souvent **ensemble dans le même cluster**.
+
+**Objectif :** Votre Contrôleur (Gale) et votre Exécuteur (Lockadin) ont le même bonus d'initiative — Gale paralyse le boss **au même round** que le Lockadin frappe.
+
+- **Étape 1 :** Don Alerte (+5) sur Gale et Sombrecœur.
+- **Étape 2 :** Équipement initiative pour le Lockadin (Casque de Hâte, Élixir d'Alerte, ou Bouclier Sentinelle).
+- **Résultat :** Toute l'équipe entre dans le même cluster d4. Le boss agit en dernier — ou jamais.
+
+</section>
+
+---
+
+<section id="positioning">
+
+## 7.4 — Positionnement & Terrain
+
+Un groupe collé se fait instantanément pulvériser par un enchaînement de Boules de Feu.
+
+| Règle | Détail |
+|---|---|
+| **Espacement** | 4 à 6m entre lanceurs et mêlée — un Fracas ne touche qu'une cible |
+| **Dos au mur** | Jamais au bord d'un vide — une flèche de poussée = chute fatale |
+| **Goulets d'étranglement** | Attirez les ennemis dans une embrasure — le Lockadin bloque, Sombrecœur lance Esprits Gardiens |
+| **Bulle des Auras (3m)** | Lae'zel et les alliés de mêlée restent dans le rayon — +5 à tous leurs JS |
+
+</section>
+
+---
+
+<section id="burst">
+
+## 7.5 — Burst Damage : L'Alpha Strike
+
+L'Alpha Strike consiste à déployer votre puissance maximale dès le Tour 1 pour tuer la menace principale avant qu'elle n'agisse.
+
+**Séquence optimale :**
+
+1. **Avant le combat :** Pré-buffs en Mode Tour par Tour (Bénédiction, Bouclier de la Foi, Longues Foulées). Astarion/Lae'zel en embuscade pour le round de Surprise.
+2. **Tour 1 — Gale :** <Tooltip name="Immobilisation de Personne" type="Sort Enchantement Niv.2" stats="Paralysie — attaques CàC = critiques automatiques" client:idle>JS Sagesse. Si le boss rate : paralysé = toutes les attaques au corps à corps sont des critiques automatiques. Activez l'Anneau Bien-aimée du Tueur AVANT de frapper.</Tooltip> sur le boss → Paralysie = **critiques garantis** pour toutes les attaques CàC.
+3. **Tour 1 — Lockadin :** Activez l'Anneau Bien-aimée du Tueur → Smite Niv.3 × 2 (critiques) → **~150–200 dégâts** sur le boss principal.
+4. **Tour 1 — Astarion :** Assassinat + Embuscade + Tireur d'élite → ~100–150 dégâts supplémentaires.
+
+**Total Alpha Strike Tour 1 : ~250 à 350+ dégâts.** La quasi-totalité des boss sont vaporisés avant d'avoir pu utiliser leur première Action Légendaire.
+
+</section>
+
+---
+
+<section id="concentration">
+
+## 7.6 — Gestion de la Concentration
+
+Un personnage ne peut maintenir qu'**un seul sort de concentration** à la fois. S'il subit des dégâts, il doit réussir un JS Constitution (DC 10 ou moitié des dégâts subis) ou perdre le sort.
+
+| Personnage | Sort prioritaire | Pourquoi |
+|---|---|---|
+| **Sombrecœur** | Bénédiction ou Esprits Gardiens | Bénédiction = +1d4 permanent pour 3 alliés. Esprits Gardiens = AoE radiant passif |
+| **Gale** | Immobilisation ou Mur de Feu | Contrôle absolu du boss ou zone |
+| **Lockadin** | Bouclier de la Foi (+2 CA) | En première ligne — sa concentration est souvent cassée. Priorisez le don Mage de Guerre sur Sombrecœur pour sécuriser Bénédiction |
+
+</section>
+
+---
+
+<section id="legendary-actions">
+
+## 7.7 — MATRICE : Contrer les Actions Légendaires
+
+Les Actions Légendaires sont la mécanique mortelle exclusive du Mode Honneur. Chaque boss en possède une qui se déclenche **hors de son tour, en réaction**. Ne pas les anticiper = Game Over.
+
+**L'Invocation-Appât :** La meilleure façon de purger une réaction légendaire qui se déclenche sur la première attaque du round (comme Myrkul) est de frapper avec une **Invocation** (Décharge Occulte, Appel de Tempête) — l'invocation absorbe la réaction, laissant le Lockadin frapper librement.
+
+| Boss | Action Légendaire | Contre absolu |
+|---|---|---|
+| **Myrkul** : Regard des Morts | Riposte nécrotique sur la 1ère attaque | Aura de Courage (immunité peur) + Invocation-Appât d'abord |
+| **Balthazar** : Le Mort Impardonné | Explose cadavres adjacents | Contresort (Occultiste 5) |
+| **Ansur** : Nova au Cœur de Tempête | AoE foudre toute l'arène (~130 dégâts) | Globe d'invulnérabilité — obligatoire |
+| **Orin** : Implacable ×12 | 1 charge absorbe 1 point de dégât | Projectile Magique upcasté Niv.5 (9 fléchettes) |
+| **Raphaël** : Représailles Envoûtantes | Charme l'attaquant et son allié | Globe + Désactivez Châtiment Divin (Cambions reflètent Radiant) |
+
+</section>
+
+---
+
+<section id="consumables">
+
+## 7.8 — Consommables & Pré-buffs
+
+En Mode Honneur, les consommables sont votre assurance-vie — pas un luxe.
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-combat"
+  title="Checklist pré-combat — Boss majeur"
+  showProgress={false}
+  groups={[{
+    items: [
+      { id: "cbt-01", label: "<strong>Lier l'arme de pacte</strong> : le Lockadin a-t-il bien lié son arme ce matin ?", priority: "critical", tag: "Obligatoire" },
+      { id: "cbt-02", label: "<strong>Élixirs actifs</strong> sur toute l'équipe (Viciosité ou Soif de Sang pour le Lockadin).", priority: "critical" },
+      { id: "cbt-03", label: "<strong>Longues Foulées</strong> sur tous (+3m mouvement — rituel gratuit).", priority: "important" },
+      { id: "cbt-04", label: "<strong>Aide</strong> via Sombrecœur (+5 à +25 PV max jusqu'au repos).", priority: "important" },
+      { id: "cbt-05", label: "<strong>Lien de Protection</strong> (Camp Casting) → résistance totale aux dégâts sur le Lockadin.", priority: "critical" },
+      { id: "cbt-06", label: "<strong>Festin des Héros</strong> → immunité poison & peur, +12 PV.", priority: "important" },
+      { id: "cbt-07", label: "<strong>Bénédiction</strong> lancée juste AVANT le combat en Mode Tour par Tour.", priority: "critical" },
+    ]
+  }]}
+/>
+
+</section>
+
+---
+
+<section id="vendor-refresh">
+
+## 7.9 — Ingénierie Économique (Vendor Refresh)
+
+Le Lockadin dépend des Élixirs de Force pour les 7 premiers niveaux. Tante Ethel vend 3 Élixirs à la fois — son stock se réinitialise de deux façons : Repos Long, ou en **basculant sur un mercenaire** de Flétrissure.
+
+**Le Leveling Exploit légal :**
+1. Engagez un mercenaire chez Flétrissure (ne le montez pas de niveau).
+2. Allez voir Ethel avec votre groupe — achetez ses 3 élixirs.
+3. Basculez sur le mercenaire comme personnage actif.
+4. Revenez voir Ethel — son stock est réinitialisé. Achetez 3 élixirs supplémentaires.
+5. Rebaculez sur votre Lockadin.
+
+Résultat : **6 élixirs par visite** au lieu de 3, sans repos long supplémentaire.
+
+</section>
+
+---
+
+<section id="emergency">
+
+## 7.10 — Protocoles d'urgence
+
+See §7.11 for full protocol content.
+
+</section>
+
+---
+
+<section id="party-synergy">
+
+## 7.10 — Synergies d'équipe avancées
+
+La synergie Lockadin + Gale (expliquée dans l'Alpha Strike §7.5) repose sur la paralysie garantie transformant chaque frappe en critique. Voici les deux synergies de formation avancées :
+
+**Formation Porte (Chokepoint)**
+
+| Phase | Détail |
+|---|---|
+| Préparation | Le Lockadin se positionne dans l'embrasure d'une porte (CA 25+). Sombrecœur lance Esprits Gardiens (3d8 radiants/tour). |
+| Exécution | Les sbires s'agglutinent dans le couloir — Esprits Gardiens les usent. Le Lockadin tient la ligne sans dépenser un Smite. |
+
+**Formation Bouclier Magique (Protection Totale)**
+
+| Phase | Détail |
+|---|---|
+| Préparation | Équipe groupée à 3m du Lockadin. Gale a son Contresort en réaction. Sombrecœur maintient Bénédiction. |
+| Exécution | 4 couches défensives : Aura Protection (+5 JS) · Lien de Protection (résistance) · Bouclier de la Foi (+2 CA) · Contresort (annulation sort ennemi). |
+
+</section>
+
+---
+
+<section id="honour-tactics">
+
+## 7.11 — Tactiques avancées du Mode Honneur
+
+**Le Compagnon de Secours (Failsafe absolu)**
+
+La parade la plus sous-estimée : gardez toujours un compagnon **au camp** pendant les combats à risque extrême. Si vos 3 actifs meurent, le jeu ne déclare pas Game Over car votre 4e est en sécurité. Les compagnons au camp gagnent la même XP que ceux en combat.
+
+- À utiliser contre : Raphaël, Ansur, Myrkul, la Matriarche Araignée.
+- Si vous doutez → partez à 3.
+
+**Pré-buffs en Mode Tour par Tour**
+
+Ne lancez pas vos buffs en temps réel avant d'ouvrir une porte (le buff expire avant la fin du dialogue). Passez en **Mode Tour par Tour** (Espace) **avant** d'interagir :
+- Lancez Bénédiction, buvez vos Potions de Vitesse.
+- Positionnez vos archers en hauteur.
+- Le temps est figé — ouvrez le combat avec une attaque furtive de Lae'zel ou Astarion pour le round de Surprise.
+
+**L'Anti-Bug Absolu**
+
+Parfois la mort en Mode Honneur n'est pas de votre faute mais celle du moteur du jeu (ascenseur traversant les personnages, chute dans le vide lors d'un chargement). Pour vous protéger : sauvegardez manuellement avant chaque zone de transition et avant chaque boss. En cas de mort injuste liée à un bug, Larian permet un recours via le support — conservez votre dernière sauvegarde locale (dossier `%AppData%\Local\Larian Studios\Baldur's Gate 3\PlayerProfiles`).
+
+</section>
+
+---
+
+<section id="emergency">
+
+## 7.10 — Protocoles d'Urgence
+
+La grande majorité des Hécatombes sont évitables avec les bons protocoles.
+
+**Si un allié tombe à 0 PV :**
+- Sombrecœur lance **Mot de Guérison** (Action Bonus, portée 18m) — le personnage se relève immédiatement.
+- Un allié jette une Potion de Soins Suprêmes au sol à ses pieds (Action) ou utilise un Parchemin de Revivifier.
+- Si 2 alliés tombent : **Mot de Guérison de Groupe** (Niv.3) relève tout le monde.
+
+**Si 3 personnages sont à terre — Protocol Noir :**
+- **Fuyez** avec le survivant. Dans BG3, si le dernier membre vivant s'éloigne suffisamment, le combat se réinitialise.
+- <Tooltip name="Pas Brumeux" type="Sort Niv.2" stats="Téléportation 18m — Action Bonus" client:idle>Le moyen le plus rapide de décrocher. Téléportez-vous hors de portée, puis utilisez l'action Sprint (courir = double mouvement).</Tooltip> (Action Bonus) + Sprint (Action) = 27m en un tour.
+- Après la fuite : réanimez vos alliés chez **Flétrissure** au camp (200 PO / personne). Reposez-vous. Analysez votre erreur.
+
+**Le Failsafe ultime :** Gardez un compagnon **au camp** lors des combats à risque extrême (Raphaël, Ansur, Myrkul). Si vos 3 actifs meurent, le compagnon au camp survit — le run continue. Les compagnons au camp gagnent la même XP que ceux au combat.
+
+</section>
+
+---
+
+<section id="illithid-powers">
+
+## 7.11 — Pouvoirs Illithid
+
+<CalloutBlock type="danger" title="Consommer des larves — Conséquences">
+Manger des larves a des répercussions esthétiques (veines noires en Acte 3), mais n'entraîne **aucun Game Over** ni mauvaise fin obligatoire. En revanche, évitez la chaise Zaith'isk à la Crèche Y'llek sauf si votre build est optimisé pour les sauvegardes : échouer inflige −2 permanent à vos caractéristiques.
+</CalloutBlock>
+
+| Tier | Pouvoir | Synergie Lockadin |
+|---|---|---|
+| **S** | Chance des Royaumes Lointains | Force un critique 1×/repos long — combo parfait avec Smite Niv.3 |
+| **S** | Incantation Gratuite | Prochain sort sans slot = Smite Niv.3 gratuit |
+| **S** | Trou Noir (Black Hole) | Aspire tous les ennemis + divise leur mouvement — parfait pour regrouper avant les AoE |
+| **A** | Commencements Favorables | +Maîtrise sur le premier jet d'attaque du combat |
+| **A** | Vol (Fly) | Mobilité sans action supplémentaire |
+
+</section>
+
+---
+
+<section id="checklist-combat">
+
+## ✓ Checklist — Maîtrise du combat Mode Honneur
+
+<Checklist
+  client:load
+  storageKey="bg3-checklist-combat"
+  title="Stratégies maîtrisées ?"
+  showProgress={true}
+  groups={[{
+    items: [
+      { id: "strat-01", label: "Les 3 Piliers : discipline (0 RNG), burst rapide, contrôle de l'engagement.", priority: "critical" },
+      { id: "strat-02", label: "Nerf Hâte intégré — les Potions de Vitesse ne servent qu'au déplacement.", priority: "important" },
+      { id: "strat-03", label: "Initiative Syncing : mon équipe a +6/+8 d'initiative pour jouer groupée.", priority: "important" },
+      { id: "strat-04", label: "Alpha Strike : combo Paralysie + Smites Critiques Niv.3 maîtrisée.", priority: "critical" },
+      { id: "strat-05", label: "Actions Légendaires : j'utilise des Invocations comme appâts pour purger les réactions.", priority: "important" },
+      { id: "strat-06", label: "Vendor Refresh : élixirs en stock illimité via les mercenaires.", },
+      { id: "strat-07", label: "Protocol Noir : je sais fuir avec 1 survivant sans paniquer.", priority: "important" },
+      { id: "strat-08", label: "Failsafe : je laisse un compagnon au camp contre Myrkul/Ansur/Raphaël.", priority: "critical" },
+    ]
+  }]}
+/>
+
+</section>
