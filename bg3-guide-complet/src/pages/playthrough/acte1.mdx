@@ -18,6 +18,8 @@ import StatBlock from '../../components/StatBlock.astro';
 import StatRow from '../../components/StatRow.astro';
 import BossFiche from '../../components/BossFiche.astro';
 import BossWeakness from '../../components/BossWeakness.astro';
+import ZoneHeader from '../../components/ZoneHeader.astro';
+import Timeline from '../../components/Timeline.astro';
 
 {/* ════════════════════════════════════════════════════════════
     COLONNE DROITE — Encarts contextuels (slot "encarts")
@@ -57,6 +59,13 @@ Objectif : atteindre **Paladin pur Niv. 7** avant la transition Acte 2.
   location="Grymforge — Forge adamantine"
   legendary="Réverbération : +10m mvt + PV temp quand touché. Onde de choc tonnerre massive quand les PV sautent."
   difficulty={4}
+  bossType="construct"
+  phases={[
+    "Phase normale : Invulnérable aux dégâts — attirer dans la lave",
+    "Surchauffé (après lave) : Vulnérable, dégâts contondants ×2",
+    "Réverbération : immunité physique — utiliser Châtiment Divin (Radiant)"
+  ]}
+  damageTypes={["contondant", "radiant"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">Invulnérable SAUF dans la lave (état Surchauffé)</BossWeakness>
@@ -71,6 +80,12 @@ Objectif : atteindre **Paladin pur Niv. 7** avant la transition Acte 2.
   location="Putrid Bog"
   legendary="Weird Magic Surge : dès qu'un personnage lance un sort, crée de nouvelles copies."
   difficulty={3}
+  bossType="humanoid"
+  phases={[
+    "Phase 1 : Combat normal — attaques physiques uniquement",
+    "Phase 2 (≤20 PV) : Propose son marché — laissez-la vivre pour +1 CON"
+  ]}
+  damageTypes={["tranchant", "contondant", "perforant"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">Attaques physiques UNIQUEMENT — aucun sort offensif</BossWeakness>
@@ -129,6 +144,20 @@ Objectif : atteindre **Paladin pur Niv. 7** avant la transition Acte 2.
 <section id="overview">
 
 ## 4.0 — Vue d'ensemble & Route optimale
+
+<Timeline items={[
+  { id: "prologue",  label: "Nautiloïde — Prologue",        level: "1",   type: "nautiloid", href: "#prologue",  note: "Injonction sur Zhalk, récupérer la Lame Éternelle" },
+  { id: "plage",     label: "Plage & Ruines",                level: "1",   type: "coastal",   href: "#plage",     note: "Activer Flétrissure — débloque les respécialisations" },
+  { id: "grove",     label: "Bosquet d'Émeraude",            level: "2-3", type: "forest",    href: "#grove" },
+  { id: "blighted",  label: "Village Maudit",                level: "3-4", type: "town",      href: "#blighted",  note: "Pacifist Route — Persuasion à l'entrée" },
+  { id: "risen",     label: "Route de la Résurrection",      level: "4",   type: "town",      href: "#risen" },
+  { id: "bog",       label: "Marais Putride — Auntie Ethel", level: "5",   type: "forest",    href: "#bog",       note: "Boss — Laisser vivre pour +1 CON", milestone: true },
+  { id: "goblin",    label: "Camp Gobelin",                  level: "5",   type: "dungeon",   href: "#goblin",    note: "Optionnel : bonus permanents Loviatar et Volo", optional: true },
+  { id: "underdark", label: "Outreterre",                    level: "5-6", type: "underdark", href: "#underdark" },
+  { id: "grymforge", label: "Grymforge — Forge de Grym",    level: "6",   type: "forge",     href: "#grymforge", note: "Boss Grym + Forge Adamantine BiS", milestone: true },
+  { id: "creche",    label: "Crèche Githyanki",              level: "6-7", type: "crèche",    href: "#creche",    note: "Sang de Lathandre + bonus Éveillé", milestone: true },
+  { id: "mountain",  label: "Transition — Acte 2",           level: "7",   type: "mountain",  href: "#transition", note: "Point de non-retour vers les Terres Maudites", pointOfNoReturn: true },
+]} />
 
 L'Acte 1 est la phase la plus dangereuse de votre run Mode Honneur. Votre personnage est bas niveau, vos ressources limitées, et un simple coup critique peut mettre fin à votre campagne. La priorité absolue est **d'atteindre le niveau 5** (Extra Attaque) aussi vite et aussi prudemment que possible.
 
@@ -263,6 +292,8 @@ Ces bonus sont **définitifs** et ne peuvent être obtenus qu'une seule fois. Il
 
 <section id="prologue">
 
+<ZoneHeader name="Le Nautiloïde" subtitle="Vaisseau cérébral illithide — Fuyez, ne combattez pas" level={1} type="nautiloid" />
+
 ## 4.3 — Prologue : Le Nautiloïde
 
 <Checklist
@@ -289,6 +320,8 @@ Ces bonus sont **définitifs** et ne peuvent être obtenus qu'une seule fois. Il
 ---
 
 <section id="plage">
+
+<ZoneHeader name="Plage & Ruines" subtitle="Ravaged Beach — Premier contact avec les survivants" level={1} type="coastal" />
 
 ## 4.4 — Plage & Ruines (Ravaged Beach)
 
@@ -319,6 +352,8 @@ Ces bonus sont **définitifs** et ne peuvent être obtenus qu'une seule fois. Il
 ---
 
 <section id="grove">
+
+<ZoneHeader name="Bosquet d'Émeraude" subtitle="Refuge druidique sous tension — Diplomatie avant tout" level={2} type="forest" />
 
 ## 4.5 — Bosquet d'émeraude
 
@@ -351,6 +386,8 @@ Ces bonus sont **définitifs** et ne peuvent être obtenus qu'une seule fois. Il
 ---
 
 <section id="blighted">
+
+<ZoneHeader name="Village Maudit" subtitle="Blighted Village — Gobelins et Reine des Araignées" level={3} type="town" />
 
 ## 4.6 — Village maudit (Blighted Village)
 
@@ -417,6 +454,8 @@ En réaction, enveloppe une cible dans une toile d'acide. Si vous ne la détruis
 ---
 
 <section id="bog">
+
+<ZoneHeader name="Marais Putride" subtitle="Putrid Bog — Territoire d'Auntie Ethel, gardez des attaques physiques" level={5} type="forest" />
 
 ## 4.8 — Putrid Bog : Auntie Ethel
 
@@ -516,6 +555,8 @@ L'Ours-hibou mère appelle son compagnon (Mate) en Mode Honneur ! Préparez-vous
 
 <section id="underdark">
 
+<ZoneHeader name="Outreterre" subtitle="Underdark — Colonie des Myconides & Marchands essentiels" level={5} type="underdark" />
+
 ## 4.11 — Outreterre (Underdark)
 
 <CalloutBlock type="tip" title="Colonie des Myconides — Achats prioritaires">
@@ -537,6 +578,8 @@ L'Ours-hibou mère appelle son compagnon (Mate) en Mode Honneur ! Préparez-vous
 ---
 
 <section id="grymforge">
+
+<ZoneHeader name="Grymforge" subtitle="Forge Adamantine — Craft les meilleures armures du jeu" level={6} type="forge" />
 
 ## 4.12 — Grymforge & Forge adamantine
 
@@ -584,6 +627,8 @@ Nere mourra asphyxié si vous faites un **repos long** après être arrivé à G
 ---
 
 <section id="creche">
+
+<ZoneHeader name="Crèche Githyanki" subtitle="Monastère d'Auberosée — Sang de Lathandre & trait Éveillé" level={6} type="crèche" />
 
 ## 4.13 — Crèche Githyanki (Monastère d'Auberosée)
 

@@ -4,34 +4,86 @@
 // Usage MDX :
 //
 //   <BossFiche
-//     name="Ansur — Dragon de Tempête"
-//     hp={500}
-//     location="Wyrmway, sous la Ville Basse"
-//     legendary="Nova de Cœur-de-Tempête — 8d10 Foudre + Étourdissement zone"
+//     name="Grym — Gardien de la Forge"
+//     hp={450}
+//     location="Grymforge — Forge adamantine"
+//     legendary="Réverbération : +10m mvt + PV temp quand touché."
+//     difficulty={4}
+//     bossType="construct"
+//     phases={["Phase 1 : Invulnérable — attirer dans la lave", "Phase 2 : Surchauffé — dégâts ×2 contondant"]}
+//     damageTypes={["contondant", "radiant"]}
 //     slot="encarts"
 //   >
-//     <BossWeakness>Silence Tour 1 — annule la Légendaire</BossWeakness>
-//     <BossWeakness>Globle d'invulnérabilité — protège l'équipe</BossWeakness>
+//     <BossWeakness>...</BossWeakness>
 //   </BossFiche>
+
+type BossType = 'humanoid' | 'undead' | 'construct' | 'beast' | 'aberration' | 'fiend' | 'dragon' | 'elemental';
+type DamageType = 'feu' | 'froid' | 'foudre' | 'acide' | 'poison' | 'nécrotique' | 'radiant' | 'contondant' | 'perforant' | 'tranchant' | 'tonnerre' | 'psychique' | 'force';
 
 interface Props {
   name: string;
   hp: number;
   location?: string;
-  legendary?: string;     // description de l'action légendaire
-  difficulty?: 1 | 2 | 3 | 4 | 5;  // 1-5 étoiles
+  legendary?: string;
+  difficulty?: 1 | 2 | 3 | 4 | 5;
+  bossType?: BossType;
+  phases?: string[];
+  damageTypes?: DamageType[];  // Types de dégâts efficaces contre ce boss
   class?: string;
 }
 
-const { name, hp, location, legendary, difficulty = 3, class: extraClass = '' } = Astro.props;
+const {
+  name,
+  hp,
+  location,
+  legendary,
+  difficulty = 3,
+  bossType,
+  phases,
+  damageTypes,
+  class: extraClass = '',
+} = Astro.props;
 
 // Couleur HP selon montant
 const hpColor = hp > 500 ? '#ef4444' : hp > 300 ? '#f97316' : '#f59e0b';
 
-// Icônes
+// Config par type de créature
+const bossTypeConfig: Record<BossType, { label: string; emoji: string; color: string }> = {
+  humanoid:   { label: 'Humanoïde',   emoji: '🧍', color: '#94a3b8' },
+  undead:     { label: 'Mort-vivant', emoji: '💀', color: '#a78bfa' },
+  construct:  { label: 'Artificiel',  emoji: '⚙️', color: '#60a5fa' },
+  beast:      { label: 'Bête',        emoji: '🐉', color: '#4ade80' },
+  aberration: { label: 'Aberration',  emoji: '🐙', color: '#818cf8' },
+  fiend:      { label: 'Fiélon',      emoji: '😈', color: '#f87171' },
+  dragon:     { label: 'Dragon',      emoji: '🐲', color: '#fbbf24' },
+  elemental:  { label: 'Élémentaire', emoji: '🌀', color: '#38bdf8' },
+};
+
+// Config couleurs des types de dégâts
+const damageColors: Record<DamageType, { bg: string; text: string; border: string }> = {
+  feu:        { bg: 'rgba(239,68,68,0.12)',  text: '#fca5a5', border: 'rgba(239,68,68,0.3)'  },
+  froid:      { bg: 'rgba(56,189,248,0.12)', text: '#7dd3fc', border: 'rgba(56,189,248,0.3)' },
+  foudre:     { bg: 'rgba(250,204,21,0.12)', text: '#fde047', border: 'rgba(250,204,21,0.3)' },
+  acide:      { bg: 'rgba(74,222,128,0.1)',  text: '#86efac', border: 'rgba(74,222,128,0.25)'},
+  poison:     { bg: 'rgba(132,204,22,0.1)',  text: '#bef264', border: 'rgba(132,204,22,0.25)'},
+  nécrotique: { bg: 'rgba(124,58,237,0.12)', text: '#c4b5fd', border: 'rgba(124,58,237,0.3)' },
+  radiant:    { bg: 'rgba(251,191,36,0.12)', text: '#fde68a', border: 'rgba(251,191,36,0.3)' },
+  contondant: { bg: 'rgba(148,163,184,0.1)', text: '#cbd5e1', border: 'rgba(148,163,184,0.25)'},
+  perforant:  { bg: 'rgba(148,163,184,0.1)', text: '#cbd5e1', border: 'rgba(148,163,184,0.25)'},
+  tranchant:  { bg: 'rgba(148,163,184,0.1)', text: '#cbd5e1', border: 'rgba(148,163,184,0.25)'},
+  tonnerre:   { bg: 'rgba(99,102,241,0.12)', text: '#a5b4fc', border: 'rgba(99,102,241,0.3)' },
+  psychique:  { bg: 'rgba(236,72,153,0.1)',  text: '#f9a8d4', border: 'rgba(236,72,153,0.25)'},
+  force:      { bg: 'rgba(255,255,255,0.05)',text: '#e2e8f0', border: 'rgba(255,255,255,0.15)'},
+};
+
+const difficultyLabel = difficulty === 5 ? 'Létal' : difficulty >= 4 ? 'Extrême' : difficulty >= 3 ? 'Difficile' : 'Modéré';
+
+// Icônes SVG
 const skullIcon = `<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 1-2-2V9m6 5h10a2 2 0 0 0 2-2V9m0 0H3"/>`;
 const pinIcon   = `<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>`;
 const zapIcon   = `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`;
+const layersIcon= `<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>`;
+const shieldIcon= `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`;
 ---
 
 <div
@@ -40,50 +92,74 @@ const zapIcon   = `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`;
     'border border-danger/30',
     extraClass,
   ]}
-  style="background: rgba(12,5,5,0.8);"
+  style="background: rgba(12,5,5,0.85);"
 >
-  <!-- Header rouge -->
+  <!-- Header rouge avec type de créature -->
   <div class="px-4 py-3 border-b border-danger/25"
-       style="background: rgba(239,68,68,0.08);">
-    <div class="font-ui text-[9px] uppercase tracking-widest text-danger/70 mb-0.5">
-      👹 Fiche Boss
-    </div>
-    <div class="font-heading text-sm text-red-300 leading-snug">
-      {name}
-    </div>
+       style="background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(12,5,5,0) 100%);">
 
-    <!-- Difficulté -->
-    <div class="flex items-center gap-1 mt-1.5" aria-label={`Difficulté : ${difficulty}/5`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div
-          class:list={[
-            'w-2 h-2 rounded-sm',
-            i < difficulty ? 'bg-danger' : 'bg-white/10',
-          ]}
-          aria-hidden="true"
-        />
-      ))}
-      <span class="font-ui text-[10px] text-danger/60 ml-1">
-        {difficulty === 5 ? 'Létal' : difficulty >= 4 ? 'Extrême' : difficulty >= 3 ? 'Difficile' : 'Modéré'}
-      </span>
+    <div class="flex items-start justify-between gap-2">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 flex-wrap mb-0.5">
+          <span class="font-ui text-[9px] uppercase tracking-widest text-danger/70">
+            👹 Fiche Boss
+          </span>
+          {bossType && (
+            <span
+              class="font-ui text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded border"
+              style={`color: ${bossTypeConfig[bossType].color}; border-color: ${bossTypeConfig[bossType].color}30; background: ${bossTypeConfig[bossType].color}10;`}
+            >
+              {bossTypeConfig[bossType].emoji} {bossTypeConfig[bossType].label}
+            </span>
+          )}
+        </div>
+        <div class="font-heading text-sm text-red-300 leading-snug">
+          {name}
+        </div>
+      </div>
+
+      <!-- Difficulté -->
+      <div class="flex flex-col items-end gap-0.5 shrink-0">
+        <div class="flex items-center gap-0.5" aria-label={`Difficulté : ${difficulty}/5`}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              class:list={[
+                'w-2 h-2 rounded-sm',
+                i < difficulty ? 'bg-danger' : 'bg-white/10',
+              ]}
+              aria-hidden="true"
+            />
+          ))}
+        </div>
+        <span class="font-ui text-[9px] text-danger/60">{difficultyLabel}</span>
+      </div>
     </div>
   </div>
 
   <!-- Stats -->
   <div class="px-4 py-3 space-y-2.5">
-    <!-- PV -->
-    <div class="flex items-center justify-between">
-      <span class="font-ui text-xs text-text-muted flex items-center gap-1.5">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="w-3 h-3" aria-hidden="true">
-          <Fragment set:html={skullIcon} />
-        </svg>
-        Points de vie
-      </span>
-      <span class="font-mono text-sm font-bold" style={`color: ${hpColor};`}>
-        {hp} PV
-      </span>
+    <!-- PV avec barre de vie -->
+    <div class="space-y-1">
+      <div class="flex items-center justify-between">
+        <span class="font-ui text-xs text-text-muted flex items-center gap-1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="w-3 h-3" aria-hidden="true">
+            <Fragment set:html={skullIcon} />
+          </svg>
+          Points de vie
+        </span>
+        <span class="font-mono text-sm font-bold" style={`color: ${hpColor};`}>
+          {hp} PV
+        </span>
+      </div>
+      <!-- Barre de PV visuelle -->
+      <div class="h-1.5 rounded-full bg-white/5 overflow-hidden" aria-hidden="true">
+        <div
+          class="h-full rounded-full transition-all"
+          style={`width: ${Math.min(100, (hp / 600) * 100)}%; background: linear-gradient(90deg, ${hpColor}99, ${hpColor});`}
+        ></div>
+      </div>
     </div>
 
     <!-- Localisation -->
@@ -97,6 +173,35 @@ const zapIcon   = `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`;
         <span class="font-ui text-[11px] text-text-muted leading-snug">
           {location}
         </span>
+      </div>
+    )}
+
+    <!-- Types de dégâts efficaces -->
+    {damageTypes && damageTypes.length > 0 && (
+      <div>
+        <div class="flex items-center gap-1.5 mb-1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="w-3 h-3 text-gold/50 shrink-0" aria-hidden="true">
+            <Fragment set:html={shieldIcon} />
+          </svg>
+          <span class="font-ui text-[10px] uppercase tracking-widest text-text-muted">
+            Dégâts efficaces
+          </span>
+        </div>
+        <div class="flex flex-wrap gap-1">
+          {damageTypes.map((dt) => {
+            const dc = damageColors[dt] ?? damageColors.force;
+            return (
+              <span
+                class="font-ui text-[10px] px-2 py-0.5 rounded-full border"
+                style={`background: ${dc.bg}; color: ${dc.text}; border-color: ${dc.border};`}
+              >
+                {dt}
+              </span>
+            );
+          })}
+        </div>
       </div>
     )}
 
@@ -119,8 +224,39 @@ const zapIcon   = `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`;
       </div>
     )}
 
+    <!-- Phases de combat -->
+    {phases && phases.length > 0 && (
+      <div>
+        <div class="flex items-center gap-1.5 mb-1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="w-3 h-3 text-violet-400/70 shrink-0" aria-hidden="true">
+            <Fragment set:html={layersIcon} />
+          </svg>
+          <span class="font-ui text-[10px] uppercase tracking-widest text-text-muted">
+            Phases de combat
+          </span>
+        </div>
+        <ol class="space-y-1 m-0 p-0 list-none">
+          {phases.map((phase, i) => (
+            <li class="flex items-start gap-2">
+              <span
+                class="font-mono text-[9px] font-bold px-1.5 py-0.5 rounded border border-violet-500/30 bg-violet-500/10 text-violet-400 shrink-0 mt-0.5 leading-none"
+                aria-label={`Phase ${i + 1}`}
+              >
+                P{i + 1}
+              </span>
+              <span class="font-body text-[11px] text-text-secondary leading-snug">
+                {phase}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
+
     <!-- Faiblesses / contre-stratégies -->
-    <div class="space-y-1">
+    <div class="space-y-1 pt-1 border-t border-white/5">
       <div class="font-ui text-[10px] uppercase tracking-widest text-text-muted mb-1.5">
         ⚔ Stratégies clés
       </div>

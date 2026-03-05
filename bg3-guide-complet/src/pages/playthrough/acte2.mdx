@@ -18,6 +18,8 @@ import StatBlock from '../../components/StatBlock.astro';
 import StatRow from '../../components/StatRow.astro';
 import BossFiche from '../../components/BossFiche.astro';
 import BossWeakness from '../../components/BossWeakness.astro';
+import ZoneHeader from '../../components/ZoneHeader.astro';
+import Timeline from '../../components/Timeline.astro';
 
 {/* ════════════════════════════════════════════════════════════
     COLONNE DROITE — Encarts contextuels (slot "encarts")
@@ -66,6 +68,13 @@ C'est au **Niveau 8** que vous effectuez la respécialisation majeure chez Flét
   location="Colonie Illithid — sous Hautelune"
   legendary="Regard des Morts : en réaction à la PREMIÈRE attaque chaque round, riposte avec un regard nécrotique massif."
   difficulty={5}
+  bossType="undead"
+  phases={[
+    "Phase 1 : Combat standard — tuer les Nécromites sur les bords en priorité",
+    "Phase 2 : Invoque Ketheric — Aveugler avec Rayon de Soleil (Sang de Lathandre)",
+    "Phase 3 : Bone Chill actif — aucune guérison en mêlée, rester à distance"
+  ]}
+  damageTypes={["radiant", "tranchant"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">Rayon de soleil (Sang de Lathandre) → Aveuglé = Avantage total</BossWeakness>
@@ -81,6 +90,12 @@ C'est au **Niveau 8** que vous effectuez la respécialisation majeure chez Flét
   location="Toit des Tours de Hautelune"
   legendary="Consume the Faithful : marque une cible, les Nécromites concentrent leurs attaques dessus."
   difficulty={4}
+  bossType="undead"
+  phases={[
+    "Phase 1 (Toit) : Invulnérable — libérer Dame Aylin d'abord",
+    "Phase 2 (Colonie) : Vulnérable — tuer le Flagelleur mental en priorité"
+  ]}
+  damageTypes={["radiant", "tranchant", "contondant"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">Libérez Aylin (Action d'Aide) → Ketheric invulnérable sans elle</BossWeakness>
@@ -141,6 +156,17 @@ C'est au **Niveau 8** que vous effectuez la respécialisation majeure chez Flét
 
 ## 5.0 — Vue d'ensemble de l'Acte 2
 
+<Timeline items={[
+  { id: "entry",      label: "Entrée des Terres Maudites",        level: "7",  type: "shadow",   href: "#entry",      note: "Obtenir la Lanterne lunaire (Pixie) en priorité absolue", milestone: true },
+  { id: "lastlight",  label: "Auberge de la Dernière Lumière",     level: "7",  type: "inn",      href: "#lastlight",  note: "Protéger Isobel — si elle meurt, l'auberge est perdue" },
+  { id: "reithwin",   label: "Ville de Reithwin",                  level: "7-8",type: "shadow",   href: "#reithwin",   note: "3 boss Thorm — solution dialogue disponible" },
+  { id: "moonrise",   label: "Tours de Hautelune (Infiltration)",  level: "8",  type: "dungeon",  href: "#moonrise",   note: "Respécialisation Pal7/Occ5 chez Flétrissure", milestone: true },
+  { id: "shar",       label: "Épreuve de Shar (Shadowfell)",       level: "8",  type: "shadow",   href: "#shar",       note: "Point de non-retour — Shadowfell ferme l'Acte 1", pointOfNoReturn: true },
+  { id: "assault",    label: "Assaut de Hautelune",                level: "8",  type: "dungeon",  href: "#assault",    note: "Ketheric Phase 1 sur le toit — Dame Aylin obligatoire" },
+  { id: "illithid",   label: "Colonie Illithide",                  level: "8",  type: "underdark",href: "#illithid",   note: "Explorer AVANT le Pod — ensuite point de non-retour", milestone: true },
+  { id: "myrkul",     label: "Apôtre de Myrkul — Boss Acte 2",    level: "8",  type: "dungeon",  href: "#myrkul",     note: "Aucun Repos Long possible depuis l'assaut", pointOfNoReturn: true },
+]} />
+
 L'Acte 2 se déroule dans les **Terres maudites par l'ombre**, un territoire infesté d'une malédiction qui inflige des dégâts nécrotiques à quiconque n'est pas protégé par une source de lumière. C'est aussi ici que vous effectuez la **respécialisation majeure au Niveau 8** pour finaliser le build Lockadin (Pal 7 / Occ 5).
 
 <CalloutBlock type="tip" title="Avantage Lockadin en Acte 2">
@@ -179,6 +205,8 @@ Les squelettes sont **vulnérables au Contondant** — double dégâts avec le <
 
 <section id="shadow-entry">
 
+<ZoneHeader name="Terres Maudites par l'Ombre" subtitle="Shadow-Cursed Lands — Protégez-vous dès l'entrée" level={7} type="shadow" />
+
 ## 5.1 — Entrée dans les Terres maudites par l'ombre
 
 La <Tooltip name="Lanterne lunaire" type="Objet — protection de zone" stats="Protège contre toute la Malédiction des Ombres" client:idle>Donne la Bénédiction de la Fée (Pixie's Blessing) si vous libérez la fée : protection personnelle permanente pour tout l'Acte 2, indépendante de la lanterne.</Tooltip> est **indispensable**. Obtenez-la dès votre arrivée.
@@ -193,6 +221,8 @@ La <Tooltip name="Lanterne lunaire" type="Objet — protection de zone" stats="P
 ---
 
 <section id="last-light">
+
+<ZoneHeader name="Auberge de la Dernière Lumière" subtitle="Last Light Inn — Refuge dans les Terres Maudites — Protéger Isobel" level={7} type="inn" />
 
 ## 5.2 — Auberge de la Dernière Lumière (Last Light Inn)
 
@@ -238,6 +268,8 @@ Parler à Isobel (1er étage) **déclenche le combat** avec Marcus. Si Isobel to
 ---
 
 <section id="reithwin">
+
+<ZoneHeader name="Ville de Reithwin" subtitle="3 Boss Thorm — Solutions dialogue disponibles" level="7-8" type="shadow" />
 
 ## 5.3 — Reithwin Town : Les 3 Boss Thorm
 

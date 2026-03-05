@@ -1,0 +1,241 @@
+---
+// src/components/ZoneHeader.astro
+// Bannière atmosphérique illustrée pour chaque grande zone du walkthrough
+// Usage MDX (dans la colonne gauche, avant le contenu de la section) :
+//
+//   <ZoneHeader
+//     name="Bosquet d'Émeraude"
+//     subtitle="Enclave druidique sous tension"
+//     level={3}
+//     type="forest"
+//   />
+
+type ZoneType =
+  | 'forest'
+  | 'dungeon'
+  | 'underdark'
+  | 'shadow'
+  | 'town'
+  | 'city'
+  | 'coastal'
+  | 'mountain'
+  | 'inn'
+  | 'nautiloid'
+  | 'crèche'
+  | 'forge';
+
+interface Props {
+  name: string;
+  subtitle?: string;
+  level?: number | string;
+  type?: ZoneType;
+  optional?: boolean;
+  imageUrl?: string; // URL d'image optionnelle (override)
+  class?: string;
+}
+
+const {
+  name,
+  subtitle,
+  level,
+  type = 'dungeon',
+  optional = false,
+  imageUrl,
+  class: extraClass = '',
+} = Astro.props;
+
+// Config visuelle par type de zone
+const typeConfig: Record<ZoneType, {
+  gradient: string;
+  glowColor: string;
+  label: string;
+  emoji: string;
+  photo: string; // Photo Unsplash gratuite (paysage/atmosphère)
+}> = {
+  coastal: {
+    gradient: 'linear-gradient(160deg, #0c1a2e 0%, #0a1520 50%, #050a0a 100%)',
+    glowColor: 'rgba(56, 189, 248, 0.15)',
+    label: 'Zone côtière',
+    emoji: '🌊',
+    photo: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+  },
+  nautiloid: {
+    gradient: 'linear-gradient(160deg, #0d0520 0%, #0f0a1a 50%, #050a0a 100%)',
+    glowColor: 'rgba(139, 92, 246, 0.2)',
+    label: 'Vaisseau Illithide',
+    emoji: '🐙',
+    photo: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=80',
+  },
+  forest: {
+    gradient: 'linear-gradient(160deg, #0a1f0d 0%, #0f2310 50%, #050a0a 100%)',
+    glowColor: 'rgba(22, 163, 74, 0.15)',
+    label: 'Zone forestière',
+    emoji: '🌲',
+    photo: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+  },
+  town: {
+    gradient: 'linear-gradient(160deg, #1a1208 0%, #1c1408 50%, #050a0a 100%)',
+    glowColor: 'rgba(217, 119, 6, 0.12)',
+    label: 'Village / Bourgade',
+    emoji: '🏚️',
+    photo: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+  },
+  inn: {
+    gradient: 'linear-gradient(160deg, #1c1005 0%, #1a1208 50%, #050a0a 100%)',
+    glowColor: 'rgba(251, 146, 60, 0.15)',
+    label: 'Auberge / Refuge',
+    emoji: '🍺',
+    photo: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80',
+  },
+  dungeon: {
+    gradient: 'linear-gradient(160deg, #100c0a 0%, #141010 50%, #050a0a 100%)',
+    glowColor: 'rgba(239, 68, 68, 0.1)',
+    label: 'Donjon',
+    emoji: '⚔️',
+    photo: 'https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=1200&q=80',
+  },
+  underdark: {
+    gradient: 'linear-gradient(160deg, #08080f 0%, #0a0a14 50%, #050a0a 100%)',
+    glowColor: 'rgba(99, 102, 241, 0.15)',
+    label: 'Outreterre',
+    emoji: '🍄',
+    photo: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?auto=format&fit=crop&w=1200&q=80',
+  },
+  shadow: {
+    gradient: 'linear-gradient(160deg, #06060a 0%, #08070c 50%, #050a0a 100%)',
+    glowColor: 'rgba(167, 139, 250, 0.08)',
+    label: 'Terres Maudites',
+    emoji: '🌑',
+    photo: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80',
+  },
+  city: {
+    gradient: 'linear-gradient(160deg, #0a0c14 0%, #0c0e18 50%, #050a0a 100%)',
+    glowColor: 'rgba(212, 168, 87, 0.1)',
+    label: 'Cité',
+    emoji: '🏰',
+    photo: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=80',
+  },
+  mountain: {
+    gradient: 'linear-gradient(160deg, #0d0f14 0%, #0c0e12 50%, #050a0a 100%)',
+    glowColor: 'rgba(148, 163, 184, 0.1)',
+    label: 'Zone montagneuse',
+    emoji: '⛰️',
+    photo: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+  },
+  crèche: {
+    gradient: 'linear-gradient(160deg, #0e0c0f 0%, #120e14 50%, #050a0a 100%)',
+    glowColor: 'rgba(239, 68, 68, 0.12)',
+    label: 'Crèche Githyanki',
+    emoji: '⚡',
+    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
+  },
+  forge: {
+    gradient: 'linear-gradient(160deg, #1a0a04 0%, #1c0c05 50%, #050a0a 100%)',
+    glowColor: 'rgba(251, 146, 60, 0.2)',
+    label: 'Forge / Lieu industriel',
+    emoji: '🔥',
+    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
+  },
+};
+
+const cfg = typeConfig[type];
+const bgImage = imageUrl ?? cfg.photo;
+---
+
+<div
+  class:list={[
+    'zone-header relative w-full rounded-xl overflow-hidden mb-6 not-prose',
+    extraClass,
+  ]}
+  style={`min-height: 140px;`}
+>
+  <!-- Image de fond avec overlay sombre -->
+  <div
+    class="absolute inset-0 bg-cover bg-center"
+    style={`background-image: url('${bgImage}');`}
+    aria-hidden="true"
+  ></div>
+  <!-- Gradient overlay fort pour lisibilité -->
+  <div
+    class="absolute inset-0"
+    style={`background: ${cfg.gradient}; opacity: 0.88;`}
+    aria-hidden="true"
+  ></div>
+  <!-- Lueur de couleur centrée -->
+  <div
+    class="absolute inset-0"
+    style={`background: radial-gradient(ellipse at 20% 50%, ${cfg.glowColor} 0%, transparent 65%);`}
+    aria-hidden="true"
+  ></div>
+  <!-- Ligne décorative dorée en haut -->
+  <div
+    class="absolute top-0 left-0 right-0 h-px"
+    style="background: linear-gradient(90deg, transparent, rgba(212,168,87,0.4) 30%, rgba(212,168,87,0.6) 50%, rgba(212,168,87,0.4) 70%, transparent);"
+    aria-hidden="true"
+  ></div>
+  <!-- Motif de points subtil -->
+  <div
+    class="absolute inset-0 opacity-10"
+    style="background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 24px 24px;"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Contenu -->
+  <div class="relative z-10 px-5 py-4 flex items-center gap-4">
+    <!-- Emoji / icône de zone -->
+    <div
+      class="text-3xl shrink-0 w-12 h-12 flex items-center justify-center rounded-lg border border-white/10"
+      style={`background: rgba(0,0,0,0.3); box-shadow: 0 0 12px ${cfg.glowColor};`}
+      aria-hidden="true"
+    >
+      {cfg.emoji}
+    </div>
+
+    <!-- Texte -->
+    <div class="flex-1 min-w-0">
+      <!-- Label de type + badge optionnel -->
+      <div class="flex items-center gap-2 mb-1 flex-wrap">
+        <span class="font-ui text-[10px] uppercase tracking-widest text-text-dim">
+          {cfg.label}
+        </span>
+        {optional && (
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-ui uppercase tracking-wide bg-white/5 text-text-muted border border-white/10">
+            Optionnel
+          </span>
+        )}
+      </div>
+
+      <!-- Nom de la zone -->
+      <h3
+        class="font-heading text-xl leading-tight text-gold-light m-0"
+        style="text-shadow: 0 0 20px rgba(212,168,87,0.3);"
+      >
+        {name}
+      </h3>
+
+      <!-- Sous-titre -->
+      {subtitle && (
+        <p class="font-body text-sm text-text-secondary mt-0.5 m-0 italic">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Badge de niveau recommandé -->
+    {level !== undefined && (
+      <div class="shrink-0 text-center" aria-label={`Niveau recommandé : ${level}`}>
+        <div
+          class="w-12 h-12 rounded-full flex flex-col items-center justify-center border"
+          style={`background: rgba(0,0,0,0.5); border-color: rgba(212,168,87,0.4); box-shadow: 0 0 10px rgba(212,168,87,0.15);`}
+        >
+          <span class="font-ui text-[9px] uppercase tracking-widest text-gold/60 leading-none">
+            Niv.
+          </span>
+          <span class="font-heading text-lg text-gold leading-none mt-0.5">
+            {level}
+          </span>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
