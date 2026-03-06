@@ -70,7 +70,7 @@ const defaultColor = { dot: '#d4a857', text: '#fde68a', bg: 'rgba(212,168,87,0.0
     ></div>
 
     <ol class="space-y-1 list-none m-0 p-0">
-      {items.map((item, index) => {
+      {items.map((item) => {
         const colors = item.type ? (typeColors[item.type] ?? defaultColor) : defaultColor;
         const isPoNR = item.pointOfNoReturn;
         const isMilestone = item.milestone;

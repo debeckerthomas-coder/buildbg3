@@ -10,7 +10,7 @@ interface Props {
   currentPath: string;
 }
 
-const { page, currentPath } = Astro.props;
+const { page } = Astro.props;
 
 // Icônes inline pour la sidebar (Lucide SVG paths)
 const sectionIcon = `<path d="M4 6h16M4 12h8M4 18h12"/>`;  // AlignLeft
@@ -51,7 +51,7 @@ const sectionLabels: Record<string, string> = {
 
     <!-- Sommaire (TOC) -->
     <nav class="flex-1 px-3 py-3 space-y-0.5" aria-label="Sommaire">
-      {page.navSections.map((section, i) => {
+      {page.navSections.map((section) => {
         const isChecklist = section.label.startsWith('✓');
         return (
           <a
