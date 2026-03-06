@@ -24,6 +24,7 @@ interface Props {
   note?: string;
   bis?: boolean;
   optional?: boolean;
+  imageUrl?: string;  // Icône de l'objet (wiki BG3)
 }
 
 const {
@@ -35,6 +36,7 @@ const {
   note,
   bis = false,
   optional = false,
+  imageUrl,
 } = Astro.props;
 
 const rarityConfig: Record<Rarity, {
@@ -84,20 +86,43 @@ const crownIcon = `<path d="m2 4 3 12h14l3-12-6 5-4-5-4 5-6-5zm3 16h14"/>`;
     </div>
   )}
 
-  <!-- Point de rareté coloré avec animation -->
-  <div class="relative shrink-0 mt-1.5" aria-label={`Rareté : ${rc.label}`} title={rc.label}>
+  <!-- Icône item ou point de rareté -->
+  {imageUrl ? (
     <div
-      class="w-2.5 h-2.5 rounded-full"
-      style={`background: ${rc.color}; box-shadow: 0 0 8px ${rc.glowColor};`}
-    ></div>
-    {rc.shimmer && (
+      class="relative shrink-0 w-10 h-10 rounded-lg overflow-hidden border flex items-center justify-center"
+      style={`border-color: ${rc.borderColor}; background: ${rc.bgColor}; box-shadow: 0 0 8px ${rc.glowColor};`}
+      aria-label={`Rareté : ${rc.label}`}
+      title={rc.label}
+    >
+      <img
+        src={imageUrl}
+        alt={name}
+        class="w-8 h-8 object-contain"
+        onerror="this.parentElement.innerHTML='<div class=\'w-2.5 h-2.5 rounded-full m-auto\' style=\'background:currentColor;\'></div>';this.parentElement.style.width='1rem';this.parentElement.style.height='1rem';this.parentElement.style.border='none';"
+      />
+      {rc.shimmer && (
+        <div
+          class="absolute inset-0 rounded-lg animate-pulse opacity-20"
+          style={`background: ${rc.color};`}
+          aria-hidden="true"
+        ></div>
+      )}
+    </div>
+  ) : (
+    <div class="relative shrink-0 mt-1.5" aria-label={`Rareté : ${rc.label}`} title={rc.label}>
       <div
-        class="absolute inset-0 rounded-full animate-ping opacity-30"
-        style={`background: ${rc.color};`}
-        aria-hidden="true"
+        class="w-2.5 h-2.5 rounded-full"
+        style={`background: ${rc.color}; box-shadow: 0 0 8px ${rc.glowColor};`}
       ></div>
-    )}
-  </div>
+      {rc.shimmer && (
+        <div
+          class="absolute inset-0 rounded-full animate-ping opacity-30"
+          style={`background: ${rc.color};`}
+          aria-hidden="true"
+        ></div>
+      )}
+    </div>
+  )}
 
   <!-- Infos item -->
   <div class="flex-1 min-w-0 relative z-10">

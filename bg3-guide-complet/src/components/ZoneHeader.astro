@@ -45,101 +45,117 @@ const {
 } = Astro.props;
 
 // Config visuelle par type de zone
+// bgWiki : image BG3 wiki (prioritaire, peut échouer si hotlink bloqué)
+// bgFallback : image Unsplash de secours toujours disponible
 const typeConfig: Record<ZoneType, {
   gradient: string;
   glowColor: string;
   label: string;
   emoji: string;
-  photo: string; // Photo Unsplash gratuite (paysage/atmosphère)
+  bgWiki: string;
+  bgFallback: string;
 }> = {
   coastal: {
     gradient: 'linear-gradient(160deg, #0c1a2e 0%, #0a1520 50%, #050a0a 100%)',
     glowColor: 'rgba(56, 189, 248, 0.15)',
     label: 'Zone côtière',
     emoji: '🌊',
-    photo: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/3/3f/Ravaged_Beach_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
   },
   nautiloid: {
     gradient: 'linear-gradient(160deg, #0d0520 0%, #0f0a1a 50%, #050a0a 100%)',
     glowColor: 'rgba(139, 92, 246, 0.2)',
     label: 'Vaisseau Illithide',
     emoji: '🐙',
-    photo: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/c/cf/Nautiloid.png',
+    bgFallback: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=80',
   },
   forest: {
     gradient: 'linear-gradient(160deg, #0a1f0d 0%, #0f2310 50%, #050a0a 100%)',
     glowColor: 'rgba(22, 163, 74, 0.15)',
     label: 'Zone forestière',
     emoji: '🌲',
-    photo: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/0/05/Emerald_Grove_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
   },
   town: {
     gradient: 'linear-gradient(160deg, #1a1208 0%, #1c1408 50%, #050a0a 100%)',
     glowColor: 'rgba(217, 119, 6, 0.12)',
     label: 'Village / Bourgade',
     emoji: '🏚️',
-    photo: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/e/e6/Trielta_Crags_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
   },
   inn: {
     gradient: 'linear-gradient(160deg, #1c1005 0%, #1a1208 50%, #050a0a 100%)',
     glowColor: 'rgba(251, 146, 60, 0.15)',
     label: 'Auberge / Refuge',
     emoji: '🍺',
-    photo: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/6/66/Last_Light_Inn_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80',
   },
   dungeon: {
     gradient: 'linear-gradient(160deg, #100c0a 0%, #141010 50%, #050a0a 100%)',
     glowColor: 'rgba(239, 68, 68, 0.1)',
     label: 'Donjon',
     emoji: '⚔️',
-    photo: 'https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/8/87/Moonrise_Towers_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=1200&q=80',
   },
   underdark: {
     gradient: 'linear-gradient(160deg, #08080f 0%, #0a0a14 50%, #050a0a 100%)',
     glowColor: 'rgba(99, 102, 241, 0.15)',
     label: 'Outreterre',
     emoji: '🍄',
-    photo: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/4/4d/Underdark_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?auto=format&fit=crop&w=1200&q=80',
   },
   shadow: {
     gradient: 'linear-gradient(160deg, #06060a 0%, #08070c 50%, #050a0a 100%)',
     glowColor: 'rgba(167, 139, 250, 0.08)',
     label: 'Terres Maudites',
     emoji: '🌑',
-    photo: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/8/81/Shadow-Cursed_Lands_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80',
   },
   city: {
     gradient: 'linear-gradient(160deg, #0a0c14 0%, #0c0e18 50%, #050a0a 100%)',
     glowColor: 'rgba(212, 168, 87, 0.1)',
     label: 'Cité',
     emoji: '🏰',
-    photo: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/5/5f/Lower_City_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=80',
   },
   mountain: {
     gradient: 'linear-gradient(160deg, #0d0f14 0%, #0c0e12 50%, #050a0a 100%)',
     glowColor: 'rgba(148, 163, 184, 0.1)',
     label: 'Zone montagneuse',
     emoji: '⛰️',
-    photo: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/e/e6/Trielta_Crags_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
   },
   crèche: {
     gradient: 'linear-gradient(160deg, #0e0c0f 0%, #120e14 50%, #050a0a 100%)',
     glowColor: 'rgba(239, 68, 68, 0.12)',
     label: 'Crèche Githyanki',
     emoji: '⚡',
-    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/a/a6/Creche_Y%27llek.png',
+    bgFallback: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
   },
   forge: {
     gradient: 'linear-gradient(160deg, #1a0a04 0%, #1c0c05 50%, #050a0a 100%)',
     glowColor: 'rgba(251, 146, 60, 0.2)',
     label: 'Forge / Lieu industriel',
     emoji: '🔥',
-    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
+    bgWiki: 'https://bg3.wiki/w/images/5/5f/Grymforge_BG3.png',
+    bgFallback: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
   },
 };
 
 const cfg = typeConfig[type];
-const bgImage = imageUrl ?? cfg.photo;
+const primaryImage = imageUrl ?? cfg.bgWiki;
+const fallbackImage = cfg.bgFallback;
 ---
 
 <div
@@ -149,12 +165,16 @@ const bgImage = imageUrl ?? cfg.photo;
   ]}
   style={`min-height: 140px;`}
 >
-  <!-- Image de fond avec overlay sombre -->
-  <div
-    class="absolute inset-0 bg-cover bg-center"
-    style={`background-image: url('${bgImage}');`}
+  <!-- Image de fond avec fallback automatique -->
+  <img
+    src={primaryImage}
+    alt=""
     aria-hidden="true"
-  ></div>
+    class="absolute inset-0 w-full h-full object-cover object-center"
+    onerror={`this.src='${fallbackImage}';this.onerror=null;`}
+    loading="lazy"
+    decoding="async"
+  />
   <!-- Gradient overlay fort pour lisibilité -->
   <div
     class="absolute inset-0"
