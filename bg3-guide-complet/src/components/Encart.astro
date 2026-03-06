@@ -24,7 +24,7 @@ interface Props {
   class?: string;
 }
 
-const { type, title, icon, collapsed = false, class: extraClass = '' } = Astro.props;
+const { type, title, icon, class: extraClass = '' } = Astro.props;
 
 // ── Config par type ──────────────────────────────────────────────
 const config: Record<EncartType, {

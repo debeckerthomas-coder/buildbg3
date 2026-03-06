@@ -6,9 +6,10 @@
 //     La lame est perpétuellement en feu, infligeant 1d4 dégâts de Feu supplémentaires.
 //   </Tooltip>
 //
-// Ou version compacte (sans children = affiche juste le nom souligné) :
-//   <Tooltip name="Châtiment Divin" type="Capacité Paladin" stats="2d8 Radiant" client:idle>
-//     Dépensez un emplacement de sort après avoir touché.
+//   Avec image (icône wiki BG3) :
+//   <Tooltip name="Sang de Lathandre" type="Masse Légendaire +3" rarity="legendary"
+//     imageUrl="https://bg3.wiki/w/images/0/05/Blood_of_Lathander_Icon.png" client:idle>
+//     Inflige 2d6+3 contondant + 2d6 radiant.
 //   </Tooltip>
 
 import { useState, useRef, useEffect, useCallback, type ReactNode } from 'react';
@@ -18,6 +19,7 @@ interface Props {
   type?: string;          // "Arme Légendaire", "Capacité Paladin", etc.
   stats?: string;         // stats courtes : "+2 CA", "2d8 Radiant", etc.
   rarity?: 'common' | 'uncommon' | 'rare' | 'very-rare' | 'legendary';
+  imageUrl?: string;      // Icône de l'objet/sort (wiki BG3)
   children?: ReactNode;   // description longue
   className?: string;
 }
@@ -35,6 +37,7 @@ export default function Tooltip({
   type,
   stats,
   rarity,
+  imageUrl,
   children,
   className = '',
 }: Props) {
@@ -91,7 +94,6 @@ export default function Tooltip({
   // Recalcule la position dès que le tooltip devient visible
   useEffect(() => {
     if (visible) {
-      // Attendre le prochain frame pour que le DOM soit rendu
       requestAnimationFrame(computePos);
     }
   }, [visible, computePos]);
@@ -145,22 +147,46 @@ export default function Tooltip({
         >
           {/* Header */}
           <div
-            className="px-4 py-2.5 border-b"
+            className="px-3 py-2.5 border-b flex items-center gap-2.5"
             style={{
               background: `${rarityColor}10`,
               borderColor: `${rarityColor}25`,
             }}
           >
-            <div className="font-heading text-sm font-semibold leading-snug"
-                 style={{ color: rarityColor === '#d4a857' ? '#f0d090' : rarityColor }}>
-              {name}
-            </div>
-            {type && (
-              <div className="font-ui text-[10px] mt-0.5 opacity-70"
-                   style={{ color: rarityColor }}>
-                {type}
+            {/* Icône de l'objet */}
+            {imageUrl && (
+              <div
+                className="shrink-0 w-11 h-11 rounded-lg overflow-hidden flex items-center justify-center border"
+                style={{
+                  background: `${rarityColor}12`,
+                  borderColor: `${rarityColor}30`,
+                  boxShadow: `0 0 8px ${rarityColor}20`,
+                }}
+              >
+                <img
+                  src={imageUrl}
+                  alt={name}
+                  className="w-9 h-9 object-contain"
+                  onError={(e) => {
+                    (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
+                  }}
+                />
               </div>
             )}
+
+            {/* Nom + type */}
+            <div className="flex-1 min-w-0">
+              <div className="font-heading text-sm font-semibold leading-snug"
+                   style={{ color: rarityColor === '#d4a857' ? '#f0d090' : rarityColor }}>
+                {name}
+              </div>
+              {type && (
+                <div className="font-ui text-[10px] mt-0.5 opacity-70"
+                     style={{ color: rarityColor }}>
+                  {type}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Contenu */}

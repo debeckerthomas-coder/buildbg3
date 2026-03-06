@@ -18,6 +18,8 @@ import StatBlock from '../../components/StatBlock.astro';
 import StatRow from '../../components/StatRow.astro';
 import BossFiche from '../../components/BossFiche.astro';
 import BossWeakness from '../../components/BossWeakness.astro';
+import ZoneHeader from '../../components/ZoneHeader.astro';
+import Timeline from '../../components/Timeline.astro';
 
 {/* ════════════════════════════════════════════════════════════
     COLONNE DROITE — Encarts contextuels (slot "encarts")
@@ -41,6 +43,13 @@ import BossWeakness from '../../components/BossWeakness.astro';
   location="Roc du Ver — Salle du trône (après Fonderie détruite)"
   legendary="Marquage Tyrannique : quand attaqué, maudit l'attaquant → ~110 dégâts de Force à la fin du tour suivant."
   difficulty={4}
+  bossType="humanoid"
+  imageUrl="https://bg3.wiki/w/images/0/0d/Gortash.png"
+  phases={[
+    "Phase 1 : Combat normal — Délivrance des malédictions après chaque attaque",
+    "Astuce : Attirer sur le balcon pour éviter les lance-flammes"
+  ]}
+  damageTypes={["tranchant", "radiant", "contondant"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">Délivrance des malédictions (Sombrecœur/Gale) juste après chaque attaque du Lockadin</BossWeakness>
@@ -55,6 +64,14 @@ import BossWeakness from '../../components/BossWeakness.astro';
   location="Temple de Bhaal — Cité Souterraine"
   legendary="Assaut du Porteur de Mort : enchaîne 4 coups à ~50 dégâts chacun. 12 charges Implacable par round."
   difficulty={4}
+  bossType="humanoid"
+  imageUrl="https://bg3.wiki/w/images/9/93/Orin_the_Red.png"
+  phases={[
+    "Phase 1 : Cultistes avec Sanctuaire — dégâts de zone pour les éliminer",
+    "Phase 2 Écorcheur : Briser les boucliers (Projectile Magique) avant d'approcher",
+    "Phase finale : Immobilisation inefficace — Smites purs uniquement"
+  ]}
+  damageTypes={["tranchant", "radiant", "contondant"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">Gale brise les boucliers (Projectile Magique upcasté) AVANT que le Lockadin approche</BossWeakness>
@@ -69,6 +86,14 @@ import BossWeakness from '../../components/BossWeakness.astro';
   location="Maison de l'Espoir (optionnel)"
   legendary="(1) Représailles Envoûtantes : charme l'attaquant + son allié. (2) Ascension des Âmes : draine un Pilier pour une AoE dévastatrice."
   difficulty={5}
+  bossType="fiend"
+  imageUrl="https://bg3.wiki/w/images/5/5a/Raphael.png"
+  phases={[
+    "Tour 1 priorité : Détruire les 4 Piliers d'Âmes (Globe d'invulnérabilité en place)",
+    "Phase combat : DÉSACTIVER Châtiment Divin — Cambions reflètent Radiant ×2 en Feu",
+    "Phase finale : Raphaël passe en forme cambion — Smites purs sans Radiant"
+  ]}
+  damageTypes={["tranchant", "contondant", "force"]}
   slot="encarts"
 >
   <BossWeakness priority="critical">DÉSACTIVEZ le Châtiment Divin — les Cambions reflètent le Radiant ×2 en Feu</BossWeakness>
@@ -84,6 +109,7 @@ import BossWeakness from '../../components/BossWeakness.astro';
     rarity="legendary"
     stats="21 CA · −3 dégâts · Immunité Feu & Crits"
     location="Raphaël — Maison de l'Espoir (optionnel)"
+    imageUrl="https://bg3.wiki/w/images/c/cb/Helldusk_Armour_Icon.png"
     bis
   />
   <LootItem
@@ -92,6 +118,7 @@ import BossWeakness from '../../components/BossWeakness.astro';
     rarity="legendary"
     stats="Immunité Étourdissement & Crits · +2 PV/tour"
     location="Ansur — Wyrmway (optionnel)"
+    imageUrl="https://bg3.wiki/w/images/c/c0/Helmet_of_Balduran_Icon.png"
     bis
   />
   <LootItem
@@ -100,6 +127,7 @@ import BossWeakness from '../../components/BossWeakness.astro';
     rarity="legendary"
     stats="+3 CA · Avantage JS sorts · Renvoi de sorts"
     location="Viconia — Temple de Shar (optionnel)"
+    imageUrl="https://bg3.wiki/w/images/8/81/Viconia%27s_Walking_Fortress_Icon.png"
     bis
   />
   <LootItem
@@ -108,6 +136,7 @@ import BossWeakness from '../../components/BossWeakness.astro';
     rarity="very-rare"
     stats="+2 jets d'attaque & dégâts"
     location="Ville basse — Sorcerie de l'Archmage"
+    imageUrl="https://bg3.wiki/w/images/1/19/Gauntlets_of_Hill_Giant_Strength_Icon.png"
     bis
   />
   <LootItem
@@ -151,6 +180,17 @@ import BossWeakness from '../../components/BossWeakness.astro';
 
 ## 6.0 — Vue d'ensemble de l'Acte 3
 
+<Timeline items={[
+  { id: "rivington",   label: "Rivington & Roc du Ver",             level: "9-10", type: "city",    href: "#rivington",   note: "Couronnement Gortash — cinématique, ne pas attaquer" },
+  { id: "lower-city",  label: "Ville Basse — Exploration",           level: "10-12",type: "city",    href: "#lower-city",  note: "Atteindre le niveau 12 + équipement endgame", milestone: true },
+  { id: "steel-watch", label: "Fonderie de la Garde d'Acier",        level: "11",   type: "dungeon", href: "#steel-watch", note: "Désactiver les robots de Gortash avant le combat" },
+  { id: "gortash",     label: "Gortash — Roc du Ver",                level: "12",   type: "city",    href: "#gortash",     note: "Délivrance des malédictions OBLIGATOIRE", milestone: true },
+  { id: "orin",        label: "Orin l'Écorcheur — Temple de Bhaal",  level: "12",   type: "dungeon", href: "#orin",        note: "Briser les boucliers (Projectile Magique) d'abord", milestone: true },
+  { id: "raphael",     label: "Raphaël — Maison de l'Espoir",        level: "12",   type: "dungeon", href: "#optional-bosses", note: "Optionnel — DÉSACTIVER Châtiment Divin", optional: true },
+  { id: "ansur",       label: "Ansur le Dragon — Wyrmway",           level: "12",   type: "dungeon", href: "#optional-bosses", note: "Optionnel — Globe d'invulnérabilité obligatoire", optional: true },
+  { id: "netherbrain", label: "Cerveau Vénérable — Combat Final",    level: "12",   type: "shadow",  href: "#netherbrain", note: "Point de non-retour absolu — alternez les dégâts", pointOfNoReturn: true },
+]} />
+
 L'Acte 3 est le plus long et le plus libre de Baldur's Gate 3. Vous atteindrez le **niveau 12** rapidement et la majorité des combats se fera au niveau maximum (Paladin 7 / Occultiste 5). L'ordre des quêtes est très flexible — vous pouvez affronter Orin ou Gortash dans l'ordre de votre choix.
 
 <CalloutBlock type="danger" title="Combats tueurs de run — Acte 3">
@@ -187,6 +227,8 @@ L'Acte 3 est le plus long et le plus libre de Baldur's Gate 3. Vous atteindrez l
 ---
 
 <section id="rivington">
+
+<ZoneHeader name="Rivington & Roc du Ver" subtitle="Porte d'entrée de Baldur's Gate — QG de Gortash" level="9-10" type="city" />
 
 ## 6.1 — Rivington & Roc du Ver (Wyrm's Rock)
 
@@ -228,6 +270,8 @@ La forteresse du **Roc du Ver** est le QG de Gortash. Assistez à son couronneme
 ---
 
 <section id="lower-city">
+
+<ZoneHeader name="Ville Basse" subtitle="Lower City — Hub principal, marchands endgame et équipement BiS" level="10-12" type="city" />
 
 ## 6.2 — Ville basse (Lower City) : Exploration & Équipement Endgame
 
@@ -271,6 +315,8 @@ La Ville basse regorge de quêtes, marchands et trésors. Atteignez le **niveau 
 
 <section id="steel-watch">
 
+<ZoneHeader name="Fonderie de la Garde d'Acier" subtitle="Désactiver les robots de Gortash avant de l'affronter" level={11} type="forge" />
+
 ## 6.3 — Fonderie de la Garde d'Acier & Trône de Fer
 
 **La Fonderie :** La détruire élimine **tous** les robots de Gortash en ville, rendant son combat ultérieur bien plus simple. Infiltrez-vous, sauvez le nain aveugle Zanner Toobin, descendez au cœur.
@@ -293,6 +339,8 @@ Vous avez **5 tours** (Mode Honneur) pour libérer le Duc, Omeluum et les prison
 
 <section id="gortash">
 
+<ZoneHeader name="Gortash — Roc du Ver" subtitle="Élu de Baine — Délivrance des malédictions OBLIGATOIRE" level={12} type="city" />
+
 ## 6.4 — Gortash, Élu de Baine
 
 <CalloutBlock type="tip" title="Alliance optionnelle avec Gortash">
@@ -312,6 +360,8 @@ Vous pouvez **accepter** l'alliance de Gortash (il vous donne sa Pierre Néthér
 ---
 
 <section id="orin">
+
+<ZoneHeader name="Temple de Bhaal — Orin l'Écorcheur" subtitle="Briser ses boucliers avant tout — 12 charges d'Implacable" level={12} type="dungeon" />
 
 ## 6.5 — Orin la Rouge, Élue de Bhaal
 
@@ -376,6 +426,8 @@ Stratégie : Repliez-vous dans le couloir d'entrée. Lancez Mur de Feu + Globe d
 ---
 
 <section id="netherbrain">
+
+<ZoneHeader name="Cerveau Vénérable — Combat Final" subtitle="Netherbrain — Alternez les types de dégâts — Immunité Rétributive" level={12} type="shadow" />
 
 ## 6.7 — Cerveau Vénérable (Netherbrain) : Le Combat Final
 

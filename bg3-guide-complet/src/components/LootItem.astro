@@ -17,13 +17,14 @@ type Rarity = 'common' | 'uncommon' | 'rare' | 'very-rare' | 'legendary';
 
 interface Props {
   name: string;
-  type?: string;           // "Épée longue", "Armure lourde", etc.
+  type?: string;
   rarity?: Rarity;
-  stats?: string;          // Stats courtes : "+2 CA", "1d8+3 Feu+Radiant", etc.
-  location?: string;       // Où le trouver
-  note?: string;           // Conseil court
-  bis?: boolean;           // Badge "BiS"
-  optional?: boolean;      // Grisé + badge "Optionnel"
+  stats?: string;
+  location?: string;
+  note?: string;
+  bis?: boolean;
+  optional?: boolean;
+  imageUrl?: string;  // Icône de l'objet (wiki BG3)
 }
 
 const {
@@ -35,14 +36,22 @@ const {
   note,
   bis = false,
   optional = false,
+  imageUrl,
 } = Astro.props;
 
-const rarityConfig: Record<Rarity, { color: string; label: string }> = {
-  common:    { color: '#a8a0b8', label: 'Commun' },
-  uncommon:  { color: '#10b981', label: 'Inhabituel' },
-  rare:      { color: '#3b82f6', label: 'Rare' },
-  'very-rare': { color: '#8b5cf6', label: 'Très rare' },
-  legendary: { color: '#f59e0b', label: 'Légendaire' },
+const rarityConfig: Record<Rarity, {
+  color: string;
+  label: string;
+  glowColor: string;
+  borderColor: string;
+  bgColor: string;
+  shimmer: boolean;
+}> = {
+  common:      { color: '#a8a0b8', label: 'Commun',     glowColor: 'rgba(168,160,184,0.3)', borderColor: 'rgba(168,160,184,0.1)', bgColor: 'transparent',              shimmer: false },
+  uncommon:    { color: '#10b981', label: 'Inhabituel', glowColor: 'rgba(16,185,129,0.3)',  borderColor: 'rgba(16,185,129,0.12)', bgColor: 'rgba(16,185,129,0.04)',     shimmer: false },
+  rare:        { color: '#3b82f6', label: 'Rare',       glowColor: 'rgba(59,130,246,0.35)', borderColor: 'rgba(59,130,246,0.15)', bgColor: 'rgba(59,130,246,0.04)',     shimmer: false },
+  'very-rare': { color: '#8b5cf6', label: 'Très rare',  glowColor: 'rgba(139,92,246,0.4)',  borderColor: 'rgba(139,92,246,0.2)',  bgColor: 'rgba(139,92,246,0.05)',     shimmer: false },
+  legendary:   { color: '#f59e0b', label: 'Légendaire', glowColor: 'rgba(245,158,11,0.5)',  borderColor: 'rgba(245,158,11,0.3)',  bgColor: 'rgba(245,158,11,0.06)',     shimmer: true  },
 };
 
 const rc = rarityConfig[rarity];
@@ -51,34 +60,93 @@ const rc = rarityConfig[rarity];
 const pinIcon = `<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>`;
 // Icône stats (dés)
 const diceIcon = `<rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/>`;
+// Icône couronne pour BiS
+const crownIcon = `<path d="m2 4 3 12h14l3-12-6 5-4-5-4 5-6-5zm3 16h14"/>`;
 ---
 
 <div
   class:list={[
-    'flex items-start gap-3 py-2.5 border-b border-white/5 last:border-0',
+    'loot-item relative flex items-start gap-3 py-2.5 px-2 -mx-2 rounded-lg border transition-all duration-200',
+    'hover:border-white/10',
     optional && 'opacity-60',
+    rc.shimmer && 'legendary-item',
   ]}
+  style={`border-color: ${rc.borderColor}; background: ${rc.bgColor};`}
 >
-  <!-- Point de rareté coloré -->
-  <div
-    class="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5"
-    style={`background: ${rc.color}; box-shadow: 0 0 6px ${rc.color}60;`}
-    title={rc.label}
-    aria-label={`Rareté : ${rc.label}`}
-  ></div>
+  <!-- Shimmer overlay pour les items légendaires -->
+  {rc.shimmer && (
+    <div
+      class="absolute inset-0 rounded-lg overflow-hidden pointer-events-none"
+      aria-hidden="true"
+    >
+      <div
+        class="absolute inset-0 opacity-0 legendary-shimmer"
+        style="background: linear-gradient(105deg, transparent 35%, rgba(245,158,11,0.08) 50%, transparent 65%); background-size: 200% 100%;"
+      ></div>
+    </div>
+  )}
+
+  <!-- Icône item ou point de rareté -->
+  {imageUrl ? (
+    <div
+      class="relative shrink-0 w-10 h-10 rounded-lg overflow-hidden border flex items-center justify-center"
+      style={`border-color: ${rc.borderColor}; background: ${rc.bgColor}; box-shadow: 0 0 8px ${rc.glowColor};`}
+      aria-label={`Rareté : ${rc.label}`}
+      title={rc.label}
+    >
+      <img
+        src={imageUrl}
+        alt={name}
+        class="w-8 h-8 object-contain"
+        onerror="this.parentElement.innerHTML='<div class=\'w-2.5 h-2.5 rounded-full m-auto\' style=\'background:currentColor;\'></div>';this.parentElement.style.width='1rem';this.parentElement.style.height='1rem';this.parentElement.style.border='none';"
+      />
+      {rc.shimmer && (
+        <div
+          class="absolute inset-0 rounded-lg animate-pulse opacity-20"
+          style={`background: ${rc.color};`}
+          aria-hidden="true"
+        ></div>
+      )}
+    </div>
+  ) : (
+    <div class="relative shrink-0 mt-1.5" aria-label={`Rareté : ${rc.label}`} title={rc.label}>
+      <div
+        class="w-2.5 h-2.5 rounded-full"
+        style={`background: ${rc.color}; box-shadow: 0 0 8px ${rc.glowColor};`}
+      ></div>
+      {rc.shimmer && (
+        <div
+          class="absolute inset-0 rounded-full animate-ping opacity-30"
+          style={`background: ${rc.color};`}
+          aria-hidden="true"
+        ></div>
+      )}
+    </div>
+  )}
 
   <!-- Infos item -->
-  <div class="flex-1 min-w-0">
+  <div class="flex-1 min-w-0 relative z-10">
     <!-- Nom + badges -->
-    <div class="flex items-start gap-2 flex-wrap">
-      <span class="font-ui text-sm font-semibold text-text-primary leading-snug">
+    <div class="flex items-start gap-1.5 flex-wrap">
+      <span
+        class:list={[
+          'font-ui text-sm font-semibold leading-snug',
+          rc.shimmer ? '' : 'text-text-primary',
+        ]}
+        style={rc.shimmer ? `color: ${rc.color};` : ''}
+      >
         {name}
       </span>
       {bis && (
-        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px]
+        <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px]
                      font-ui font-bold uppercase tracking-wide
                      bg-gold/15 text-gold border border-gold/35"
               aria-label="Meilleur en emplacement">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"
+               class="w-2.5 h-2.5" aria-hidden="true">
+            <Fragment set:html={crownIcon} />
+          </svg>
           BiS
         </span>
       )}
@@ -104,10 +172,13 @@ const diceIcon = `<rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path
       <div class="flex items-center gap-1.5 mt-1.5">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
-             class="w-3 h-3 text-gold/50 shrink-0" aria-hidden="true">
+             class="w-3 h-3 shrink-0" style={`color: ${rc.color}80;`} aria-hidden="true">
           <Fragment set:html={diceIcon} />
         </svg>
-        <code class="font-mono text-[11px] text-gold-pale bg-gold/8 px-1.5 py-0.5 rounded">
+        <code
+          class="font-mono text-[11px] px-1.5 py-0.5 rounded border"
+          style={`color: ${rc.color}; background: ${rc.bgColor}; border-color: ${rc.borderColor};`}
+        >
           {stats}
         </code>
       </div>
@@ -129,10 +200,25 @@ const diceIcon = `<rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path
 
     <!-- Note -->
     {note && (
-      <div class="mt-1.5 text-[11px] font-body text-text-secondary italic leading-snug
-                  pl-2 border-l border-gold/20">
+      <div class="mt-1.5 text-[11px] font-body italic leading-snug
+                  pl-2 border-l"
+           style={`color: ${rc.color}aa; border-color: ${rc.borderColor};`}>
         {note}
       </div>
     )}
   </div>
 </div>
+
+<style>
+  .legendary-shimmer {
+    animation: legendary-sweep 3s ease-in-out infinite;
+  }
+
+  @keyframes legendary-sweep {
+    0%   { opacity: 0; background-position: -100% 0; }
+    20%  { opacity: 1; }
+    50%  { opacity: 1; background-position: 200% 0; }
+    70%  { opacity: 0; }
+    100% { opacity: 0; background-position: 200% 0; }
+  }
+</style>

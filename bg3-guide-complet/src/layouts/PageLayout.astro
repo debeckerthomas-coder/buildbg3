@@ -33,7 +33,7 @@ interface Props {
 }
 
 // Résolution des props (frontmatter prioritaire)
-const fm = Astro.props.frontmatter ?? {};
+const fm: Partial<NonNullable<Props['frontmatter']>> = Astro.props.frontmatter ?? {};
 const title       = fm.title       ?? Astro.props.title       ?? 'Guide Lockadin BG3';
 const description = fm.description ?? Astro.props.description ?? '';
 const section     = fm.section     ?? Astro.props.section     ?? 'grimoire';

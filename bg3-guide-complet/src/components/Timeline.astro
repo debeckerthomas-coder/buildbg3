@@ -1,0 +1,179 @@
+---
+// src/components/Timeline.astro
+// Frise chronologique visuelle pour la vue d'ensemble de chaque Acte
+// Usage MDX (dans la section #overview) :
+//
+//   <Timeline items={[
+//     { id: "prologue",  label: "Nautiloïde",         level: "1",  type: "nautiloid", href: "#prologue" },
+//     { id: "plage",     label: "Plage & Ruines",      level: "1",  type: "coastal" },
+//     { id: "grove",     label: "Bosquet d'Émeraude",  level: "2",  type: "forest" },
+//     { id: "grymforge", label: "Grymforge",           level: "5",  type: "forge",  milestone: true },
+//     ...
+//   ]} />
+
+type ZoneType =
+  | 'forest' | 'dungeon' | 'underdark' | 'shadow' | 'town'
+  | 'city' | 'coastal' | 'mountain' | 'inn' | 'nautiloid'
+  | 'crèche' | 'forge';
+
+interface TimelineItem {
+  id: string;
+  label: string;
+  level?: string | number;
+  type?: ZoneType;
+  href?: string;    // Ancre dans la page (#id)
+  milestone?: boolean;        // Étape critique (changement de niveau majeur)
+  pointOfNoReturn?: boolean;  // Point de non-retour
+  optional?: boolean;         // Zone optionnelle
+  note?: string;              // Courte note
+}
+
+interface Props {
+  items: TimelineItem[];
+  class?: string;
+}
+
+const { items, class: extraClass = '' } = Astro.props;
+
+// Config couleur par type
+const typeColors: Record<string, { dot: string; text: string; bg: string }> = {
+  coastal:   { dot: '#38bdf8', text: '#7dd3fc', bg: 'rgba(56,189,248,0.08)'   },
+  nautiloid: { dot: '#8b5cf6', text: '#a78bfa', bg: 'rgba(139,92,246,0.08)'   },
+  forest:    { dot: '#22c55e', text: '#86efac', bg: 'rgba(34,197,94,0.08)'    },
+  town:      { dot: '#f59e0b', text: '#fcd34d', bg: 'rgba(245,158,11,0.08)'   },
+  inn:       { dot: '#fb923c', text: '#fdba74', bg: 'rgba(251,146,60,0.08)'   },
+  dungeon:   { dot: '#ef4444', text: '#fca5a5', bg: 'rgba(239,68,68,0.08)'    },
+  underdark: { dot: '#6366f1', text: '#a5b4fc', bg: 'rgba(99,102,241,0.08)'   },
+  shadow:    { dot: '#7c3aed', text: '#c4b5fd', bg: 'rgba(124,58,237,0.06)'   },
+  city:      { dot: '#d4a857', text: '#fde68a', bg: 'rgba(212,168,87,0.08)'   },
+  mountain:  { dot: '#94a3b8', text: '#cbd5e1', bg: 'rgba(148,163,184,0.08)'  },
+  crèche:    { dot: '#e11d48', text: '#fda4af', bg: 'rgba(225,29,72,0.08)'    },
+  forge:     { dot: '#f97316', text: '#fdba74', bg: 'rgba(249,115,22,0.12)'   },
+};
+
+const defaultColor = { dot: '#d4a857', text: '#fde68a', bg: 'rgba(212,168,87,0.08)' };
+---
+
+<div class:list={['timeline-component not-prose my-6', extraClass]}>
+  <div class="flex items-center gap-3 mb-4">
+    <div class="h-px flex-1 bg-gradient-to-r from-transparent to-gold/20"></div>
+    <span class="font-ui text-[10px] uppercase tracking-widest text-gold/60">Progression de l'Acte</span>
+    <div class="h-px flex-1 bg-gradient-to-l from-transparent to-gold/20"></div>
+  </div>
+
+  <div class="relative pl-4">
+    <!-- Ligne verticale de la timeline -->
+    <div
+      class="absolute left-4 top-0 bottom-0 w-px"
+      style="background: linear-gradient(to bottom, transparent, rgba(212,168,87,0.3) 10%, rgba(212,168,87,0.3) 90%, transparent);"
+      aria-hidden="true"
+    ></div>
+
+    <ol class="space-y-1 list-none m-0 p-0">
+      {items.map((item) => {
+        const colors = item.type ? (typeColors[item.type] ?? defaultColor) : defaultColor;
+        const isPoNR = item.pointOfNoReturn;
+        const isMilestone = item.milestone;
+
+        return (
+          <li class="relative flex items-start gap-3 group">
+            <!-- Nœud de la timeline -->
+            <div class="absolute -left-0 flex items-center justify-center" style="top: 0.625rem;">
+              {isPoNR ? (
+                <!-- Point de non-retour : losange rouge -->
+                <div
+                  class="w-3.5 h-3.5 rotate-45 border-2 border-danger bg-danger/20 shrink-0 z-10"
+                  aria-label="Point de non-retour"
+                  title="Point de non-retour"
+                ></div>
+              ) : isMilestone ? (
+                <!-- Milestone : étoile dorée -->
+                <div
+                  class="w-3.5 h-3.5 rounded-sm rotate-45 border border-gold shrink-0 z-10"
+                  style={`background: rgba(212,168,87,0.3); box-shadow: 0 0 8px rgba(212,168,87,0.4);`}
+                  aria-label="Étape majeure"
+                ></div>
+              ) : (
+                <!-- Nœud standard -->
+                <div
+                  class="w-2.5 h-2.5 rounded-full shrink-0 z-10"
+                  style={`background: ${colors.dot}; box-shadow: 0 0 6px ${colors.dot}60;`}
+                ></div>
+              )}
+            </div>
+
+            <!-- Contenu -->
+            <div
+              class:list={[
+                'flex-1 ml-4 px-3 py-2 rounded-lg border transition-all duration-200',
+                'group-hover:border-white/15',
+                isPoNR
+                  ? 'border-danger/20 bg-danger/5'
+                  : isMilestone
+                    ? 'border-gold/20 bg-gold/5'
+                    : 'border-white/5 bg-white/2',
+              ]}
+              style={!isPoNR && !isMilestone ? `background: ${colors.bg};` : ''}
+            >
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <!-- Nom de la zone -->
+                <div class="flex items-center gap-2 flex-wrap">
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      class="font-ui text-sm font-medium leading-snug no-underline hover:underline"
+                      style={`color: ${isPoNR ? '#fca5a5' : isMilestone ? '#fde68a' : colors.text};`}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <span
+                      class="font-ui text-sm font-medium leading-snug"
+                      style={`color: ${isPoNR ? '#fca5a5' : isMilestone ? '#fde68a' : colors.text};`}
+                    >
+                      {item.label}
+                    </span>
+                  )}
+
+                  {item.optional && (
+                    <span class="font-ui text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-white/5 text-text-dim border border-white/10">
+                      Optionnel
+                    </span>
+                  )}
+                  {isPoNR && (
+                    <span class="font-ui text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-danger/10 text-danger/80 border border-danger/20">
+                      ⚠ Non-retour
+                    </span>
+                  )}
+                  {isMilestone && (
+                    <span class="font-ui text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-gold/10 text-gold/80 border border-gold/20">
+                      ★ Étape clé
+                    </span>
+                  )}
+                </div>
+
+                <!-- Badge de niveau -->
+                {item.level !== undefined && (
+                  <span
+                    class="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
+                    style={`color: ${isMilestone ? '#fde68a' : '#d4a857'}; border-color: rgba(212,168,87,0.25); background: rgba(212,168,87,0.08);`}
+                    aria-label={`Niveau ${item.level}`}
+                  >
+                    Niv. {item.level}
+                  </span>
+                )}
+              </div>
+
+              <!-- Note courte -->
+              {item.note && (
+                <p class="font-body text-[11px] italic text-text-muted mt-1 mb-0 leading-snug">
+                  {item.note}
+                </p>
+              )}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</div>

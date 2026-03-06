@@ -3,7 +3,7 @@
 // Barre de navigation globale : Accueil | Aventure | Grimoire
 // + indicateur de section active + progression globale (React island)
 
-import { navigationBySection, sectionLabels, type SectionKey } from '../data/navigation';
+import { type SectionKey } from '../data/navigation';
 import GlobalProgress from './GlobalProgress';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   currentPath: string;
 }
 
-const { currentSection, currentPath } = Astro.props;
+const { currentSection } = Astro.props;
 
 // Icônes SVG inline (Lucide) — évite l'import JS au build pour la topbar statique
 const icons: Record<string, string> = {
