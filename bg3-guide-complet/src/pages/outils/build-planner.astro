@@ -1,0 +1,388 @@
+---
+// src/pages/outils/build-planner.astro
+// Mini Build-Planner Lockadin — simulateur de niveaux et de répartition
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout
+  title="Build Planner — Lockadin BG3"
+  description="Planifiez votre build Lockadin (Paladin/Occultiste) niveau par niveau pour Baldur's Gate 3 en Mode Honneur."
+>
+  <TopBar currentSection="outils" currentPath={currentPath} />
+
+  <main class="min-h-screen" style="background: #05060a;">
+
+    <!-- En-tête -->
+    <section class="px-4 pt-8 pb-4 max-w-content mx-auto">
+      <div class="flex items-center gap-3 mb-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             class="w-6 h-6 shrink-0" style="color: #d4a857;" aria-hidden="true">
+          <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+          <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+          <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+          <path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/>
+          <path d="M15.5 9H17v1.5c0 .83-.67 1.5-1.5 1.5S14 11.33 14 10.5V9h1.5z"/>
+          <path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/>
+          <path d="M8.5 15H7v-1.5c0-.83.67-1.5 1.5-1.5S10 12.67 10 13.5V15H8.5z"/>
+        </svg>
+        <h1 class="font-display text-2xl" style="color: #d4a857;">Mini Build-Planner</h1>
+      </div>
+      <p style="color: #9a8a72; font-size: 0.875rem;">
+        Simulez votre répartition Paladin / Occultiste niveau par niveau. Les données sont sauvegardées dans votre navigateur.
+      </p>
+    </section>
+
+    <!-- Planner principal -->
+    <section class="px-4 pb-12 max-w-content mx-auto">
+
+      <div class="grid gap-6 lg:grid-cols-[1fr_22rem]">
+
+        <!-- Colonne gauche : planificateur -->
+        <div class="space-y-4">
+
+          <!-- Répartition des niveaux -->
+          <div style="background: rgba(13,15,26,0.8); border: 1px solid rgba(212,168,87,0.2); border-radius: 8px; padding: 1.25rem;">
+            <h2 class="font-display text-base mb-4" style="color: #d4a857;">Répartition Paladin / Occultiste</h2>
+
+            <div class="flex items-center gap-4 mb-5">
+              <div style="flex: 1;">
+                <label class="font-ui text-xs uppercase tracking-widest" style="color: #9a8a72;">Niveaux Paladin</label>
+                <div class="flex items-center gap-2 mt-1">
+                  <button id="pal-minus" class="planner-btn" aria-label="Réduire Paladin">−</button>
+                  <span id="pal-count" class="font-display text-2xl w-10 text-center" style="color: #e8dcc8;">7</span>
+                  <button id="pal-plus" class="planner-btn" aria-label="Augmenter Paladin">+</button>
+                </div>
+              </div>
+              <div style="color: #4a3f30; font-size: 1.5rem; font-weight: 300;">+</div>
+              <div style="flex: 1;">
+                <label class="font-ui text-xs uppercase tracking-widest" style="color: #9a8a72;">Niveaux Occultiste</label>
+                <div class="flex items-center gap-2 mt-1">
+                  <button id="occ-minus" class="planner-btn" aria-label="Réduire Occultiste">−</button>
+                  <span id="occ-count" class="font-display text-2xl w-10 text-center" style="color: #e8dcc8;">5</span>
+                  <button id="occ-plus" class="planner-btn" aria-label="Augmenter Occultiste">+</button>
+                </div>
+              </div>
+              <div style="color: #4a3f30; font-size: 1.5rem; font-weight: 300;">=</div>
+              <div>
+                <label class="font-ui text-xs uppercase tracking-widest" style="color: #9a8a72;">Total</label>
+                <div class="font-display text-2xl w-10 text-center mt-1" id="total-count" style="color: #d4a857;">12</div>
+              </div>
+            </div>
+
+            <!-- Barre de progression -->
+            <div style="height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; margin-bottom: 0.5rem;">
+              <div id="pal-bar" style="height: 100%; background: linear-gradient(90deg, #7c5cbf, #9e77e0); border-radius: 4px 0 0 4px; transition: width 0.3s ease;" class="inline-block float-left"></div>
+              <div id="occ-bar" style="height: 100%; background: linear-gradient(90deg, #d4a857, #f0c97a); border-radius: 0 4px 4px 0; transition: width 0.3s ease;" class="inline-block float-right"></div>
+            </div>
+            <div class="flex justify-between font-ui text-xs" style="color: #6b5f50;">
+              <span style="color: #9e77e0;">■ Paladin</span>
+              <span style="color: #d4a857;">Occultiste ■</span>
+            </div>
+          </div>
+
+          <!-- Tableau niveau par niveau -->
+          <div style="background: rgba(13,15,26,0.8); border: 1px solid rgba(212,168,87,0.2); border-radius: 8px; overflow: hidden;">
+            <div class="px-4 py-3 border-b" style="border-color: rgba(212,168,87,0.15);">
+              <h2 class="font-display text-base" style="color: #d4a857;">Progression niveau par niveau</h2>
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem;">
+                <thead>
+                  <tr style="background: rgba(212,168,87,0.06);">
+                    <th class="tbl-th">Niv.</th>
+                    <th class="tbl-th">Classe</th>
+                    <th class="tbl-th">Acquisitions clés</th>
+                    <th class="tbl-th">Sorts Occ.</th>
+                    <th class="tbl-th">Emplac. sort</th>
+                  </tr>
+                </thead>
+                <tbody id="level-table-body">
+                  <!-- Généré par JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Colonne droite : stats et export -->
+        <div class="space-y-4">
+
+          <!-- Résumé des capacités -->
+          <div style="background: rgba(13,15,26,0.8); border: 1px solid rgba(212,168,87,0.2); border-radius: 8px; padding: 1.25rem;">
+            <h2 class="font-display text-base mb-3" style="color: #d4a857;">Capacités au niveau max</h2>
+            <div id="stat-summary" class="space-y-2">
+              <!-- Généré par JS -->
+            </div>
+          </div>
+
+          <!-- Actions légendaires du Lockadin -->
+          <div style="background: rgba(13,15,26,0.8); border: 1px solid rgba(124,92,191,0.3); border-radius: 8px; padding: 1.25rem;">
+            <h2 class="font-display text-base mb-3" style="color: #9e77e0;">Ressources par repos</h2>
+            <div id="resource-summary" class="space-y-2">
+              <!-- Généré par JS -->
+            </div>
+          </div>
+
+          <!-- Presets recommandés -->
+          <div style="background: rgba(13,15,26,0.8); border: 1px solid rgba(212,168,87,0.2); border-radius: 8px; padding: 1.25rem;">
+            <h2 class="font-display text-base mb-3" style="color: #d4a857;">Presets recommandés</h2>
+            <div class="space-y-2">
+              <button data-pal="7" data-occ="5" class="preset-btn w-full text-left px-3 py-2 rounded transition-all duration-150"
+                style="background: rgba(212,168,87,0.1); border: 1px solid rgba(212,168,87,0.25);">
+                <div class="font-ui text-xs font-semibold" style="color: #d4a857;">Pal 7 / Occ 5 — Standard</div>
+                <div class="font-ui text-xs" style="color: #6b5f50;">Aura Protection + 2 sorts Occ niv.3 · Recommandé</div>
+              </button>
+              <button data-pal="6" data-occ="6" class="preset-btn w-full text-left px-3 py-2 rounded transition-all duration-150"
+                style="background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.2);">
+                <div class="font-ui text-xs font-semibold" style="color: #818cf8;">Pal 6 / Occ 6 — Équilibré</div>
+                <div class="font-ui text-xs" style="color: #6b5f50;">Invocation Mystic Arcanum · plus de slots Occ</div>
+              </button>
+              <button data-pal="5" data-occ="7" class="preset-btn w-full text-left px-3 py-2 rounded transition-all duration-150"
+                style="background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.2);">
+                <div class="font-ui text-xs font-semibold" style="color: #f97316;">Pal 5 / Occ 7 — Occultiste lourd</div>
+                <div class="font-ui text-xs" style="color: #6b5f50;">Extra Attack Pal5 + Mystic Arcanum + Shroud</div>
+              </button>
+              <button data-pal="8" data-occ="4" class="preset-btn w-full text-left px-3 py-2 rounded transition-all duration-150"
+                style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2);">
+                <div class="font-ui text-xs font-semibold" style="color: #10b981;">Pal 8 / Occ 4 — Paladin pur</div>
+                <div class="font-ui text-xs" style="color: #6b5f50;">Amélioration de caractéristique supplémentaire</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sauvegarder / Réinitialiser -->
+          <div class="flex gap-2">
+            <button id="btn-reset" class="flex-1 font-ui text-xs py-2 px-3 rounded transition-all duration-150"
+              style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #6b5f50;">
+              Réinitialiser
+            </button>
+            <button id="btn-copy" class="flex-1 font-ui text-xs py-2 px-3 rounded transition-all duration-150"
+              style="background: rgba(212,168,87,0.12); border: 1px solid rgba(212,168,87,0.3); color: #d4a857;">
+              Copier résumé
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <style>
+    .planner-btn {
+      width: 2rem; height: 2rem;
+      border-radius: 4px;
+      background: rgba(212,168,87,0.1);
+      border: 1px solid rgba(212,168,87,0.25);
+      color: #d4a857;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .planner-btn:hover { background: rgba(212,168,87,0.22); }
+    .planner-btn:disabled { opacity: 0.35; cursor: default; }
+    .tbl-th {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-family: var(--font-ui, sans-serif);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6b5f50;
+    }
+    .tbl-td {
+      padding: 0.45rem 0.75rem;
+      color: #9a8a72;
+      border-top: 1px solid rgba(212,168,87,0.06);
+      vertical-align: top;
+    }
+    .tbl-td.pal { color: #c4a8ef; }
+    .tbl-td.occ { color: #f0c97a; }
+    .preset-btn:hover { filter: brightness(1.15); }
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: 0.8rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(212,168,87,0.07);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label { color: #6b5f50; font-size: 0.75rem; }
+    .stat-value { color: #e8dcc8; font-weight: 600; }
+  </style>
+
+  <script is:inline>
+    // ── Données de progression ─────────────────────────────────────
+    const PAL_DATA = [
+      { level: 1, gains: 'Attaque divine, Imposition des mains, Sens divin' },
+      { level: 2, gains: 'Style de combat, Sorts (niv.1), Châtiment divin' },
+      { level: 3, gains: 'Serment (Parjure : Châtiment Ténèbres, Inviolabilité)' },
+      { level: 4, gains: 'Don : Amélioration de Caractéristique (Force +2)' },
+      { level: 5, gains: 'Attaque supplémentaire (2 attaques/action)' },
+      { level: 6, gains: 'Aura de Dévotion' },
+      { level: 7, gains: 'Aura de Protection (+Mod. Charisme aux JS alliés)' },
+      { level: 8, gains: 'Don : Amélioration de Caractéristique' },
+    ];
+    const OCC_DATA = [
+      { level: 1, gains: 'Magie des pactes, Sorts Occ (niv.1)', slots: '1×niv.1' },
+      { level: 2, gains: 'Invocations occultes (Agonisant Blast, etc.)', slots: '2×niv.1' },
+      { level: 3, gains: 'Pacte : Pacte de la Lame (attaques Charisme)', slots: '2×niv.2' },
+      { level: 4, gains: 'Don : War Caster / Resilient (Constitution)', slots: '2×niv.2' },
+      { level: 5, gains: 'Mystic Arcanum niv.6 (Masse du Mal)', slots: '2×niv.3' },
+      { level: 6, gains: 'Invocation supplémentaire', slots: '2×niv.3' },
+      { level: 7, gains: 'Mystic Arcanum niv.7', slots: '2×niv.4' },
+    ];
+
+    // ── État ───────────────────────────────────────────────────────
+    let pal = 7, occ = 5;
+    const MAX = 12;
+
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+    // Sauvegarder / restaurer
+    function save() {
+      try { localStorage.setItem('bg3-build-planner', JSON.stringify({ pal, occ })); } catch {}
+    }
+    function load() {
+      try {
+        const s = localStorage.getItem('bg3-build-planner');
+        if (s) { const d = JSON.parse(s); pal = d.pal ?? 7; occ = d.occ ?? 5; }
+      } catch {}
+    }
+
+    // ── Rendu ──────────────────────────────────────────────────────
+    function render() {
+      // Compteurs
+      document.getElementById('pal-count').textContent = pal;
+      document.getElementById('occ-count').textContent = occ;
+      document.getElementById('total-count').textContent = pal + occ;
+
+      // Boutons
+      document.getElementById('pal-minus').disabled = pal <= 1;
+      document.getElementById('pal-plus').disabled  = pal + occ >= MAX;
+      document.getElementById('occ-minus').disabled = occ <= 0;
+      document.getElementById('occ-plus').disabled  = pal + occ >= MAX;
+
+      // Barres
+      const total = pal + occ || 1;
+      document.getElementById('pal-bar').style.width = `${(pal / total) * 100}%`;
+      document.getElementById('occ-bar').style.width = `${(occ / total) * 100}%`;
+
+      // Tableau
+      const tbody = document.getElementById('level-table-body');
+      tbody.innerHTML = '';
+      let cumPal = 0, cumOcc = 0;
+      for (let i = 1; i <= pal + occ; i++) {
+        const isPal = cumPal < pal;
+        if (isPal) cumPal++; else cumOcc++;
+        const data = isPal ? PAL_DATA[cumPal - 1] : OCC_DATA[cumOcc - 1];
+        const slotsCell = !isPal && OCC_DATA[cumOcc - 1]?.slots
+          ? `<td class="tbl-td occ">${OCC_DATA[cumOcc - 1].slots}</td>`
+          : `<td class="tbl-td">—</td>`;
+        const palSlotsCell = isPal ? `<td class="tbl-td pal">${Math.min(cumPal, 4) > 0 ? '2×niv.' + Math.min(Math.ceil(cumPal/2), 3) : '—'}</td>` : '';
+        tbody.innerHTML += `
+          <tr>
+            <td class="tbl-td" style="font-weight:600;color:#e8dcc8;">${i}</td>
+            <td class="tbl-td ${isPal ? 'pal' : 'occ'}">${isPal ? 'Paladin' : 'Occultiste'}</td>
+            <td class="tbl-td ${isPal ? 'pal' : 'occ'}" style="font-size:0.73rem;">${data?.gains ?? '—'}</td>
+            ${isPal ? '<td class="tbl-td">—</td>' : slotsCell}
+            ${isPal ? '<td class="tbl-td pal" style="font-size:0.73rem;">' + getSortsPal(cumPal) + '</td>' : '<td class="tbl-td occ">' + (OCC_DATA[cumOcc-1]?.slots ?? '—') + '</td>'}
+          </tr>`;
+      }
+
+      // Résumé stats
+      const occSlot = occ >= 5 ? 'niv. 3' : occ >= 3 ? 'niv. 2' : occ >= 1 ? 'niv. 1' : '—';
+      const palSlots = pal >= 3 ? `${Math.min(pal - 1, 4)} × niv. ${Math.min(Math.ceil(pal/2), 3)}` : '—';
+      const smites = pal >= 1 ? `Châtiments Divins (Imposition mains : ${pal * 5} PV)` : '—';
+      const auras = pal >= 7 ? 'Aura Protection (9m) + Aura Dévotion' : pal >= 6 ? 'Aura Dévotion' : '—';
+      const invocs = occ >= 2 ? `${Math.floor(occ / 2) + 1} invocations` : occ >= 1 ? '1 invocation' : '—';
+      const pact = occ >= 3 ? 'Pacte de la Lame (Charisme → attaques)' : '—';
+      const arcanum = occ >= 5 ? 'Mystic Arcanum niv. 6' : '—';
+
+      document.getElementById('stat-summary').innerHTML = [
+        ['Auras Paladin', auras],
+        ['Sorts Paladin', getSortsPal(pal)],
+        ['Smites & Imposition', smites],
+        ['Invocations', invocs],
+        ['Pacte', pact],
+        ['Arcanum mystique', arcanum],
+      ].map(([l, v]) => `
+        <div class="stat-row">
+          <span class="stat-label">${l}</span>
+          <span class="stat-value" style="font-size:0.75rem;text-align:right;max-width:60%;">${v}</span>
+        </div>`).join('');
+
+      // Ressources par repos
+      const shortRests = 1; // Pacte de la lame = 1 repos court
+      const longRestSpells = `${pal >= 3 ? pal - 1 : 0} emplacements Paladin`;
+      const shortRestSlots = occ >= 1 ? `${occ >= 5 ? 2 : 1} emplacement(s) Occultiste (récup. court repos)` : '—';
+      const channelDivinity = pal >= 3 ? '1 × Canal divin / repos long' : '—';
+
+      document.getElementById('resource-summary').innerHTML = [
+        ['Emplacements (repos long)', longRestSpells],
+        ['Emplacements Occ. (repos court)', shortRestSlots],
+        ['Canal Divin', channelDivinity],
+        ['Imposition des mains (pool PV)', `${pal * 5} PV / repos long`],
+      ].map(([l, v]) => `
+        <div class="stat-row">
+          <span class="stat-label">${l}</span>
+          <span class="stat-value" style="font-size:0.72rem;text-align:right;max-width:58%;">${v}</span>
+        </div>`).join('');
+
+      save();
+    }
+
+    function getSortsPal(p) {
+      if (p < 2) return '—';
+      const slots = Math.min(p - 1, 4);
+      const lvl = p >= 9 ? 5 : p >= 7 ? 4 : p >= 5 ? 3 : p >= 3 ? 2 : 1;
+      return `${slots} × niv. ${lvl}`;
+    }
+
+    // ── Événements ─────────────────────────────────────────────────
+    document.getElementById('pal-plus').addEventListener('click',  () => { if (pal + occ < MAX) { pal++; render(); } });
+    document.getElementById('pal-minus').addEventListener('click', () => { if (pal > 1)          { pal--; render(); } });
+    document.getElementById('occ-plus').addEventListener('click',  () => { if (pal + occ < MAX) { occ++; render(); } });
+    document.getElementById('occ-minus').addEventListener('click', () => { if (occ > 0)          { occ--; render(); } });
+
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        pal = parseInt(btn.dataset.pal);
+        occ = parseInt(btn.dataset.occ);
+        render();
+      });
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      pal = 7; occ = 5; render();
+    });
+
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      const txt = `Lockadin BG3 — Build Pal${pal}/Occ${occ}\n` +
+        `Auras : ${pal >= 7 ? 'Protection + Dévotion' : pal >= 6 ? 'Dévotion' : 'aucune'}\n` +
+        `Pacte de la Lame : ${occ >= 3 ? 'Oui' : 'Non'}\n` +
+        `Arcanum mystique : ${occ >= 5 ? 'Oui (niv.6)' : 'Non'}\n` +
+        `Total niveau : ${pal + occ}`;
+      navigator.clipboard?.writeText(txt).then(() => {
+        const btn = document.getElementById('btn-copy');
+        btn.textContent = 'Copié !';
+        setTimeout(() => btn.textContent = 'Copier résumé', 2000);
+      });
+    });
+
+    // ── Init ───────────────────────────────────────────────────────
+    load();
+    render();
+  </script>
+
+</BaseLayout>
