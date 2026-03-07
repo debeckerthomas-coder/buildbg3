@@ -167,6 +167,7 @@ export default function Tooltip({
                   src={imageUrl}
                   alt={name}
                   className="w-9 h-9 object-contain"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
                     (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
                   }}
