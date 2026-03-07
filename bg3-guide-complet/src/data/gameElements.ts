@@ -117,7 +117,7 @@ export const gameElements: Record<string, GameElement> = {
   },
   'elixir-bloodlust': {
     id: 'elixir-bloodlust', type: 'consumable', name: 'Élixir de Soif de Sang',
-    action: 'Action (hors combat)',
+    action: 'Action',
     description: 'Accorde une action bonus lorsque vous tuez un ennemi. Transforme les combats en cascade de kills.',
     source: 'Recette Alchimie / Marchands',
   },
