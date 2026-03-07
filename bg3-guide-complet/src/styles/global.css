@@ -178,6 +178,14 @@
     --icon-color: #8b5cf6;
   }
 
+  /* Encart hover polish */
+  .encart {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .encart:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
   /* Tableau stylé BG3 */
   .table-bg3 {
     @apply w-full text-sm border-collapse;
