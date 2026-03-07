@@ -104,7 +104,7 @@ En Tacticien, la Potion de Vitesse accordait une série complète de 2 attaques 
 
 ## 7.2 — L'Économie des Châtiments
 
-Le Châtiment Divin est la ressource offensive nucléaire du build — mais elle est **limitée**. Dépenser tous ses Smites sur les sbires est la première cause de mort contre les boss.
+Le <Tooltip id="chatiment-divin" term="Châtiment Divin" client:load /> est la ressource offensive nucléaire du build — mais elle est **limitée**. Dépenser tous ses Smites sur les sbires est la première cause de mort contre les boss.
 
 **Règle de gestion :**
 - Sbires (ennemis normaux) : **0 Smite** — votre DPS passif (~22/attaque) suffit largement.
@@ -158,7 +158,7 @@ L'Alpha Strike consiste à déployer votre puissance maximale dès le Tour 1 pou
 
 **Séquence optimale :**
 
-1. **Avant le combat :** Pré-buffs en Mode Tour par Tour (Bénédiction, Bouclier de la Foi, Longues Foulées). Astarion/Lae'zel en embuscade pour le round de Surprise.
+1. **Avant le combat :** Pré-buffs en Mode Tour par Tour (<Tooltip id="benediction" term="Bénédiction" client:load />, <Tooltip id="bouclier-foi" term="Bouclier de la Foi" client:load />, Longues Foulées). Astarion/Lae'zel en embuscade pour le round de Surprise.
 2. **Tour 1 — Gale :** <Tooltip name="Immobilisation de Personne" type="Sort Enchantement Niv.2" stats="Paralysie — attaques CàC = critiques automatiques" imageUrl="https://bg3.wiki/w/images/b/b3/Hold_Person_Icon.png" client:idle>JS Sagesse. Si le boss rate : paralysé = toutes les attaques au corps à corps sont des critiques automatiques. Activez l'Anneau Bien-aimée du Tueur AVANT de frapper.</Tooltip> sur le boss → Paralysie = **critiques garantis** pour toutes les attaques CàC.
 3. **Tour 1 — Lockadin :** Activez l'Anneau Bien-aimée du Tueur → Smite Niv.3 × 2 (critiques) → **~150–200 dégâts** sur le boss principal.
 4. **Tour 1 — Astarion :** Assassinat + Embuscade + Tireur d'élite → ~100–150 dégâts supplémentaires.
@@ -179,7 +179,7 @@ Un personnage ne peut maintenir qu'**un seul sort de concentration** à la fois.
 |---|---|---|
 | **Sombrecœur** | Bénédiction ou <Tooltip name="Esprits Gardiens" type="Sort Évocation Niv.3 — Concentration" stats="3d8 Radiant/tour · Zone 4.5m · Ralentit 3m" imageUrl="https://bg3.wiki/w/images/a/a2/Spirit_Guardians_Icon.png" client:idle>AoE radiant passif centré sur Sombrecœur. Toute créature hostile dans un rayon de 4,5m subit automatiquement des dégâts au début de chaque tour. Empêcher Sombrecœur de perdre sa concentration est votre priorité numéro 1.</Tooltip> | Bénédiction = +1d4 permanent pour 3 alliés. Esprits Gardiens = AoE radiant passif |
 | **Gale** | Immobilisation ou <Tooltip name="Mur de Feu" type="Sort Évocation Niv.4 — Concentration" stats="5d8 Feu à traverser · Zone de contrôle permanente" imageUrl="https://bg3.wiki/w/images/b/bb/Wall_of_Fire_Icon.png" client:idle>Crée une barrière de feu qui inflige 5d8 dégâts à quiconque la traverse. Utilisé pour bloquer les renforts ennemis ou forcer les boss dans des corridors où votre Lockadin les attend.</Tooltip> | Contrôle absolu du boss ou zone |
-| **Lockadin** | Bouclier de la Foi (+2 CA) | En première ligne — sa concentration est souvent cassée. Priorisez le don Mage de Guerre sur Sombrecœur pour sécuriser Bénédiction |
+| **Lockadin** | <Tooltip id="bouclier-foi" term="Bouclier de la Foi" client:load /> (+2 CA) | En première ligne — sa concentration est souvent cassée. Priorisez le don Mage de Guerre sur Sombrecœur pour sécuriser <Tooltip id="benediction" term="Bénédiction" client:load /> |
 
 </section>
 
@@ -271,7 +271,7 @@ Quand le combat déraille en Mode Honneur, chaque seconde compte. Voici les prot
 ### 🟠 Protocole Bravo — Lockadin à ≤ 20% PV
 
 1. **Réaction de protection** : équiper le Bouclier de la Foi via Bonus Action (si pas actif).
-2. **Darkness + Devil's Sight** : créer une zone d'obscurité sur soi-même (désavantage ennemi, avantage propre).
+2. <Tooltip id="tenebres" term="Ténèbres" client:load /> + <Tooltip id="devil-sight" term="Vision du Diable" client:load /> : créer une zone d'obscurité sur soi-même (désavantage ennemi, avantage propre).
 3. **Disengage** + repositionnement en couverture totale si possible.
 4. **Potion de Soin Supérieure** en Bonus Action (Modale spéciale BG3).
 
@@ -309,7 +309,7 @@ La synergie Lockadin + Gale (expliquée dans l'Alpha Strike §7.5) repose sur la
 
 | Phase | Détail |
 |---|---|
-| Préparation | Équipe groupée à 3m du Lockadin. Gale a son Contresort en réaction. Sombrecœur maintient Bénédiction. |
+| Préparation | Équipe groupée à 3m du Lockadin. Gale a son Contresort en réaction. Sombrecœur maintient <Tooltip id="benediction" term="Bénédiction" client:load />. |
 | Exécution | 4 couches défensives : Aura Protection (+5 JS) · Lien de Protection (résistance) · Bouclier de la Foi (+2 CA) · Contresort (annulation sort ennemi). |
 
 </section>
@@ -330,7 +330,7 @@ La parade la plus sous-estimée : gardez toujours un compagnon **au camp** penda
 **Pré-buffs en Mode Tour par Tour**
 
 Ne lancez pas vos buffs en temps réel avant d'ouvrir une porte (le buff expire avant la fin du dialogue). Passez en **Mode Tour par Tour** (Espace) **avant** d'interagir :
-- Lancez Bénédiction, buvez vos Potions de Vitesse.
+- Lancez <Tooltip id="benediction" term="Bénédiction" client:load />, buvez vos Potions de Vitesse.
 - Positionnez vos archers en hauteur.
 - Le temps est figé — ouvrez le combat avec une attaque furtive de Lae'zel ou Astarion pour le round de Surprise.
 

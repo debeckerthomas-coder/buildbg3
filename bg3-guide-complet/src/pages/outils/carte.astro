@@ -36,31 +36,109 @@ const currentPath = Astro.url.pathname;
       </p>
     </section>
 
-    <!-- Légende -->
-    <section class="px-4 pb-4 max-w-content mx-auto">
-      <div class="flex flex-wrap gap-3">
-        <div class="flex items-center gap-1.5">
-          <span class="inline-block w-3 h-3 rounded-full" style="background: #4ade80;"></span>
-          <span style="color: #9a8a72; font-size: 0.75rem;">Acte 1</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="inline-block w-3 h-3 rounded-full" style="background: #818cf8;"></span>
-          <span style="color: #9a8a72; font-size: 0.75rem;">Acte 2</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="inline-block w-3 h-3 rounded-full" style="background: #f97316;"></span>
-          <span style="color: #9a8a72; font-size: 0.75rem;">Acte 3</span>
-        </div>
+    <!-- Onglets Actes -->
+    <section class="px-4 pb-3 max-w-content mx-auto">
+      <div class="flex gap-2" role="tablist" aria-label="Sélection de l'acte">
+        <button
+          id="tab-act1"
+          role="tab"
+          aria-selected="true"
+          aria-controls="map"
+          data-act="1"
+          style="
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            border: 1px solid #4ade80;
+            background: rgba(74,222,128,0.15);
+            color: #4ade80;
+            transition: background 0.15s;
+          "
+        >Acte 1</button>
+        <button
+          id="tab-act2"
+          role="tab"
+          aria-selected="false"
+          aria-controls="map"
+          data-act="2"
+          style="
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            border: 1px solid rgba(129,140,248,0.35);
+            background: transparent;
+            color: #818cf8;
+            transition: background 0.15s;
+          "
+        >Acte 2</button>
+        <button
+          id="tab-act3"
+          role="tab"
+          aria-selected="false"
+          aria-controls="map"
+          data-act="3"
+          style="
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            border: 1px solid rgba(249,115,22,0.35);
+            background: transparent;
+            color: #f97316;
+            transition: background 0.15s;
+          "
+        >Acte 3</button>
       </div>
     </section>
 
     <!-- Carte Leaflet -->
-    <section class="px-4 pb-8 max-w-content mx-auto">
+    <section class="px-4 pb-4 max-w-content mx-auto" style="position: relative;">
       <div
         id="map"
         style="width: 100%; height: 600px; background: #05060a; border: 1px solid rgba(212,168,87,0.25); border-radius: 8px; overflow: hidden;"
         aria-label="Carte interactive des zones BG3"
       ></div>
+
+      <!-- Légende -->
+      <div id="map-legend" style="
+        position: absolute;
+        bottom: 28px;
+        left: 28px;
+        background: rgba(10,11,20,0.92);
+        border: 1px solid rgba(212,168,87,0.25);
+        border-radius: 6px;
+        padding: 10px 14px;
+        z-index: 1000;
+        pointer-events: none;
+      ">
+        <div style="color: #d4a857; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 7px;">Légende</div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <div style="display: flex; align-items: center; gap: 7px;">
+            <span style="width:14px;height:14px;border-radius:50%;background:rgba(129,140,248,0.13);border:2px solid #818cf8;display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:#818cf8;flex-shrink:0;">!</span>
+            <span style="color:#9a8a72;font-size:0.72rem;">Quête</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 7px;">
+            <span style="width:14px;height:14px;border-radius:50%;background:rgba(239,68,68,0.13);border:2px solid #ef4444;display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:#ef4444;flex-shrink:0;">☠</span>
+            <span style="color:#9a8a72;font-size:0.72rem;">Boss</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 7px;">
+            <span style="width:14px;height:14px;border-radius:50%;background:rgba(212,168,87,0.13);border:2px solid #d4a857;display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:#d4a857;flex-shrink:0;">★</span>
+            <span style="color:#9a8a72;font-size:0.72rem;">Loot</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 7px;">
+            <span style="width:14px;height:14px;border-radius:50%;background:rgba(34,197,94,0.13);border:2px solid #22c55e;display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:#22c55e;flex-shrink:0;">⛺</span>
+            <span style="color:#9a8a72;font-size:0.72rem;">Camp</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Liste des zones -->
@@ -79,323 +157,278 @@ const currentPath = Astro.url.pathname;
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" is:inline></script>
 
   <script is:inline>
-    // ── Données des zones ──────────────────────────────────────────
-    const zones = [
-      {
-        id: 'bosquet',
-        name: "Bosquet d'Émeraude",
-        act: 1,
-        actLabel: 'Acte 1',
-        description: 'Camp des Tieffelins et des Druides. Premier bastion de résistance.',
-        href: '/playthrough/acte1#bois-sacres',
-        coords: [60, -55],
-        color: '#4ade80',
-      },
-      {
-        id: 'grymforge',
-        name: 'Grymforge',
-        act: 1,
-        actLabel: 'Acte 1',
-        description: "Forteresse Duergars dans l'Outreterre. Forge ancestrale de Shar.",
-        href: '/playthrough/acte1#grymforge',
-        coords: [20, -70],
-        color: '#4ade80',
-      },
-      {
-        id: 'creche',
-        name: 'Crèche Githyanki',
-        act: 1,
-        actLabel: 'Acte 1',
-        description: 'Avant-poste militaire Githyanki. Quête de Lae\'zel.',
-        href: '/playthrough/acte1#creche',
-        coords: [75, -20],
-        color: '#4ade80',
-      },
-      {
-        id: 'lastlight',
-        name: 'Last Light Inn',
-        act: 2,
-        actLabel: 'Acte 2',
-        description: "Refuge dans les Terres maudites. Protégé par la lumière d'Isobel.",
-        href: '/playthrough/acte2#last-light',
-        coords: [30, 10],
-        color: '#818cf8',
-      },
-      {
-        id: 'hautelune',
-        name: 'Tours de Hautelune',
-        act: 2,
-        actLabel: 'Acte 2',
-        description: "Forteresse du culte de l'Absolute. Donjon de Ketheric Thorm.",
-        href: '/playthrough/acte2#moonrise-infiltration',
-        coords: [10, 35],
-        color: '#818cf8',
-      },
-      {
-        id: 'rivington',
-        name: 'Rivington',
-        act: 3,
-        actLabel: 'Acte 3',
-        description: 'Faubourg sud de Baldur\'s Gate. Première zone de l\'Acte 3.',
-        href: '/playthrough/acte3#rivington',
-        coords: [-20, 55],
-        color: '#f97316',
-      },
-      {
-        id: 'lowercity',
-        name: "Ville Basse de Baldur's Gate",
-        act: 3,
-        actLabel: 'Acte 3',
-        description: 'Cœur de Baldur\'s Gate. Quartiers populaires et undercity.',
-        href: '/playthrough/acte3#lower-city',
-        coords: [-45, 70],
-        color: '#f97316',
-      },
+    // ── Données des marqueurs ─────────────────────────────────────────
+    // Coordonnées en pixels dans un repère [0,0] → [1024,1024]
+    // (Leaflet CRS.Simple : y=0 en bas, on inverse pour avoir y=0 en haut)
+
+    var markers_act1 = [
+      { pos: [820, 200], type: 'boss', label: 'Harponnière des Eaux Profondes', desc: 'Boss : Minotaures + Mécaniques', href: '/playthrough/acte1#plage' },
+      { pos: [600, 350], type: 'quest', label: 'Bois Sacrés', desc: 'Tieflings à sauver, Approuver Kagha', href: '/playthrough/acte1#bois-sacres' },
+      { pos: [300, 500], type: 'boss', label: 'Camp Gobelin', desc: 'Boss : Gut, Dror Ragzlin, Minthara', href: '/playthrough/acte1#gobelin-camp' },
+      { pos: [150, 700], type: 'loot', label: 'Outreterre', desc: 'Arcane Circlet, équipement Acte 1', href: '/playthrough/acte1#underdark' },
+      { pos: [500, 750], type: 'boss', label: 'Grymforge', desc: 'Boss : Grym le Forgeron', href: '/playthrough/acte1#grymforge' },
+      { pos: [800, 650], type: 'quest', label: 'Crèche Githyanki', desc: 'Infirmière Ghustil, Zaith\'isk', href: '/playthrough/acte1#creche' },
+      { pos: [500, 150], type: 'camp', label: 'Camp de base', desc: 'Repos long, gestion équipe', href: '/playthrough/acte1#overview' },
     ];
 
-    // ── Initialisation Leaflet CRS.Simple ─────────────────────────
+    var markers_act2 = [
+      { pos: [512, 200], type: 'quest', label: 'Last Light Inn', desc: 'Refuge sûr, Isobel à protéger', href: '/playthrough/acte2#last-light' },
+      { pos: [300, 400], type: 'boss', label: 'Mausolée de Thorm', desc: 'Boss : Général Thorm', href: '/playthrough/acte2#reithwin' },
+      { pos: [700, 500], type: 'quest', label: 'Hautelune (infiltration)', desc: 'Zblin-déguisé, libération prisonniers', href: '/playthrough/acte2#moonrise-infiltration' },
+      { pos: [500, 600], type: 'loot', label: 'Gauntlet de Shar', desc: 'Shadowheart quête, Spear of Night', href: '/playthrough/acte2#shar-gauntlet' },
+      { pos: [512, 800], type: 'boss', label: 'Shadowfell', desc: 'Boss : Balthazar, Nightsong', href: '/playthrough/acte2#shadowfell' },
+    ];
+
+    var markers_act3 = [
+      { pos: [400, 200], type: 'quest', label: 'Rivington', desc: 'Wyrm\'s Rock, passage Ville Basse', href: '/playthrough/acte3#rivington' },
+      { pos: [600, 350], type: 'loot', label: 'Ville Basse', desc: 'Équipement BiS endgame', href: '/playthrough/acte3#lower-city' },
+      { pos: [750, 500], type: 'boss', label: 'Gortash', desc: 'Boss : Gortash (Fond. Acier)', href: '/playthrough/acte3#gortash' },
+      { pos: [300, 600], type: 'boss', label: 'Orin la Rouge', desc: 'Boss : Temple de Bhaal', href: '/playthrough/acte3#orin' },
+      { pos: [512, 780], type: 'boss', label: 'Cerveau Vénérable', desc: 'Boss final du jeu', href: '/playthrough/acte3#netherbrain' },
+    ];
+
+    var allMarkersData = {
+      1: markers_act1,
+      2: markers_act2,
+      3: markers_act3,
+    };
+
+    // Fichiers image : webp en priorité, placeholder SVG en fallback
+    var mapImages = {
+      1: { webp: '/maps/acte1-bg3.webp', placeholder: '/maps/acte1-placeholder.svg' },
+      2: { webp: '/maps/acte2-bg3.webp', placeholder: '/maps/acte2-placeholder.svg' },
+      3: { webp: '/maps/acte3-bg3.webp', placeholder: '/maps/acte3-placeholder.svg' },
+    };
+
+    // ── Utilitaires marqueurs ─────────────────────────────────────────
+    function createDivIcon(type) {
+      var colors = { quest: '#818cf8', boss: '#ef4444', loot: '#d4a857', camp: '#22c55e' };
+      var icons  = { quest: '!', boss: '☠', loot: '★', camp: '⛺' };
+      var c = colors[type] || '#9a8a72';
+      var i = icons[type]  || '?';
+      return L.divIcon({
+        className: '',
+        html: '<div style="'
+          + 'width:28px;height:28px;border-radius:50%;'
+          + 'background:' + c + '22;border:2px solid ' + c + ';'
+          + 'display:flex;align-items:center;justify-content:center;'
+          + 'font-size:13px;color:' + c + ';'
+          + 'box-shadow:0 0 8px ' + c + '44;'
+          + 'cursor:pointer;'
+          + '">' + i + '</div>',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        popupAnchor: [0, -16],
+      });
+    }
+
+    function buildPopup(m) {
+      var colors = { quest: '#818cf8', boss: '#ef4444', loot: '#d4a857', camp: '#22c55e' };
+      var labels = { quest: 'Quête', boss: 'Boss', loot: 'Loot', camp: 'Camp' };
+      var c = colors[m.type] || '#9a8a72';
+      var l = labels[m.type] || m.type;
+      return '<div style="'
+        + 'background:#0d0f1a;'
+        + 'border:1px solid rgba(212,168,87,0.4);'
+        + 'border-radius:6px;'
+        + 'padding:12px 14px;'
+        + 'min-width:210px;'
+        + 'font-family:sans-serif;'
+        + '">'
+        + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+        + '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + c + ';flex-shrink:0;"></span>'
+        + '<strong style="color:#d4a857;font-size:0.88rem;">' + m.label + '</strong>'
+        + '</div>'
+        + '<div style="font-size:0.68rem;color:' + c + ';font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">' + l + '</div>'
+        + '<p style="color:#9a8a72;font-size:0.78rem;line-height:1.4;margin:0 0 10px;">' + m.desc + '</p>'
+        + '<a href="' + m.href + '" style="'
+        + 'display:inline-block;'
+        + 'background:rgba(212,168,87,0.15);'
+        + 'border:1px solid rgba(212,168,87,0.35);'
+        + 'color:#d4a857;'
+        + 'text-decoration:none;'
+        + 'font-size:0.75rem;'
+        + 'font-weight:600;'
+        + 'padding:4px 10px;'
+        + 'border-radius:4px;'
+        + '" onmouseover="this.style.background=\'rgba(212,168,87,0.28)\'"'
+        + '   onmouseout="this.style.background=\'rgba(212,168,87,0.15)\'">'
+        + 'Voir le guide →'
+        + '</a>'
+        + '</div>';
+    }
+
+    // ── Initialisation Leaflet ────────────────────────────────────────
     (function initMap() {
-      // Attendre que Leaflet soit chargé
       if (typeof L === 'undefined') {
         setTimeout(initMap, 100);
         return;
       }
 
-      const map = L.map('map', {
+      var BOUNDS = [[0, 0], [1024, 1024]];
+      var currentAct = 1;
+      var currentOverlay = null;
+      var currentMarkers = [];
+
+      // Injecter styles globaux
+      var style = document.createElement('style');
+      style.textContent = [
+        '.bg3-popup .leaflet-popup-content-wrapper{background:transparent;border:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);padding:0;border-radius:6px;overflow:hidden;}',
+        '.bg3-popup .leaflet-popup-content{margin:0;}',
+        '.bg3-popup .leaflet-popup-tip-container{display:none;}',
+        '.leaflet-control-zoom{border:1px solid rgba(212,168,87,0.3)!important;overflow:hidden;}',
+        '.leaflet-control-zoom a{background:#0d0f1a!important;color:#d4a857!important;border-bottom:1px solid rgba(212,168,87,0.2)!important;}',
+        '.leaflet-control-zoom a:hover{background:rgba(212,168,87,0.15)!important;}',
+        '.leaflet-container{background:#05060a;}',
+      ].join('');
+      document.head.appendChild(style);
+
+      // Créer la carte en mode CRS.Simple (plan 2D, pas de projection)
+      var map = L.map('map', {
         crs: L.CRS.Simple,
         minZoom: -2,
-        maxZoom: 3,
-        center: [20, 5],
-        zoom: -1,
+        maxZoom: 2,
+        zoomSnap: 0.5,
         zoomControl: true,
         attributionControl: false,
       });
 
-      // Grille de fond (canvas)
-      const gridCanvas = document.createElement('canvas');
-      gridCanvas.width = 800;
-      gridCanvas.height = 600;
-      const ctx = gridCanvas.getContext('2d');
-
-      // Fond très sombre
-      ctx.fillStyle = '#05060a';
-      ctx.fillRect(0, 0, 800, 600);
-
-      // Grille subtile
-      ctx.strokeStyle = 'rgba(212, 168, 87, 0.06)';
-      ctx.lineWidth = 1;
-      for (let x = 0; x <= 800; x += 40) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, 600);
-        ctx.stroke();
-      }
-      for (let y = 0; y <= 600; y += 40) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(800, y);
-        ctx.stroke();
+      // ── Charge le fond de carte pour un acte donné ────────────────
+      function loadMapBackground(act, callback) {
+        var urls = mapImages[act];
+        // Tester si le webp existe
+        var img = new Image();
+        img.onload = function() { callback(urls.webp); };
+        img.onerror = function() { callback(urls.placeholder); };
+        img.src = urls.webp;
       }
 
-      // Légères zones géographiques fictives
-      // Acte 1 — zone nord-ouest
-      ctx.fillStyle = 'rgba(74, 222, 128, 0.03)';
-      ctx.beginPath();
-      ctx.ellipse(200, 150, 180, 120, 0, 0, Math.PI * 2);
-      ctx.fill();
+      function setOverlay(url) {
+        if (currentOverlay) {
+          map.removeLayer(currentOverlay);
+        }
+        currentOverlay = L.imageOverlay(url, BOUNDS, { opacity: 1, interactive: false });
+        currentOverlay.addTo(map);
+        // S'assurer que l'overlay est en dessous des marqueurs
+        currentOverlay.bringToBack();
+      }
 
-      // Acte 2 — zone centrale
-      ctx.fillStyle = 'rgba(129, 140, 248, 0.03)';
-      ctx.beginPath();
-      ctx.ellipse(480, 280, 150, 110, 0, 0, Math.PI * 2);
-      ctx.fill();
+      // ── Place les marqueurs pour un acte ─────────────────────────
+      function loadMarkers(act) {
+        // Supprimer anciens marqueurs
+        currentMarkers.forEach(function(m) { map.removeLayer(m); });
+        currentMarkers = [];
 
-      // Acte 3 — zone sud-est
-      ctx.fillStyle = 'rgba(249, 115, 22, 0.03)';
-      ctx.beginPath();
-      ctx.ellipse(620, 430, 140, 100, 0, 0, Math.PI * 2);
-      ctx.fill();
+        var data = allMarkersData[act] || [];
+        data.forEach(function(m) {
+          // CRS.Simple : [y, x] → on convertit [px_x, px_y] en [1024-py, px]
+          // Les coordonnées données sont [x_pixel, y_pixel] avec y=0 en haut
+          // En CRS.Simple Leaflet, latLng est [y_leaflet, x_leaflet]
+          // Pour que y=0 soit en haut et y=1024 en bas : latLng = [1024 - pos[1], pos[0]]
+          var latlng = [1024 - m.pos[1], m.pos[0]];
+          var marker = L.marker(latlng, { icon: createDivIcon(m.type) })
+            .bindPopup(buildPopup(m), { className: 'bg3-popup', maxWidth: 280 });
+          marker.addTo(map);
+          currentMarkers.push(marker);
+        });
+      }
 
-      // Contours de "continents" fictifs
-      ctx.strokeStyle = 'rgba(212, 168, 87, 0.08)';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([8, 12]);
-      ctx.beginPath();
-      ctx.moveTo(50, 80);
-      ctx.bezierCurveTo(150, 60, 300, 40, 420, 100);
-      ctx.bezierCurveTo(500, 140, 560, 200, 580, 300);
-      ctx.bezierCurveTo(600, 380, 650, 440, 700, 500);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      // ── Mise à jour de la liste des zones ────────────────────────
+      function updateZonesList(act) {
+        var list = document.getElementById('zones-list');
+        if (!list) return;
+        list.innerHTML = '';
+        var typeLabels = { quest: 'Quête', boss: 'Boss', loot: 'Loot', camp: 'Camp' };
+        var typeColors = { quest: '#818cf8', boss: '#ef4444', loot: '#d4a857', camp: '#22c55e' };
+        var data = allMarkersData[act] || [];
+        data.forEach(function(m) {
+          var c = typeColors[m.type] || '#9a8a72';
+          var l = typeLabels[m.type] || m.type;
+          var card = document.createElement('a');
+          card.href = m.href;
+          card.style.cssText = 'display:block;padding:12px 14px;background:rgba(13,15,26,0.8);border:1px solid rgba(212,168,87,0.15);border-radius:6px;text-decoration:none;transition:border-color 0.15s,background 0.15s;';
+          card.onmouseover = function() {
+            card.style.borderColor = 'rgba(212,168,87,0.4)';
+            card.style.background = 'rgba(212,168,87,0.06)';
+          };
+          card.onmouseout = function() {
+            card.style.borderColor = 'rgba(212,168,87,0.15)';
+            card.style.background = 'rgba(13,15,26,0.8)';
+          };
+          card.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+            + '<span style="width:8px;height:8px;border-radius:50%;background:' + c + ';flex-shrink:0;display:inline-block;"></span>'
+            + '<span style="color:#e8dcc8;font-weight:600;font-size:0.85rem;">' + m.label + '</span>'
+            + '</div>'
+            + '<div style="color:' + c + ';font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;margin-bottom:4px;">' + l + '</div>'
+            + '<div style="color:#7a6a58;font-size:0.78rem;line-height:1.4;">' + m.desc + '</div>';
+          list.appendChild(card);
+        });
+      }
 
-      // Textes des régions
-      ctx.fillStyle = 'rgba(212, 168, 87, 0.12)';
-      ctx.font = 'bold 18px serif';
-      ctx.fillText('ACTE I', 100, 100);
-      ctx.fillText('ACTE II', 390, 260);
-      ctx.fillText('ACTE III', 560, 400);
+      // ── Chargement initial (Acte 1) ───────────────────────────────
+      loadMapBackground(1, function(url) {
+        setOverlay(url);
+        map.fitBounds(BOUNDS);
+        map.setMaxBounds([[-50, -50], [1074, 1074]]);
+      });
+      loadMarkers(1);
+      updateZonesList(1);
 
-      // Overlay image sur la carte
-      const imageUrl = gridCanvas.toDataURL();
-      const bounds = [[-100, -100], [100, 100]];
-      L.imageOverlay(imageUrl, bounds, { opacity: 1, interactive: false }).addTo(map);
+      // ── Gestion des onglets ───────────────────────────────────────
+      var tabColors = {
+        1: { active: '#4ade80', activeBg: 'rgba(74,222,128,0.15)', inactiveOpacity: '0.35' },
+        2: { active: '#818cf8', activeBg: 'rgba(129,140,248,0.15)', inactiveOpacity: '0.35' },
+        3: { active: '#f97316', activeBg: 'rgba(249,115,22,0.15)', inactiveOpacity: '0.35' },
+      };
 
-      // Limiter la vue
-      map.setMaxBounds([[-120, -120], [120, 120]]);
+      function switchAct(act) {
+        if (act === currentAct) return;
+        currentAct = act;
 
-      // ── Marqueurs personnalisés ──────────────────────────────────
-      zones.forEach(zone => {
-        const markerHtml = `
-          <div style="
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: ${zone.color};
-            border: 2px solid rgba(255,255,255,0.4);
-            box-shadow: 0 0 8px ${zone.color}80, 0 0 16px ${zone.color}40;
-            cursor: pointer;
-          "></div>
-        `;
-
-        const icon = L.divIcon({
-          html: markerHtml,
-          className: '',
-          iconSize: [14, 14],
-          iconAnchor: [7, 7],
-          popupAnchor: [0, -10],
+        // Mettre à jour les styles des onglets
+        [1, 2, 3].forEach(function(a) {
+          var btn = document.getElementById('tab-act' + a);
+          if (!btn) return;
+          var tc = tabColors[a];
+          if (a === act) {
+            btn.style.border = '1px solid ' + tc.active;
+            btn.style.background = tc.activeBg;
+            btn.style.color = tc.active;
+            btn.setAttribute('aria-selected', 'true');
+          } else {
+            btn.style.border = '1px solid rgba(' + hexToRgbStr(tc.active) + ',' + tc.inactiveOpacity + ')';
+            btn.style.background = 'transparent';
+            btn.style.color = tc.active;
+            btn.setAttribute('aria-selected', 'false');
+          }
         });
 
-        const popupContent = `
-          <div style="
-            background: #0d0f1a;
-            border: 1px solid rgba(212,168,87,0.4);
-            border-radius: 6px;
-            padding: 12px 14px;
-            min-width: 200px;
-            font-family: sans-serif;
-          ">
-            <div style="
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              margin-bottom: 6px;
-            ">
-              <span style="
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: ${zone.color};
-                flex-shrink: 0;
-              "></span>
-              <strong style="color: #d4a857; font-size: 0.9rem;">${zone.name}</strong>
-            </div>
-            <div style="
-              font-size: 0.7rem;
-              color: #818cf8;
-              font-weight: 600;
-              letter-spacing: 0.08em;
-              text-transform: uppercase;
-              margin-bottom: 6px;
-            ">${zone.actLabel}</div>
-            <p style="
-              color: #9a8a72;
-              font-size: 0.78rem;
-              line-height: 1.4;
-              margin: 0 0 10px;
-            ">${zone.description}</p>
-            <a href="${zone.href}" style="
-              display: inline-block;
-              background: rgba(212,168,87,0.15);
-              border: 1px solid rgba(212,168,87,0.35);
-              color: #d4a857;
-              text-decoration: none;
-              font-size: 0.75rem;
-              font-weight: 600;
-              padding: 4px 10px;
-              border-radius: 4px;
-              transition: background 0.15s;
-            " onmouseover="this.style.background='rgba(212,168,87,0.28)'"
-               onmouseout="this.style.background='rgba(212,168,87,0.15)'">
-              Voir le guide →
-            </a>
-          </div>
-        `;
+        // Charger le nouveau fond de carte
+        loadMapBackground(act, function(url) {
+          setOverlay(url);
+          map.fitBounds(BOUNDS);
+        });
 
-        L.marker(zone.coords, { icon })
-          .addTo(map)
-          .bindPopup(popupContent, {
-            className: 'bg3-popup',
-            maxWidth: 260,
-          });
+        // Mettre à jour marqueurs et liste
+        loadMarkers(act);
+        updateZonesList(act);
+      }
+
+      // Helpers couleur
+      function hexToRgbStr(hex) {
+        var r = parseInt(hex.slice(1,3), 16);
+        var g = parseInt(hex.slice(3,5), 16);
+        var b = parseInt(hex.slice(5,7), 16);
+        return r + ',' + g + ',' + b;
+      }
+
+      [1, 2, 3].forEach(function(a) {
+        var btn = document.getElementById('tab-act' + a);
+        if (btn) {
+          btn.addEventListener('click', function() { switchAct(a); });
+        }
       });
 
-      // ── Style popup global ────────────────────────────────────────
-      const style = document.createElement('style');
-      style.textContent = `
-        .bg3-popup .leaflet-popup-content-wrapper {
-          background: transparent;
-          border: none;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-          padding: 0;
-          border-radius: 6px;
-          overflow: hidden;
-        }
-        .bg3-popup .leaflet-popup-content {
-          margin: 0;
-        }
-        .bg3-popup .leaflet-popup-tip-container {
-          display: none;
-        }
-        .leaflet-control-zoom {
-          border: 1px solid rgba(212,168,87,0.3) !important;
-          overflow: hidden;
-        }
-        .leaflet-control-zoom a {
-          background: #0d0f1a !important;
-          color: #d4a857 !important;
-          border-bottom: 1px solid rgba(212,168,87,0.2) !important;
-        }
-        .leaflet-control-zoom a:hover {
-          background: rgba(212,168,87,0.15) !important;
-        }
-      `;
-      document.head.appendChild(style);
     })();
-
-    // ── Liste des zones (DOM) ────────────────────────────────────────
-    const list = document.getElementById('zones-list');
-    if (list) {
-      zones.forEach(zone => {
-        const card = document.createElement('a');
-        card.href = zone.href;
-        card.style.cssText = `
-          display: block;
-          padding: 12px 14px;
-          background: rgba(13,15,26,0.8);
-          border: 1px solid rgba(212,168,87,0.15);
-          border-radius: 6px;
-          text-decoration: none;
-          transition: border-color 0.15s, background 0.15s;
-        `;
-        card.onmouseover = () => {
-          card.style.borderColor = 'rgba(212,168,87,0.4)';
-          card.style.background = 'rgba(212,168,87,0.06)';
-        };
-        card.onmouseout = () => {
-          card.style.borderColor = 'rgba(212,168,87,0.15)';
-          card.style.background = 'rgba(13,15,26,0.8)';
-        };
-        card.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-            <span style="width: 8px; height: 8px; border-radius: 50%; background: ${zone.color}; flex-shrink: 0; display: inline-block;"></span>
-            <span style="color: #e8dcc8; font-weight: 600; font-size: 0.85rem;">${zone.name}</span>
-          </div>
-          <div style="color: #6b5f50; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px;">${zone.actLabel}</div>
-          <div style="color: #7a6a58; font-size: 0.78rem; line-height: 1.4;">${zone.description}</div>
-        `;
-        list.appendChild(card);
-      });
-    }
   </script>
 </BaseLayout>
