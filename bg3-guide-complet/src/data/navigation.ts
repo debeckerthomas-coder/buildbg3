@@ -1,7 +1,7 @@
 // src/data/navigation.ts
 // Source de vérité unique pour toute la navigation du guide
 
-export type SectionKey = 'playthrough' | 'grimoire' | 'dashboard';
+export type SectionKey = 'playthrough' | 'grimoire' | 'dashboard' | 'outils';
 
 export interface NavSection {
   id: string;
@@ -78,17 +78,15 @@ const playthroughPages: NavPage[] = [
     act: 3,
     checklistStorageKey: 'bg3-checklist-acte3',
     navSections: [
-      { id: 'overview',      label: '6.0 — Vue d\'ensemble' },
-      { id: 'rivington',     label: '6.1 — Rivington' },
-      { id: 'lower-city',    label: '6.2 — Ville Basse' },
-      { id: 'steel-watch',   label: '6.3 — Fonderie d\'Acier' },
-      { id: 'gortash',       label: '6.4 — Gortash' },
-      { id: 'citadel',       label: '6.5 — La Citadelle' },
-      { id: 'cazador',       label: '6.6 — Cazador' },
-      { id: 'wyrmway',       label: '6.7 — Wyrmway & Épreuves' },
-      { id: 'orin',          label: '6.8 — Orin & Temple de Bhaal' },
-      { id: 'final-assault', label: '6.9 — Assaut final' },
-      { id: 'epilogue',      label: '6.10 — Épilogue' },
+      { id: 'overview',        label: '6.0 — Vue d\'ensemble' },
+      { id: 'rivington',       label: '6.1 — Rivington & Roc du Ver' },
+      { id: 'lower-city',      label: '6.2 — Ville Basse' },
+      { id: 'steel-watch',     label: '6.3 — Fonderie de la Garde d\'Acier' },
+      { id: 'gortash',         label: '6.4 — Gortash' },
+      { id: 'orin',            label: '6.5 — Orin la Rouge' },
+      { id: 'optional-bosses', label: '6.6 — Boss optionnels' },
+      { id: 'netherbrain',     label: '6.7 — Cerveau Vénérable' },
+      { id: 'endgame',         label: '6.8 — Loadout final & Épilogue' },
       { id: 'checklist-acte3', label: '✓ Checklist finale' },
     ],
   },
@@ -218,4 +216,5 @@ export const sectionLabels: Record<SectionKey, string> = {
   playthrough: 'Aventure',
   grimoire:    'Grimoire',
   dashboard:   'Accueil',
+  outils:      'Outils',
 };

@@ -232,6 +232,13 @@ L'Acte 3 est le plus long et le plus libre de Baldur's Gate 3. Vous atteindrez l
 
 ## 6.1 — Rivington & Roc du Ver (Wyrm's Rock)
 
+<CalloutBlock type="tip" title="Route Pacifique — Éviter les combats à Rivington">
+En Mode Honneur, évitez tout combat à Rivington et au Roc du Ver : les Gardes d'Acier sont des boss à part entière et les soldats du Roc du Ver anéantiront votre équipe encore sous-équipée. La **Route Pacifique** repose sur deux dialogues clés :
+
+- **Commandant Ulder Ravengard** (Roc du Ver, niveau 2) : Parlez-lui avant d'entrer dans la salle du trône. Persuasion DC 18 pour le convaincre de vous laisser passer librement. Utilisez votre bonus de Charisme (+5 au minimum) et la Guidance de Sombrecœur avant le jet. S'il vous refuse, attendez le couronnement (cinématique) — il se rend inutilisable temporairement.
+- **Gortash au couronnement** : Pure cinématique. Il vous propose une alliance. Pour ce build Parjure, vous pouvez accepter ou refuser — aucune conséquence de Serment (vous êtes déjà Parjure). Refuser garde vos options de fin ouvertes. **Ne l'attaquez jamais ici**, ses gardes (Gardes d'Acier inclus) vous tueraient sur place.
+</CalloutBlock>
+
 <CalloutBlock type="warning" title="Orin kidnappe un compagnon — soyez vigilant">
 Après quelques repos longs en Acte 3, Orin kidnappera un compagnon (celui que vous utilisez le moins — souvent Lae'zel, Gale, Halsin ou Minthara). Elle prend sa place en tant que **métamorphe**. Attention aux signes : le compagnon se comporte étrangement, refuse certains ordres. Interrogez-le via le dialogue avant tout combat risqué.
 </CalloutBlock>
@@ -241,28 +248,34 @@ La forteresse du **Roc du Ver** est le QG de Gortash. Assistez à son couronneme
 <Checklist
   client:load
   storageKey="bg3-checklist-acte3"
-  title="Rivington"
+  title="Rivington — Quêtes urgentes avant d'entrer en Ville Basse"
   showProgress={false}
-  groups={[{
-    items: [
-      { id: "riv-01", label: "Explorer Rivington : cirque ambulant (Génie Akabi, Dribbles le Clown)." },
-      { id: "riv-02", label: "<strong>Bénédiction de Boney</strong> : Achetez la Bénédiction permanente à la statue pour ~5 000 PO.", tag: "Bonus permanent" },
-      {
-        id: "riv-03",
-        label: "<strong>Voler Akabi</strong> : Volez l'anneau du Génie pour accéder à la jungle et récupérer <em>Nyrulna</em> (Trident légendaire — Attaque au Charisme via Pacte de la Lame).",
-        priority: "important",
-        tag: "Loot légendaire"
-      },
-      { id: "riv-04", label: "Rencontrer Aradin (devant le magasin de magie) pour la quête de Chantsenuit." },
-      { id: "riv-05", label: "<strong>Quête du Temple de la Main Ouverte</strong> : meurtres mystérieux → piste vers le Tribunal de Bhaal." },
-      {
-        id: "riv-06",
-        label: "<strong>Couronnement de Gortash</strong> : cinématique uniquement — NE PAS ATTAQUER !",
-        priority: "important",
-        tag: "Attention"
-      },
-    ]
-  }]}
+  groups={[
+    {
+      title: "Rivington — À faire en priorité",
+      items: [
+        { id: "riv-01", label: "Explorer Rivington : cirque ambulant (Génie Akabi, Dribbles le Clown)." },
+        { id: "riv-02", label: "<strong>Bénédiction de Boney</strong> : Achetez la Bénédiction permanente à la statue pour ~5 000 PO.", tag: "Bonus permanent" },
+        {
+          id: "riv-03",
+          label: "<strong>Voler Akabi</strong> : Volez l'anneau du Génie pour accéder à la jungle et récupérer <em>Nyrulna</em> (Trident légendaire — Attaque au Charisme via Pacte de la Lame).",
+          priority: "important",
+          tag: "Loot légendaire"
+        },
+        { id: "riv-04", label: "Rencontrer Aradin (devant le magasin de magie) pour la quête de Chantsenuit." },
+        { id: "riv-05", label: "<strong>Quête du Temple de la Main Ouverte</strong> : meurtres mystérieux → piste vers le Tribunal de Bhaal.", priority: "important" },
+        {
+          id: "riv-06",
+          label: "<strong>Couronnement de Gortash</strong> : cinématique uniquement — NE PAS ATTAQUER !",
+          priority: "important",
+          tag: "Attention"
+        },
+        { id: "riv-07", label: "<strong>Commandant Ravengard</strong> : dialogue Persuasion DC 18 pour passage libre au Roc du Ver.", priority: "important" },
+        { id: "riv-08", label: "Marchands du Roc du Ver : achetez parchemins utiles (Revivifier, Globe d'Invulnérabilité).", tag: "Achat" },
+        { id: "riv-09", label: "Quête des prisonniers gnomes : obtenir la localisation du Trône de Fer (Acte 3)." },
+      ]
+    }
+  ]}
 />
 
 </section>
