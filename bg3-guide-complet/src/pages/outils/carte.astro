@@ -1,0 +1,401 @@
+---
+// src/pages/outils/carte.astro
+// Carte interactive BG3 avec Leaflet.js (CRS.Simple — carte de jeu fictive)
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout
+  title="Carte Interactive BG3"
+  description="Carte interactive des zones de Baldur's Gate 3 — Acte 1, 2 et 3. Bosquet d'Émeraude, Grymforge, Last Light Inn, Baldur's Gate."
+>
+  <!-- Leaflet CSS via CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <TopBar currentSection="outils" currentPath={currentPath} />
+
+  <main class="min-h-screen" style="background: #05060a;">
+
+    <!-- En-tête -->
+    <section class="px-4 pt-8 pb-4 max-w-content mx-auto">
+      <div class="flex items-center gap-3 mb-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             class="w-6 h-6 shrink-0" style="color: #d4a857;" aria-hidden="true">
+          <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+          <line x1="9" x2="9" y1="3" y2="18"/>
+          <line x1="15" x2="15" y1="6" y2="21"/>
+        </svg>
+        <h1 class="font-display text-2xl" style="color: #d4a857;">Carte Interactive</h1>
+      </div>
+      <p style="color: #9a8a72; font-size: 0.875rem;">
+        Zones clés du monde de Faerûn — cliquez sur un marqueur pour accéder au guide correspondant.
+      </p>
+    </section>
+
+    <!-- Légende -->
+    <section class="px-4 pb-4 max-w-content mx-auto">
+      <div class="flex flex-wrap gap-3">
+        <div class="flex items-center gap-1.5">
+          <span class="inline-block w-3 h-3 rounded-full" style="background: #4ade80;"></span>
+          <span style="color: #9a8a72; font-size: 0.75rem;">Acte 1</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="inline-block w-3 h-3 rounded-full" style="background: #818cf8;"></span>
+          <span style="color: #9a8a72; font-size: 0.75rem;">Acte 2</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="inline-block w-3 h-3 rounded-full" style="background: #f97316;"></span>
+          <span style="color: #9a8a72; font-size: 0.75rem;">Acte 3</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carte Leaflet -->
+    <section class="px-4 pb-8 max-w-content mx-auto">
+      <div
+        id="map"
+        style="width: 100%; height: 600px; background: #05060a; border: 1px solid rgba(212,168,87,0.25); border-radius: 8px; overflow: hidden;"
+        aria-label="Carte interactive des zones BG3"
+      ></div>
+    </section>
+
+    <!-- Liste des zones -->
+    <section class="px-4 pb-12 max-w-content mx-auto">
+      <h2 class="font-display text-lg mb-4" style="color: #d4a857; border-bottom: 1px solid rgba(212,168,87,0.2); padding-bottom: 0.5rem;">
+        Zones répertoriées
+      </h2>
+      <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3" id="zones-list">
+        <!-- Généré par JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Leaflet JS via CDN -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" is:inline></script>
+
+  <script is:inline>
+    // ── Données des zones ──────────────────────────────────────────
+    const zones = [
+      {
+        id: 'bosquet',
+        name: "Bosquet d'Émeraude",
+        act: 1,
+        actLabel: 'Acte 1',
+        description: 'Camp des Tieffelins et des Druides. Premier bastion de résistance.',
+        href: '/playthrough/acte1#bois-sacres',
+        coords: [60, -55],
+        color: '#4ade80',
+      },
+      {
+        id: 'grymforge',
+        name: 'Grymforge',
+        act: 1,
+        actLabel: 'Acte 1',
+        description: "Forteresse Duergars dans l'Outreterre. Forge ancestrale de Shar.",
+        href: '/playthrough/acte1#grymforge',
+        coords: [20, -70],
+        color: '#4ade80',
+      },
+      {
+        id: 'creche',
+        name: 'Crèche Githyanki',
+        act: 1,
+        actLabel: 'Acte 1',
+        description: 'Avant-poste militaire Githyanki. Quête de Lae\'zel.',
+        href: '/playthrough/acte1#creche',
+        coords: [75, -20],
+        color: '#4ade80',
+      },
+      {
+        id: 'lastlight',
+        name: 'Last Light Inn',
+        act: 2,
+        actLabel: 'Acte 2',
+        description: "Refuge dans les Terres maudites. Protégé par la lumière d'Isobel.",
+        href: '/playthrough/acte2#last-light',
+        coords: [30, 10],
+        color: '#818cf8',
+      },
+      {
+        id: 'hautelune',
+        name: 'Tours de Hautelune',
+        act: 2,
+        actLabel: 'Acte 2',
+        description: "Forteresse du culte de l'Absolute. Donjon de Ketheric Thorm.",
+        href: '/playthrough/acte2#moonrise-infiltration',
+        coords: [10, 35],
+        color: '#818cf8',
+      },
+      {
+        id: 'rivington',
+        name: 'Rivington',
+        act: 3,
+        actLabel: 'Acte 3',
+        description: 'Faubourg sud de Baldur\'s Gate. Première zone de l\'Acte 3.',
+        href: '/playthrough/acte3#rivington',
+        coords: [-20, 55],
+        color: '#f97316',
+      },
+      {
+        id: 'lowercity',
+        name: "Ville Basse de Baldur's Gate",
+        act: 3,
+        actLabel: 'Acte 3',
+        description: 'Cœur de Baldur\'s Gate. Quartiers populaires et undercity.',
+        href: '/playthrough/acte3#lower-city',
+        coords: [-45, 70],
+        color: '#f97316',
+      },
+    ];
+
+    // ── Initialisation Leaflet CRS.Simple ─────────────────────────
+    (function initMap() {
+      // Attendre que Leaflet soit chargé
+      if (typeof L === 'undefined') {
+        setTimeout(initMap, 100);
+        return;
+      }
+
+      const map = L.map('map', {
+        crs: L.CRS.Simple,
+        minZoom: -2,
+        maxZoom: 3,
+        center: [20, 5],
+        zoom: -1,
+        zoomControl: true,
+        attributionControl: false,
+      });
+
+      // Grille de fond (canvas)
+      const gridCanvas = document.createElement('canvas');
+      gridCanvas.width = 800;
+      gridCanvas.height = 600;
+      const ctx = gridCanvas.getContext('2d');
+
+      // Fond très sombre
+      ctx.fillStyle = '#05060a';
+      ctx.fillRect(0, 0, 800, 600);
+
+      // Grille subtile
+      ctx.strokeStyle = 'rgba(212, 168, 87, 0.06)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= 800; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 600);
+        ctx.stroke();
+      }
+      for (let y = 0; y <= 600; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(800, y);
+        ctx.stroke();
+      }
+
+      // Légères zones géographiques fictives
+      // Acte 1 — zone nord-ouest
+      ctx.fillStyle = 'rgba(74, 222, 128, 0.03)';
+      ctx.beginPath();
+      ctx.ellipse(200, 150, 180, 120, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Acte 2 — zone centrale
+      ctx.fillStyle = 'rgba(129, 140, 248, 0.03)';
+      ctx.beginPath();
+      ctx.ellipse(480, 280, 150, 110, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Acte 3 — zone sud-est
+      ctx.fillStyle = 'rgba(249, 115, 22, 0.03)';
+      ctx.beginPath();
+      ctx.ellipse(620, 430, 140, 100, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Contours de "continents" fictifs
+      ctx.strokeStyle = 'rgba(212, 168, 87, 0.08)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 12]);
+      ctx.beginPath();
+      ctx.moveTo(50, 80);
+      ctx.bezierCurveTo(150, 60, 300, 40, 420, 100);
+      ctx.bezierCurveTo(500, 140, 560, 200, 580, 300);
+      ctx.bezierCurveTo(600, 380, 650, 440, 700, 500);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Textes des régions
+      ctx.fillStyle = 'rgba(212, 168, 87, 0.12)';
+      ctx.font = 'bold 18px serif';
+      ctx.fillText('ACTE I', 100, 100);
+      ctx.fillText('ACTE II', 390, 260);
+      ctx.fillText('ACTE III', 560, 400);
+
+      // Overlay image sur la carte
+      const imageUrl = gridCanvas.toDataURL();
+      const bounds = [[-100, -100], [100, 100]];
+      L.imageOverlay(imageUrl, bounds, { opacity: 1, interactive: false }).addTo(map);
+
+      // Limiter la vue
+      map.setMaxBounds([[-120, -120], [120, 120]]);
+
+      // ── Marqueurs personnalisés ──────────────────────────────────
+      zones.forEach(zone => {
+        const markerHtml = `
+          <div style="
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: ${zone.color};
+            border: 2px solid rgba(255,255,255,0.4);
+            box-shadow: 0 0 8px ${zone.color}80, 0 0 16px ${zone.color}40;
+            cursor: pointer;
+          "></div>
+        `;
+
+        const icon = L.divIcon({
+          html: markerHtml,
+          className: '',
+          iconSize: [14, 14],
+          iconAnchor: [7, 7],
+          popupAnchor: [0, -10],
+        });
+
+        const popupContent = `
+          <div style="
+            background: #0d0f1a;
+            border: 1px solid rgba(212,168,87,0.4);
+            border-radius: 6px;
+            padding: 12px 14px;
+            min-width: 200px;
+            font-family: sans-serif;
+          ">
+            <div style="
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              margin-bottom: 6px;
+            ">
+              <span style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: ${zone.color};
+                flex-shrink: 0;
+              "></span>
+              <strong style="color: #d4a857; font-size: 0.9rem;">${zone.name}</strong>
+            </div>
+            <div style="
+              font-size: 0.7rem;
+              color: #818cf8;
+              font-weight: 600;
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              margin-bottom: 6px;
+            ">${zone.actLabel}</div>
+            <p style="
+              color: #9a8a72;
+              font-size: 0.78rem;
+              line-height: 1.4;
+              margin: 0 0 10px;
+            ">${zone.description}</p>
+            <a href="${zone.href}" style="
+              display: inline-block;
+              background: rgba(212,168,87,0.15);
+              border: 1px solid rgba(212,168,87,0.35);
+              color: #d4a857;
+              text-decoration: none;
+              font-size: 0.75rem;
+              font-weight: 600;
+              padding: 4px 10px;
+              border-radius: 4px;
+              transition: background 0.15s;
+            " onmouseover="this.style.background='rgba(212,168,87,0.28)'"
+               onmouseout="this.style.background='rgba(212,168,87,0.15)'">
+              Voir le guide →
+            </a>
+          </div>
+        `;
+
+        L.marker(zone.coords, { icon })
+          .addTo(map)
+          .bindPopup(popupContent, {
+            className: 'bg3-popup',
+            maxWidth: 260,
+          });
+      });
+
+      // ── Style popup global ────────────────────────────────────────
+      const style = document.createElement('style');
+      style.textContent = `
+        .bg3-popup .leaflet-popup-content-wrapper {
+          background: transparent;
+          border: none;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+          padding: 0;
+          border-radius: 6px;
+          overflow: hidden;
+        }
+        .bg3-popup .leaflet-popup-content {
+          margin: 0;
+        }
+        .bg3-popup .leaflet-popup-tip-container {
+          display: none;
+        }
+        .leaflet-control-zoom {
+          border: 1px solid rgba(212,168,87,0.3) !important;
+          overflow: hidden;
+        }
+        .leaflet-control-zoom a {
+          background: #0d0f1a !important;
+          color: #d4a857 !important;
+          border-bottom: 1px solid rgba(212,168,87,0.2) !important;
+        }
+        .leaflet-control-zoom a:hover {
+          background: rgba(212,168,87,0.15) !important;
+        }
+      `;
+      document.head.appendChild(style);
+    })();
+
+    // ── Liste des zones (DOM) ────────────────────────────────────────
+    const list = document.getElementById('zones-list');
+    if (list) {
+      zones.forEach(zone => {
+        const card = document.createElement('a');
+        card.href = zone.href;
+        card.style.cssText = `
+          display: block;
+          padding: 12px 14px;
+          background: rgba(13,15,26,0.8);
+          border: 1px solid rgba(212,168,87,0.15);
+          border-radius: 6px;
+          text-decoration: none;
+          transition: border-color 0.15s, background 0.15s;
+        `;
+        card.onmouseover = () => {
+          card.style.borderColor = 'rgba(212,168,87,0.4)';
+          card.style.background = 'rgba(212,168,87,0.06)';
+        };
+        card.onmouseout = () => {
+          card.style.borderColor = 'rgba(212,168,87,0.15)';
+          card.style.background = 'rgba(13,15,26,0.8)';
+        };
+        card.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: ${zone.color}; flex-shrink: 0; display: inline-block;"></span>
+            <span style="color: #e8dcc8; font-weight: 600; font-size: 0.85rem;">${zone.name}</span>
+          </div>
+          <div style="color: #6b5f50; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px;">${zone.actLabel}</div>
+          <div style="color: #7a6a58; font-size: 0.78rem; line-height: 1.4;">${zone.description}</div>
+        `;
+        list.appendChild(card);
+      });
+    }
+  </script>
+</BaseLayout>
