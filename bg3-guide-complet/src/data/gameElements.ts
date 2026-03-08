@@ -355,6 +355,81 @@ export const gameElements: Record<string, GameElement> = {
     description: 'Augmente votre vitesse de déplacement de 3m. Simple mais utile pour Acte 1 pour atteindre les ennemis au corps à corps.',
     source: 'Acte 1 — Crusher (Camp Gobelin)',
   },
+  // ── CAPACITÉS & PASSIFS DE CLASSE ────────────────────────────
+  'imposition-mains': {
+    id: 'imposition-mains', type: 'passive', name: 'Imposition des Mains',
+    action: 'Action',
+    description: 'Pool de PV = 5 × votre niveau de Paladin. Soigne 5 PV par utilisation, ou purge une maladie ou un empoisonnement (1 utilisation). Outil de soin hors-combat essentiel — ne consomme aucun emplacement de sort. En Mode Honneur, utilisez-le entre chaque combat pour ne jamais entrer un affrontement entamé.',
+    source: 'Paladin niv.1',
+  },
+  'extra-attaque': {
+    id: 'extra-attaque', type: 'passive', name: 'Extra Attaque',
+    action: 'Passif',
+    description: 'Vous pouvez attaquer deux fois lors d\'une même Action Attaquer. Avec un Châtiment Divin sur chaque frappe, vous doublez l\'output de Smite par tour sans dépenser plus d\'emplacements. C\'est le premier vrai power spike du build.',
+    source: 'Paladin niv.5',
+  },
+  'aura-haine': {
+    id: 'aura-haine', type: 'passive', name: 'Aura de Haine',
+    action: 'Passif', range: '3m',
+    description: 'Vous et vos alliés morts-vivants dans un rayon de 3m ajoutent votre modificateur de Charisme aux dégâts de mêlée. Avec CHA 20 (+5), c\'est +5 dégâts gratuits par frappe, soit +10 par tour avec Extra Attaque. Attention : s\'applique aussi aux morts-vivants ennemis — désactivez-la lors des combats de masse avec des zombies ou squelettes.',
+    source: 'Paladin niv.7 — Briseur de Serment',
+  },
+  'mort-vivants': {
+    id: 'mort-vivants', type: 'spell', name: 'Animer les Morts',
+    school: 'Nécromancie', action: 'Action', concentration: false, range: '3m',
+    description: 'Anime un cadavre en squelette ou zombie allié pendant 24h (ou jusqu\'au repos long). Ces alliés morts-vivants bénéficient de votre Aura de Haine — ils frappent plus fort quand vous êtes à portée. Disponible via Canalisation Divinie Parjure.',
+    source: 'Briseur de Serment — Canalisation Divinie',
+  },
+  'decharge-agonisante': {
+    id: 'decharge-agonisante', type: 'passive', name: 'Décharge Agonisante',
+    action: 'Passif',
+    description: 'Chaque rayon de Décharge Occulte inflige votre modificateur de Charisme en dégâts supplémentaires. Avec CHA 20 (+5), chaque rayon inflige +5 dégâts. Au niveau 10 avec 3 rayons, c\'est +15 dégâts par lancer. Invocation prioritaire numéro 1 — à prendre dès le niveau 2 Occultiste.',
+    source: 'Invocation Occultiste niv.2',
+  },
+  'decharge-repulsive': {
+    id: 'decharge-repulsive', type: 'passive', name: 'Décharge Répulsive',
+    action: 'Passif',
+    description: 'Chaque rayon de Décharge Occulte repousse la cible de 4,5m. Usage tactique : repoussez un boss dans le vide, dans un Mur de Feu ou Hadar, ou loin de vos alliés fragiles. Avec 3 rayons, vous pouvez déplacer 3 ennemis distincts ou pousser un même ennemi de 13,5m. Se combine avec Agonisante.',
+    source: 'Invocation Occultiste niv.2',
+  },
+  'commandement': {
+    id: 'commandement', type: 'spell', name: 'Commandement',
+    school: 'Enchantement', action: 'Action', range: '18m', concentration: false,
+    description: 'Jet de Sagesse ou la cible obéit pendant 1 tour. Fuis : se retire du corps à corps en déclenchant des attaques d\'opportunité de toute votre équipe. Tombe (Grovel) : la cible tombe à terre — vos attaques de mêlée ont Avantage. Halte : perd son prochain tour. Lâche : pose son arme au sol.',
+    source: 'Paladin niv.1',
+  },
+  'aide': {
+    id: 'aide', type: 'spell', name: 'Aide',
+    school: 'Abjuration', action: 'Action', range: '9m', concentration: false,
+    description: 'Augmente les PV maximum et PV actuels de 3 alliés de 5 PV jusqu\'au prochain repos long. Sans concentration — se cumule avec Bénédiction, Bouclier de la Foi, et tout autre buff. Upcasté au niveau 3 avec un emplacement Occultiste, les PV bonus passent à 15.',
+    source: 'Paladin niv.2',
+  },
+  'rappel-mortel': {
+    id: 'rappel-mortel', type: 'passive', name: 'Rappel Mortel',
+    action: 'Passif',
+    description: 'Passif Grand Ancien : sur un coup critique, les ennemis dans un rayon de 3m autour de la cible sont soumis à la Peur pendant 2 tours. Les créatures effrayées ne peuvent pas se déplacer et subissent un Désavantage sur leurs jets d\'attaque. Synergise directement avec l\'Anneau de la Bien-aimée du Tueur (critique garanti après un kill).',
+    source: 'Patron Grand Ancien — Passif',
+  },
+  'benediction-tenebreux': {
+    id: 'benediction-tenebreux', type: 'passive', name: 'Bénédiction du Ténébreux',
+    action: 'Passif',
+    description: 'Passif Fiélon : chaque fois que vous ou un allié à portée tuez un ennemi, vous gagnez des PV temporaires égaux à votre niveau Occultiste + modificateur de Charisme. Avec Occ 5 et CHA 20 (+5), c\'est 10 PV temporaires par kill. En combat de masse, ce passif vous maintient en vie sans consommer aucune ressource.',
+    source: 'Patron Fiélon — Passif permanent',
+  },
+  'sang-lathandre': {
+    id: 'sang-lathandre', type: 'weapon', name: 'Sang de Lathandre',
+    icon: 'https://bg3.wiki/w/images/3/3c/Blood_of_Lathander_Icon.png',
+    damage: '1d6+2 Contondant + Radiant (aura)',
+    description: 'Masse légendaire de la cathédrale de Rosymorn. Son aura de lumière solaire (Lathander\'s Light) inflige des dégâts radiants aux morts-vivants et créatures des ténèbres adjacentes chaque tour. Sur un coup critique, aveugle les ennemis dans un rayon de 3m (JS Constitution). BiS Phase 2 pour Lockadin Parjure — synergique avec le Châtiment Divin et l\'Aura de Haine.',
+    source: 'Acte 1 — Monastère de Rosymorn (Crèche Githyanki — quête Dawnmaster\'s Crest)',
+  },
+  'bouclier-sort': {
+    id: 'bouclier-sort', type: 'spell', name: 'Bouclier',
+    icon: 'https://bg3.wiki/w/images/e/e8/Shield_Icon.png',
+    school: 'Abjuration', action: 'Réaction', range: 'Personnel', concentration: false,
+    description: '+5 CA en réaction jusqu\'à votre prochain tour. Se déclenche avant que l\'attaque touche — si les +5 CA font manquer l\'attaquant, vous ne prenez aucun dégât. L\'un des meilleurs sorts de survie du jeu. Patron Grand Ancien y donne accès comme sort de liste étendue.',
+    source: 'Occultiste (Grand Ancien) / Magicien niv.1',
+  },
   // ── ÉLIXIRS SUPPLÉMENTAIRES ───────────────────────────────────
   'elixir-hill-giant': {
     id: 'elixir-hill-giant', type: 'consumable', name: 'Élixir de Force de Géant des Collines',

@@ -14,6 +14,8 @@ import Encart from '../../components/Encart.astro';
 import CalloutBlock from '../../components/CalloutBlock.astro';
 import StatBlock from '../../components/StatBlock.astro';
 import StatRow from '../../components/StatRow.astro';
+import Timeline from '../../components/Timeline.astro';
+import LootItem from '../../components/LootItem.astro';
 
 {/* ════════════════════════════════════════════════════════════
     COLONNE DROITE — Encarts
@@ -54,6 +56,50 @@ Le build Pal 7 / Occ 5 contourne ce nerf via les **Smites de Niveau 3 sur repos 
   <StatRow label="Niv. 7 — Pal 7"  value="Aura de Haine"            highlight note="+CHA dégâts mêlée passifs" />
   <StatRow label="Niv. 12 — Occ 5" value="Smites Niv.3 repos court" highlight note="Machine à Smites inépuisable" />
 </StatBlock>
+
+</Encart>
+
+<Encart type="loot" title="Équipement Phase 1 — Priorités Act 1" slot="encarts">
+
+<LootItem
+  name="Masse de la Dévote"
+  type="Masse"
+  rarity="uncommon"
+  stats="1d6+4 Cont · +1d6 Radiant"
+  location="Camp Gobelin — Sombrecœur (quête)"
+  note="Meilleure arme Acte 1 pour Lockadin avant le Sang de Lathandre"
+  bis
+/>
+
+<LootItem
+  name="Armure d'Attelle Adamantine"
+  type="Armure lourde"
+  rarity="rare"
+  stats="CA 18 · Immunité crit · –2 dégâts"
+  location="Grymforge — Forge Adamantine + Moule Attelle"
+  note="Équipez-la avant l'Acte 2. BiS jusqu'à l'Armure Crépuscule Infernal."
+  bis
+/>
+
+<LootItem
+  name="Bouclier Adamantine"
+  type="Bouclier"
+  rarity="rare"
+  stats="+2 CA · Immunité crit · Reeling"
+  location="Grymforge — Forge Adamantine + Moule Bouclier"
+  note="BiS bouclier Acts 1-2. Forge-le en même temps que l'armure."
+  bis
+/>
+
+<LootItem
+  name="Lame Perpétuellement Embrasée"
+  type="Grande épée"
+  rarity="uncommon"
+  stats="1d6+1 Tranch · +2d4 Feu"
+  location="Nautiloïde — Commandeur Zhalk"
+  note="Optionnel. À récupérer avec Lae'zel avant de fuir le navire."
+  optional
+/>
 
 </Encart>
 
@@ -370,12 +416,30 @@ Jouez comme un Paladin classique avec Force élevée jusqu'au Niveau 8, puis res
 
 ## 1.4 — Compétences & Historique
 
-Le Paladin choisit 2 compétences. Votre Historique en accorde 2 autres.
+Le Paladin choisit 2 compétences parmi sa liste. Votre Historique en accorde 2 autres.
 
-- **Historique recommandé :** Charlatan (Tromperie, Escamotage) ou Criminel (Tromperie, Discrétion).
-- **Compétences Paladin :** Prenez **Persuasion** et **Intimidation**.
+**Recommandation principale — Historique Noble + Athlétisme + Religion**
 
-Résultat : votre Lockadin maîtrise **3 compétences de Charisme**. Vous dominerez absolument tous les dialogues du jeu — ce qui est précieux pour éviter les combats risqués en Mode Honneur.
+| Compétence | Source | Stat | Utilité |
+|---|---|---|---|
+| Persuasion | Noble | Charisme | Checks sociaux — très fréquent, clé en Mode Honneur |
+| Histoire | Noble | Intelligence | Checks narratifs et érudits |
+| Athlétisme | Choix Paladin 1 | Force | Grappin, pousser ennemis dans les vides |
+| Religion | Choix Paladin 2 | Intelligence | Checks religieux, dialogues avec clercs/prêtres |
+
+Avec un **Charisme 20** au Niveau 4, votre Persuasion (+11 avec maîtrise) résout la quasi-totalité des confrontations sociales en votre faveur — ce qui évite des combats potentiellement fatals en Mode Honneur.
+
+<details>
+<summary>Voir l'alternative Sociale pure (3 compétences CHA) →</summary>
+
+Pour les joueurs voulant maximiser les compétences de dialogue au détriment de l'Athlétisme :
+
+- **Historique Criminel** → Tromperie + Discrétion *(CHA + DEX)*
+- **Compétences Paladin** → Persuasion + Intimidation *(CHA + CHA)*
+
+Résultat : 3 compétences de Charisme (Tromperie, Persuasion, Intimidation). Vous couvrez l'ensemble des dialogues sociaux, mais perdez Athlétisme (poussées dans le vide) et Religion. Option viable si votre équipe inclut un personnage avec Athlétisme élevé.
+
+</details>
 
 </section>
 
@@ -386,22 +450,37 @@ Résultat : votre Lockadin maîtrise **3 compétences de Charisme**. Vous domine
 ## 1.5 — Progression niveau par niveau
 
 <CalloutBlock type="danger" title="Règle d'Or — Ne multiclassez pas tôt">
-Ne commencez **pas** votre multiclassage Occultiste niveau par niveau après le Paladin 5. L'<Tooltip id="aura-protection" term="Aura de Protection" client:load /> (Niv.6) et l'Aura de Haine (Niv.7) sont **trop vitales** pour les survivre en Acte 1-2. Restez Paladin pur (7 niveaux) puis basculez d'un seul coup via la respécialisation au Niveau 8.
+Ne commencez **pas** votre multiclassage Occultiste niveau par niveau après le Paladin 5. L'<Tooltip id="aura-protection" term="Aura de Protection" client:load /> (Niv.6) et l'<Tooltip id="aura-haine" term="Aura de Haine" client:load /> (Niv.7) sont **trop vitales** pour y renoncer en Acte 1-2. Restez Paladin pur (7 niveaux) puis basculez d'un seul coup via la respécialisation au Niveau 8.
 </CalloutBlock>
+
+<Timeline items={[
+  { id: "pal1",   label: "Paladin 1",       level: "1",  type: "coastal", note: "Armure lourde, Imposition des Mains, Détection du Mal" },
+  { id: "pal2",   label: "Paladin 2",       level: "2",  type: "coastal", note: "Châtiment Divin + Style Défense — 1er power spike offensif", milestone: true },
+  { id: "pal3",   label: "Paladin 3",       level: "3",  type: "dungeon", note: "Rupture du Serment → Briseur de Serment actif" },
+  { id: "pal4",   label: "Paladin 4",       level: "4",  type: "dungeon", note: "Don +2 CHA → CHA 20 atteint dès maintenant (Demi-Orc)", milestone: true },
+  { id: "pal5",   label: "Paladin 5",       level: "5",  type: "forge",   note: "Extra Attaque : 2 frappes par tour — DPS doublé", milestone: true },
+  { id: "pal6",   label: "Paladin 6",       level: "6",  type: "shadow",  note: "Aura de Protection — meilleur buff du jeu pour l'équipe", milestone: true },
+  { id: "pal7",   label: "Paladin 7",       level: "7",  type: "shadow",  note: "Aura de Haine — +5 dégâts passifs par frappe avec CHA 20", milestone: true },
+  { id: "respec", label: "RESPEC ← Pal 5 / Occ 3", level: "8", type: "inn", note: "Pacte de la Lame activé · Fin des Élixirs de Force · Pivot du build", milestone: true },
+  { id: "occ4",   label: "Pal 5 / Occ 4",  level: "9",  type: "city",    note: "Don offensif libre — Sentinelle ou Maître des Armes", milestone: true },
+  { id: "pal6b",  label: "Pal 6 / Occ 4",  level: "10", type: "city",    note: "Aura de Protection restaurée avec CHA 20" },
+  { id: "pal7b",  label: "Pal 7 / Occ 4",  level: "11", type: "city",    note: "Aura de Haine restaurée" },
+  { id: "occ5",   label: "Pal 7 / Occ 5",  level: "12", type: "city",    note: "Smites Niv.3 sur repos court + Contresort — apothéose", milestone: true },
+]} />
 
 | Niv. | Classe | Capacité débloquée | Spike |
 |---|---|---|---|
-| 1 | Paladin 1 | Armure lourde, Imposition des mains | — |
-| 2 | Paladin 2 | **Châtiment Divin (Smite)**, Style Défense (+1 CA bouclier) | ⭐ |
+| 1 | Paladin 1 | Armure lourde, <Tooltip id="imposition-mains" term="Imposition des Mains" client:load /> | — |
+| 2 | Paladin 2 | <Tooltip id="chatiment-divin" term="Châtiment Divin" client:load /> **(Smite)**, Style Défense (+1 CA bouclier) | ⭐ |
 | 3 | Paladin 3 | Rupture du Serment → **Briseur de Serment** | — |
 | 4 | Paladin 4 | **Don : +2 Charisme (→ 20)** — cap ultime dès maintenant (Demi-Orc CHA 18) | ⭐⭐ |
-| 5 | Paladin 5 | **Extra Attaque** (2 frappes / tour) | ⭐⭐ |
-| 6 | Paladin 6 | **Aura de Protection** (+CHA à tous les JS alliés) | ⭐⭐⭐ |
-| 7 | Paladin 7 | **Aura de Haine** (+CHA aux dégâts de mêlée) | ⭐⭐ |
-| **8** | **Pal 5 / Occ 3** | **⭐ RESPEC : Pacte de la Lame** — fin des Élixirs FOR | ⭐⭐⭐ |
+| 5 | Paladin 5 | <Tooltip id="extra-attaque" term="Extra Attaque" client:load /> **(2 frappes / tour)** | ⭐⭐ |
+| 6 | Paladin 6 | <Tooltip id="aura-protection" term="Aura de Protection" client:load /> **(+CHA à tous les JS alliés)** | ⭐⭐⭐ |
+| 7 | Paladin 7 | <Tooltip id="aura-haine" term="Aura de Haine" client:load /> **(+CHA aux dégâts de mêlée)** | ⭐⭐ |
+| **8** | **Pal 5 / Occ 3** | **RESPEC : <Tooltip id="pacte-lame" term="Pacte de la Lame" client:load />** — fin des Élixirs FOR | ⭐⭐⭐ |
 | 9 | Pal 5 / Occ 4 | **Don : Sentinelle ou Maître des Armes** — CHA déjà à 20 | ⭐⭐ |
-| 10 | Pal 6 / Occ 4 | Aura de Protection restaurée | ⭐⭐ |
-| 11 | Pal 7 / Occ 4 | Aura de Haine restaurée | ⭐ |
+| 10 | Pal 6 / Occ 4 | <Tooltip id="aura-protection" term="Aura de Protection" client:load /> restaurée | ⭐⭐ |
+| 11 | Pal 7 / Occ 4 | <Tooltip id="aura-haine" term="Aura de Haine" client:load /> restaurée | ⭐ |
 | 12 | Pal 7 / Occ 5 | **Smites Niv.3 sur repos court**, Contresort | ⭐⭐⭐ |
 
 <Checklist
@@ -451,19 +530,46 @@ Ne commencez **pas** votre multiclassage Occultiste niveau par niveau après le 
 
 ## 1.6 — Le Serment : Briseur de Serment (Parjure)
 
-Le <Tooltip name="Briseur de Serment" type="Sous-classe Paladin" stats="Aura de Haine +CHA · Souffrance Malveillante · Représailles infernales" imageUrl="https://bg3.wiki/w/images/6/66/Oathbreaker_Icon.png" client:idle>Débloqué en brisant intentionnellement les règles de votre serment de départ. Faites une action Mauvaise (frapper un allié KO, laisser mourir un innocent, etc.) ou choisissez l'option de dialogue explicite pour briser votre serment au Niveau 3.</Tooltip> reste le choix offensif absolu pour une raison simple : l'**Aura de Haine**.
+Le <Tooltip name="Briseur de Serment" type="Sous-classe Paladin" stats="Aura de Haine +CHA · Souffrance Malveillante · Représailles infernales" imageUrl="https://bg3.wiki/w/images/6/66/Oathbreaker_Icon.png" client:idle>Débloqué en brisant intentionnellement les règles de votre serment de départ. Faites une action Mauvaise — frapper un allié à terre, laisser mourir un innocent qui vous supplie, etc. — ou choisissez l'option de dialogue explicite au Niveau 3.</Tooltip> est le choix offensif absolu du Lockadin. Son **Aura de Haine** est le buff de dégâts passifs le plus puissant du jeu pour ce build.
 
-| Capacité Parjure | Utilité en Mode Honneur |
-|---|---|
-| <Tooltip name="Souffrance Malveillante" type="Malediction — Action Bonus" stats="Avantage sur tous les jets contre la cible marquée" imageUrl="https://bg3.wiki/w/images/1/1d/Hex_Icon.png" client:idle>Marquez un ennemi en Action Bonus. Votre équipe entière bénéficie d'un Avantage sur tous les jets d'attaque contre cette cible. Priorité absolue sur les boss — à lancer avant de Smiter.</Tooltip> | Donne Avantage permanent à toute votre équipe sur la cible marquée |
-| **Aura de Haine** | **+5 dégâts passifs par attaque** — actif aussi pour les morts-vivants alliés |
-| <Tooltip name="Représailles infernales" type="Sort Réaction — Occultiste Niv.1" stats="2d10 dégâts de Feu · Gratuit via Parjure" imageUrl="https://bg3.wiki/w/images/d/d0/Hellish_Rebuke_Icon.png" client:idle>Se déclenche en réaction quand vous subissez des dégâts. 2d10 Feu infligés à l'attaquant. Gratuit pour le Parjure — ne coûte pas d'emplacement si obtenu via la sous-classe.</Tooltip> | Sort de réaction gratuit : 2d10 Feu à celui qui vous blesse |
+### Comment briser votre serment au Niveau 3
 
-<CalloutBlock type="danger" title="L'économie stricte du Parjure — Règle hardcore">
-En tant que Briseur de Serment, vous ne pouvez pas respécialiser chez Flétrissure sans avoir d'abord **racheté votre Serment** auprès du Chevalier Parjure (coût en PO, disponible au camp). L'ordre au Niveau 8 est donc : Chevalier Parjure → Flétrissure → rebriser immédiatement le serment.
+<CalloutBlock type="warning" title="Actions qui brisent le Serment du Dévouement">
+Voici les moyens fiables de rompre le serment intentionnellement dès le Niveau 3 :
+
+- **Frapper un allié inconscient ou à terre** (Lae'zel, Astarion, etc.) — action directe, sans conséquence irréversible sur vos compagnons
+- **Tuer un civil innocent** qui ne vous menace pas
+- **Laisser délibérément mourir un civil** qui vous supplie de l'aider
+- **Option de dialogue explicite** disponible dans certaines interactions avec des PNJ (cherchez "Briser votre serment")
+
+Immédiatement après, le **Chevalier Parjure** apparaît à votre camp. Il reste un allié permanent et vous propose de racheter votre serment contre des Pièces d'Or — ce que vous ferez obligatoirement au Niveau 8 avant la respec.
 </CalloutBlock>
 
-**Note importante sur l'Aura de Haine :** elle ajoute +CHA aux dégâts de mêlée à **tous** les morts-vivants dans un rayon de 3m — y compris les ennemis. Désactivez-la lors des combats de masse contre les zombies, rallumez-la contre les boss.
+### Capacités du Briseur de Serment
+
+| Capacité | Type | Utilité en Mode Honneur |
+|---|---|---|
+| <Tooltip name="Souffrance Malveillante" type="Canalisation Divinie — Action Bonus" stats="Avantage sur tous les jets d'attaque contre la cible" imageUrl="https://bg3.wiki/w/images/1/1d/Hex_Icon.png" client:idle>Marquez un ennemi en Action Bonus. Toute votre équipe bénéficie d'un Avantage sur tous les jets d'attaque contre cette cible marquée. Priorité absolue en début de combat boss — lancez-la avant votre premier Smite.</Tooltip> | Canalisation Divinie | Avantage garanti pour TOUTE l'équipe sur la cible |
+| <Tooltip id="aura-haine" term="Aura de Haine" client:load /> | Passif Aura | **+5 dégâts par frappe** (CHA 20) — inclut morts-vivants alliés |
+| <Tooltip id="mort-vivants" term="Animer les Morts" client:load /> | Canalisation Divinie | Invoque zombies/squelettes qui profitent de l'Aura de Haine |
+| <Tooltip name="Représailles infernales" type="Réaction — Sort niv.1" stats="2d10 dégâts de Feu · Réaction quand vous subissez des dégâts" imageUrl="https://bg3.wiki/w/images/d/d0/Hellish_Rebuke_Icon.png" client:idle>Se déclenche en réaction quand vous subissez des dégâts. 2d10 Feu infligés à l'attaquant. Ne coûte pas d'emplacement de sort si obtenu via la sous-classe Parjure.</Tooltip> | Réaction sort | 2d10 Feu en réaction — gratuit via la sous-classe |
+
+### Gérer l'Aura de Haine intelligemment
+
+L'Aura de Haine a un effet rarement signalé : elle s'applique à **tous** les morts-vivants dans son rayon de 3m — alliés **et ennemis**. Contre un boss avec des zombies serviteurs, vos ennemis eux-mêmes frappent plus fort.
+
+- **Contre un boss unique :** laissez l'aura active — aucun mort-vivant ennemi n'est présent
+- **Contre une horde de morts-vivants (Acte 2) :** désactivez l'aura via la barre d'actions passives — les zombies ennemis ne bénéficient plus du bonus
+- **Vos morts-vivants invoqués** (via Animer les Morts) profitent de l'aura — gardez-la active si vous en avez
+
+<CalloutBlock type="danger" title="Règle stricte — Respec au Niveau 8 avec le Parjure">
+Vous ne pouvez pas respécialiser chez Flétrissure sans avoir d'abord **racheté votre Serment** auprès du Chevalier Parjure (coût en PO, au camp). L'ordre obligatoire :
+
+1. Parlez au Chevalier Parjure → rachetez le serment
+2. Allez chez Flétrissure → respécialisez (PAL 5 / OCC 3)
+3. Rebrisez immédiatement votre serment (attaquez un allié à terre)
+4. Le Chevalier Parjure revient — l'Aura de Haine est restaurée
+</CalloutBlock>
 
 </section>
 
@@ -473,17 +579,49 @@ En tant que Briseur de Serment, vous ne pouvez pas respécialiser chez Flétriss
 
 ## 1.7 — Patron Occultiste : Le Choix Vanilla
 
-Puisque le Hexblade n'existe pas, deux Patrons dominent le Mode Honneur :
+Le Hexblade de la 5e édition n'existant pas dans BG3, deux Patrons émergent comme meilleurs choix pour le Lockadin. Votre décision dépend de votre style de jeu : aggressive alpha strike ou survie longue durée.
 
-**Le Grand Ancien (Great Old Entity) — Recommandé offensif**
+---
 
-- <Tooltip name="Rappel Mortel" type="Passif GOO" stats="Coup critique → AoE Peur autour de la cible" imageUrl="https://bg3.wiki/w/images/3/3b/Dead_Mans_Tell_Icon.png" client:idle>Les ennemis effrayés ne peuvent pas bouger et ont un Désavantage sur leurs jets d'attaque. Synergie parfaite avec l'Anneau de la Bien-aimée du Tueur (critique forcé) : un Smite critique = toute la zone est terrifiée.</Tooltip> : À chaque coup critique, AoE de Peur. Ennemis effrayés = immobiles + Désavantage. Synergie directe avec l'Anneau Bien-aimée du Tueur.
-- Sort bonus : **Bouclier** (Shield) — +5 CA en réaction. Un des meilleurs sorts de survie du jeu.
+### Le Grand Ancien (Great Old Entity) — Recommandé offensif
 
-**Le Fiélon (The Fiend) — Recommandé survie**
+Le Grand Ancien transforme chaque coup critique en outil de contrôle de zone. Sa synergie avec l'Anneau de la Bien-aimée du Tueur est l'une des plus puissantes du jeu.
 
-- Bénédiction du Ténébreux : À chaque kill, vous gagnez des PV Temporaires (Niv. Occ + Mod. CHA). Excellente survivabilité passive dans les combats de masse.
-- Très solide pour les joueurs qui veulent une marge de sécurité supplémentaire.
+**Capacités clés :**
+
+- <Tooltip id="rappel-mortel" term="Rappel Mortel" client:load /> : Sur chaque coup critique, les ennemis dans un rayon de 3m autour de la cible sont pris de **Peur** (2 tours). Les effrayés ne peuvent pas se déplacer et ont Désavantage aux jets d'attaque. Combo avec le Bien-aimée du Tueur : tuez un ennemi → critique garanti → toute la zone est terrifiée.
+
+- <Tooltip id="bouclier-sort" term="Bouclier" client:load /> (sort de liste étendue, Réaction) : +5 CA jusqu'au prochain tour. Transforme une attaque qui aurait touché en raté. C'est l'un des rares sorts de défense qui fonctionne *après* avoir vu le jet d'attaque de l'ennemi — vous décidez de l'activer seulement si vous en avez besoin.
+
+- **Éveil Mystérieux** (passif) : vous pouvez communiquer par télépathie avec toutes les créatures à portée de vue. Bonus roleplay, sans utilité en combat.
+
+<CalloutBlock type="tip" title="Combo Grand Ancien — Alpha Strike total">
+Tour 1 : Tuez un ennemi mineur → Bien-aimée du Tueur s'active (prochain attaque = critique garanti). Tour 2 : Smite critique sur le boss → Rappel Mortel terrifie tous les ennemis adjacents. Résultat : votre équipe attaque pendant que les ennemis sont immobiles.
+</CalloutBlock>
+
+---
+
+### Le Fiélon (The Fiend) — Recommandé survie & combats longs
+
+Le Fiélon excelle dans les combats d'usure et les situations où vous ne pouvez pas garantir un alpha strike rapide.
+
+**Capacités clés :**
+
+- <Tooltip id="benediction-tenebreux" term="Bénédiction du Ténébreux" client:load /> : À chaque kill (vous ou un allié), gagnez **Niv. Occ + CHA** PV temporaires. Avec Occ 5 et CHA 20, c'est 10 PV par ennemi éliminé. Dans un combat de 10 ennemis, vous récupérez jusqu'à 100 PV temporaires — sans aucune ressource consommée.
+
+- **Sorts de liste étendue Fiélon** : accès à *Mains Brûlantes*, *Boule de Feu*, *Mur de Feu*, *Fléau* — des sorts AoE précieux que le Grand Ancien n'offre pas. Particulièrement utile si vous voulez gérer les foules plutôt que focus un boss.
+
+---
+
+### Comparaison rapide
+
+| Critère | Grand Ancien | Fiélon |
+|---|---|---|
+| Style | Alpha strike + contrôle | Survie + combats longs |
+| Meilleur dans | Combats boss 1v1 | Combats de masse |
+| Sort signature | <Tooltip id="bouclier-sort" term="Bouclier" client:load /> (survie réaction) | Boule de Feu (AoE) |
+| Passif combat | <Tooltip id="rappel-mortel" term="Rappel Mortel" client:load /> (Peur sur crit) | <Tooltip id="benediction-tenebreux" term="Bénédiction du Ténébreux" client:load /> (PV sur kill) |
+| Mode Honneur | ⭐⭐⭐ (boss one-shot) | ⭐⭐ (marge de sécurité) |
 
 </section>
 
@@ -493,14 +631,41 @@ Puisque le Hexblade n'existe pas, deux Patrons dominent le Mode Honneur :
 
 ## 1.8 — Invocations & Pacte (Niveaux 2 et 3 Occultiste)
 
-Au Niveau 2 d'Occultiste (Niveau global 9 après respec), choisissez vos invocations :
+Après la respec au Niveau 8, vous démarrez à Occultiste 3 (Niveau global 8). Vous avez **2 invocations** — elles s'ajoutent à mesure que vous progressez.
 
-- **Décharge Agonisante (Agonizing Blast) :** Ajoute votre modificateur de Charisme aux dégâts de votre Décharge Occulte. Vous devenez aussi efficace à distance qu'au corps à corps.
-- **Décharge Répulsive (Repelling Blast) :** Vos rayons repoussent les ennemis de 4,5m. Idéal pour jeter les boss dans le vide ou dans des Murs de Feu.
-- **Optionnel (Niv.5) :** <Tooltip id="devil-sight" term="Vision du Diable" client:load /> pour voir dans les <Tooltip id="tenebres" term="Ténèbres" client:load /> magiques si vous utilisez cette stratégie avec Sombrecœur.
+### Invocations recommandées
 
-<CalloutBlock type="loot" title="Le Graal — Niveau 3 Occultiste : Pacte de la Lame">
-Vous pouvez enfin **lier votre arme**. Vos attaques de mêlée utilisent désormais votre Charisme. Vous pouvez abandonner les Élixirs de Force et investir dans les Potions de Vitesse ou les buffs offensifs. Liez le **Sang de Lathandre** dès que possible.
+**Priorité absolue (choisissez ces deux dès Occ 2) :**
+
+- <Tooltip id="decharge-agonisante" term="Décharge Agonisante" client:load /> : Votre invocation numéro 1. Avec CHA 20 (+5), chaque rayon de Décharge Occulte inflige +5 dégâts. Au niveau 10 avec 3 rayons, c'est +15 dégâts par lancer — soit l'équivalent d'un bonus magique +3 sur une arme à distance. Vous devenez aussi dangereux à distance qu'au corps à corps.
+
+- <Tooltip id="decharge-repulsive" term="Décharge Répulsive" client:load /> : Chaque rayon repousse la cible de 4,5m. Utilisations en Mode Honneur : repoussez un boss dans un vide (dégâts de chute), dans une <Tooltip name="Faim de Hadar" type="Sort Occultiste Niv.3" stats="Sphère ténèbres AoE · Ralentit + Cécité · Dégâts Acide & Froid" imageUrl="https://bg3.wiki/w/images/b/bb/Hunger_of_Hadar_Icon.png" client:idle>Zone de ténèbres magiques de 6m qui ralentit et aveugle les ennemis à l'intérieur. Parfait pour bloquer les renforts ennemis ou isoler un boss.</Tooltip>, ou simplement hors de portée de vos alliés fragiles.
+
+**Option niveau 5 Occultiste :**
+
+- <Tooltip id="devil-sight" term="Vision du Diable" client:load /> : Voyez normalement dans les <Tooltip id="tenebres" term="Ténèbres" client:load /> magiques. Si vous jouez avec Sombrecœur (compagnon qui peut lancer Ténèbres), cette invocation vous donne Avantage sur toutes vos attaques dans la zone de ténèbres, tandis que les ennemis ont Désavantage. Stratégie avancée mais redoutable.
+
+### Le Pacte de la Lame — Niveau 3 Occultiste
+
+<CalloutBlock type="loot" title="Déblocage du Pacte de la Lame">
+Au Niveau 3 Occultiste, choisissez le **Pacte de la Lame** comme don de pacte. Vous pouvez désormais **lier une arme** — vos attaques de mêlée utilisent votre Charisme au lieu de la Force. C'est le tournant du build : les Élixirs de Force deviennent inutiles.
+</CalloutBlock>
+
+**Comment lier votre arme :**
+1. Équipez l'arme souhaitée (ex : <Tooltip id="sang-lathandre" term="Sang de Lathandre" client:load />)
+2. Cliquez-droit sur l'arme → "Lier comme Arme du Pacte"
+3. La liaison est permanente jusqu'à ce que vous liezvune nouvelle arme
+4. **Vous devez relancer la liaison chaque matin** (elle se brise au repos long — c'est un bug connu / comportement de l'implémentation BG3)
+
+**Arme à lier par phase :**
+
+| Phase | Arme recommandée | Pourquoi |
+|---|---|---|
+| Acte 1-2 | <Tooltip id="sang-lathandre" term="Sang de Lathandre" client:load /> | +2, aura solaire, blinding crit |
+| Acte 3 | Nyrulna +3 ou arme légendaire Act 3 | Statistiques supérieures pour le late game |
+
+<CalloutBlock type="warning" title="Lame Soif-de-Sang — Nerfée en Mode Honneur">
+L'invocation **Lame Soif-de-Sang** (Thirsting Blade) octroie normalement une Extra Attaque supplémentaire avec l'arme du Pacte. En Mode Honneur, **le cumul avec l'Extra Attaque du Paladin est bloqué** — vous restez à 2 attaques par tour. Ne prenez pas cette invocation, elle ne vous apporte rien avec ce build.
 </CalloutBlock>
 
 </section>
@@ -513,11 +678,17 @@ Vous pouvez enfin **lier votre arme**. Vos attaques de mêlée utilisent désorm
 
 | Source | Sorts clés | Utilisation Mode Honneur |
 |---|---|---|
-| Sorts Mineurs | <Tooltip name="Décharge Occulte" type="Sort Mineur Occultiste" stats="3 rayons au Niv.10+ · Force DC" imageUrl="https://bg3.wiki/w/images/f/f9/Eldritch_Blast_Icon.png" client:idle>Votre arme à distance principale. Repousse avec Décharge Répulsive, inflige +CHA dégâts avec Décharge Agonisante. Remplace totalement l'arc.</Tooltip> Décharge Occulte | Arme à distance principale. Remplace l'arc. |
-| Occultiste (Niv.1) | **Bouclier** (si GOO) / <Tooltip name="Armure d'Agathys" type="Sort Occultiste Niv.1" stats="PV temporaires · Froid en réaction si frappé" imageUrl="https://bg3.wiki/w/images/3/30/Armour_of_Agathys_Icon.png" client:idle>Upcastée au Niv.3, donne 15 PV temporaires et inflige 15 dégâts de Froid à quiconque vous frappe au corps à corps. Synergy avec votre rôle de tank — les ennemis se brûlent en vous attaquant.</Tooltip> | Bouclier (+5 CA en réaction) est quasi obligatoire. |
-| Paladin (Niv.1) | **Bénédiction**, Commandement | Bénédiction = buff d'équipe de Tier 1. Toujours actif. |
-| Paladin (Niv.2) | **Aide**, Restauration partielle | Aide buffe les PV max sans concentration — prioriser. |
-| Occultiste (Niv.3) | **<Tooltip name="Contresort" type="Réaction — Occultiste Niv.3" stats="Annule un sort ennemi · Niv.3 automatique, DC 10+niv si supérieur" imageUrl="https://bg3.wiki/w/images/e/eb/Counterspell_Icon.png" client:idle>Le sort de réaction le plus précieux du jeu en Mode Honneur. Annule Boule de Feu, Tempête de Glace, et toutes les actions légendaires magiques des boss. Priorité absolue à Niv.12.</Tooltip>Contresort**, <Tooltip name="Faim de Hadar" type="Sort Occultiste Niv.3" stats="Sphère ténèbres AoE · Ralentit + Cécité · Dégâts Acide & Froid" imageUrl="https://bg3.wiki/w/images/b/bb/Hunger_of_Hadar_Icon.png" client:idle>Zone de ténèbres magiques de 6m qui ralentit et aveugle les ennemis à l'intérieur. Parfait pour bloquer les renforts ennemis ou isoler un boss. Combiné avec Vision du Diable, vous voyez dans ces ténèbres — pas les ennemis.</Tooltip> | Contresort sauve des vies contre les Boules de Feu boss. |
+| Sort Mineur | <Tooltip name="Décharge Occulte" type="Sort Mineur Occultiste" stats="3 rayons au Niv.10+ · Force DC" imageUrl="https://bg3.wiki/w/images/f/f9/Eldritch_Blast_Icon.png" client:idle>Votre arme à distance principale. Repousse avec Décharge Répulsive, inflige +CHA dégâts avec Décharge Agonisante. Remplace totalement l'arc — 3 rayons au niveau 10, chacun avec +5 dégâts.</Tooltip> | Arme à distance principale — remplace l'arc définitivement |
+| Occultiste Niv.1 | <Tooltip id="bouclier-sort" term="Bouclier" client:load /> *(si GOO)* ou <Tooltip name="Armure d'Agathys" type="Sort Occultiste Niv.1" stats="PV temporaires · +Froid en réaction si frappé au corps à corps" imageUrl="https://bg3.wiki/w/images/3/30/Armour_of_Agathys_Icon.png" client:idle>Upcastée en Niv.3 avec un slot Occultiste : 15 PV temporaires + 15 dégâts de Froid à quiconque vous frappe en mêlée. Synergique avec votre rôle de tank — les ennemis se punissent en vous attaquant.</Tooltip> | Bouclier (+5 CA en réaction) ou Armure d'Agathys (rétribution mêlée) |
+| Paladin Niv.1 | <Tooltip id="benediction" term="Bénédiction" client:load /> *(concentration)*, <Tooltip id="commandement" term="Commandement" client:load />, <Tooltip id="bouclier-foi" term="Bouclier de la Foi" client:load /> | Bénédiction = buff d'équipe tier S. Toujours actif en boss. |
+| Paladin Niv.2 | <Tooltip id="aide" term="Aide" client:load />, Restauration partielle | Aide sans concentration — se cumule avec Bénédiction. |
+| Occultiste Niv.3 | <Tooltip name="Contresort" type="Réaction — Niv.3 auto, DC 10+niv si supérieur" stats="Annule un sort ennemi ciblé" imageUrl="https://bg3.wiki/w/images/e/eb/Counterspell_Icon.png" client:idle>Le sort de réaction le plus précieux du jeu en Mode Honneur. Annule Boule de Feu, Tempête de Glace, et les actions légendaires magiques de boss. À Niv.12, vos emplacements Occ Niv.3 se rechargent sur repos court — vous pouvez contresort plusieurs fois par repos long.</Tooltip> Contresort, <Tooltip name="Faim de Hadar" type="Sort Occultiste Niv.3" stats="Sphère ténèbres AoE · Ralentit + Cécité · Acide & Froid" imageUrl="https://bg3.wiki/w/images/b/bb/Hunger_of_Hadar_Icon.png" client:idle>Zone de ténèbres magiques de 6m qui ralentit et aveugle les ennemis à l'intérieur. Parfait pour bloquer les renforts ennemis pendant un combat boss. Avec Vision du Diable, vous voyez dans la zone — pas les ennemis.</Tooltip> | Contresort : sauve l'équipe contre les sorts de boss. |
+
+<CalloutBlock type="tip" title="Bénédiction — Pourquoi c'est le sort n°1 de l'équipe">
+<Tooltip id="benediction" term="Bénédiction" client:load /> touche 3 alliés simultanément et ajoute **1d4 à tous leurs jets d'attaque ET leurs jets de sauvegarde** pendant la durée. En Mode Honneur, ce 1d4 transforme des ratés en réussites au moment critique. C'est la seule concentration qui vaut parfois mieux que Bénédiction de la Foi ou tout autre buff — car elle améliore à la fois l'offense ET la défense de toute l'équipe.
+
+Priorité d'utilisation : lancez Bénédiction en début de combat boss, puis Souffrance Malveillante en Action Bonus — les deux se cumulent.
+</CalloutBlock>
 
 </section>
 
@@ -542,12 +713,39 @@ Vous obtenez **2 Dons** dans ce build. Grâce au Demi-Orc (CHA 18 au départ), l
 
 ## 1.11 — Phase 1 : La Survie en Acte 1 (Pal 1 → 7)
 
-Pendant les 7 premiers niveaux, vous jouez un **Paladin pur**. Vous commencez avec 10 en Force et buvez un Élixir de Force chaque matin. Tante Ethel au Bosquet d'Émeraude en vend 3 par jour (stock réinitialisé à chaque repos long).
+Pendant les 7 premiers niveaux, vous jouez un **Paladin pur**. L'objectif de cette phase est simple : survivre jusqu'au Niveau 7 (Aura de Haine) sans prendre de risques inutiles. Votre puissance explose au Niveau 5 puis au Niveau 6-7 — résistez à l'envie de multiclasser trop tôt.
 
-- **Création :** Demi-Orc. FOR 10 / DEX 12 / CON 16 / INT 8 / SAG 10 / CHA 16.
-- **Armement :** Équipez une arme à une main + bouclier. Vous êtes immédiatement le tank de l'équipe.
-- **Règle des Élixirs :** Achetez vos élixirs chez Ethel le plus tôt possible. Ne combattez jamais un boss sans être sous l'effet de Force 21.
-- <Tooltip id="chatiment-divin" term="Châtiment Divin" client:load /> : Les dés sont doublés sur un Critique — synergie parfaite avec Attaques Sauvages (Demi-Orc). Un critique Pal sur un ennemi = dégâts déstructeurs dès le Niveau 2.
+### Routine quotidienne obligatoire
+
+Chaque matin (repos long), dans cet ordre :
+
+1. **<Tooltip id="imposition-mains" term="Imposition des Mains" client:load />** : Soignez tous vos alliés (5 PV par utilisation — pool gratuit)
+2. **Élixir de Force de Géant des Collines** : Force → 21. Achetez chez Tante Ethel au Bosquet d'Émeraude (3/jour, stock réinitalisé après chaque repos long). Ne combattez jamais un boss sans Élixir actif.
+3. **<Tooltip id="bouclier-foi" term="Bouclier de la Foi" client:load />** en Action Bonus si vous avez la concentration disponible : +2 CA gratuitement
+
+### Priorités de combat par niveau
+
+**Niveaux 1-2 :** Frappez avec l'arme + utilisez <Tooltip id="chatiment-divin" term="Châtiment Divin" client:load /> sur les cibles à haute priorité. Ne gaspillez pas vos Smites sur les sbires — gardez les emplacements pour les mini-boss. Sur un Critique (Demi-Orc), Smitez **toujours** — c'est double dégâts garanti.
+
+**Niveau 3 :** Vous êtes Briseur de Serment. Ouvrez chaque combat boss avec **Souffrance Malveillante** (Canalisation Divinie, Action Bonus) sur la cible principale. Votre équipe entière a Avantage sur cette cible.
+
+**Niveaux 4-5 :** Avec CHA 20 et Extra Attaque, vous faites 2 frappes par tour. Philosophie : **1 frappe normale + 1 frappe Smitée** plutôt que 2 Smites, pour préserver vos emplacements de sorts. Utilisez un Smite de Niveau 2 sur la seconde frappe si la cible est à mi-vie ou moins.
+
+**Niveaux 6-7 :** Vous êtes maintenant à pleine puissance Phase 1. L'<Tooltip id="aura-protection" term="Aura de Protection" client:load /> rend votre groupe presque invulnérable aux jets de sauvegarde de boss. Positionnez-vous **toujours à moins de 3m de vos alliés** pour maximiser le rayon d'aura.
+
+### Acquisitions prioritaires Acte 1
+
+<CalloutBlock type="loot" title="Ce qu'il faut absolument obtenir avant l'Acte 2">
+- **<Tooltip id="sang-lathandre" term="Sang de Lathandre" client:load />** (Monastère de Rosymorn) — votre arme BiS pour toute la Phase 2
+- **Armure d'Attelle Adamantine** (Forge de Grymforge) — CA 18 + immunité critiques
+- **Bouclier Adamantine** (même forge) — +2 CA + immunité critiques
+- **Cheveux d'Ethel** (+1 à une stat de votre choix → CHA) après la quête de Tante Ethel
+- **Anneau de Protection** (+1 CA +1 à tous JS) — volable à Mol dans le camp Tiefling
+</CalloutBlock>
+
+### Quand reposer vs. pousser
+
+Le repos long réinitialise vos emplacements de Smite (sorts Paladin). La règle d'or : **repos long après chaque boss principal**, repos court entre les groupes de sbires. Ne jamais affronter un boss sans au moins 3 emplacements de sorts Paladin disponibles (Niveaux 1-2-3).
 
 </section>
 
@@ -627,17 +825,39 @@ L'heure de vérité. Vous combinez la fureur du Paladin avec le Pacte de l'Occul
 
 **Au Niveau 8 — Marche à suivre stricte :**
 
-1. Rachetez votre Serment auprès du Chevalier Parjure.
-2. Allez chez Flétrissure → respécialisez : FOR 8, CHA 16 (Point Buy) + bonus racial Demi-Orc +2 = **CHA 18**, puis le Don Pal 4 déjà actif vous laisse à **CHA 20**.
-3. **Patron :** Grand Ancien (critiques) ou Fiélon (survie).
-4. **Sorts & Invocations :** Décharge Occulte, Bouclier (si GOO), Armure d'Agathys, Décharge Agonisante, Décharge Répulsive.
-5. **Niv.3 Occultiste :** Liez votre arme chaque matin pour utiliser le Charisme. Vous regagnez 2 emplacements Niv.3 à chaque repos court.
-6. Rebrisez immédiatement votre serment pour récupérer l'Aura de Haine.
+1. **Rachetez votre Serment** auprès du Chevalier Parjure (Pièces d'Or au camp).
+2. **Flétrissure → Respec :** FOR 8, CHA 16 (Point Buy) + bonus racial Demi-Orc +2 = CHA 18. Le Don Pal 4 vous amène à **CHA 20** automatiquement.
+3. **Patron :** Grand Ancien (critiques + Bouclier) ou Fiélon (PV sur kill).
+4. **Sorts :** <Tooltip id="bouclier-sort" term="Bouclier" client:load /> (GOO) ou <Tooltip name="Armure d'Agathys" type="Sort Occultiste Niv.1" stats="PV temporaires · Froid en réaction si frappé" imageUrl="https://bg3.wiki/w/images/3/30/Armour_of_Agathys_Icon.png" client:idle>15 PV temporaires + 15 dégâts Froid en réaction. Upcastée au Niv.3.</Tooltip> + <Tooltip id="decharge-agonisante" term="Décharge Agonisante" client:load /> + <Tooltip id="decharge-repulsive" term="Décharge Répulsive" client:load />.
+5. **Niv.3 Occultiste :** Liez votre arme (<Tooltip id="sang-lathandre" term="Sang de Lathandre" client:load />) chaque matin — la liaison se brise au repos long. Deux emplacements Niv.3 récupérables sur repos court.
+6. **Rebrisez immédiatement votre serment** pour retrouver l'Aura de Haine.
 
-**Au Niveau 9 — Don offensif :** CHA 20 étant déjà atteint depuis le Niveau 4 (Demi-Orc), ce Don est entièrement libre. Prenez **Sentinelle** pour verrouiller les ennemis qui tentent de contourner votre ligne, ou **Maître des Armes de Guerre** pour ajouter une attaque bonus avec votre arme. Attaque totale au corps à corps : **+14** (CHA 20 + Maîtrise Pal 7 + Pacte Lame).
+**Au Niveau 9 — Don offensif :** CHA 20 étant atteint depuis le Niveau 4, ce Don est libre. Prenez **Sentinelle** (bloque les ennemis qui tentent de contourner votre ligne — ils tombent à vitesse 0) ou **Maître des Armes de Guerre** (attaque bonus avec arme de guerre 1 main). Bonus total d'attaque au corps à corps : **+14** (CHA 20 + Maîtrise Pal 7 + Pacte Lame).
+
+### Gestion des repos courts — La mécanique clé du late game
+
+À partir du Niveau 12, vous avez **2 emplacements Occultiste Niv.3** qui se rechargent sur **repos court** (pas repos long). C'est la mécanique définissante du build :
+
+- **Entre deux combats difficiles** : repos court → 2 emplacements Niv.3 récupérés → 2 Smites supplémentaires disponibles
+- **Pendant un donjon** : vous pouvez effectuer 2 repos courts par repos long — soit **6 Smites Niv.3 entre chaque repos long** (2 OCC × 3 repos courts/rests)
+- **Priorité d'utilisation des emplacements :** 1) Smites sur les boss en critiques, 2) Contresort sur les sorts de boss dévastateurs, 3) Armure d'Agathys upcastée en début de combat
+
+### Séquence de combat optimale — Mode Honneur
+
+**Avant le combat :**
+- Positionnez-vous en embuscade (Avantage sur le premier tour)
+- Anneau de la Bien-aimée du Tueur : tuez un ennemi mineur si possible pour le critique garanti
+
+**Tour 1 (combat engagé) :**
+1. **Action Bonus :** Souffrance Malveillante sur le boss principal
+2. **Action :** 2 attaques (Extra Attaque) — Smitez sur la seconde si vous avez un Avantage/critique
+
+**Tour 2 (si le boss survit) :**
+1. Continuez à Smiter — vos emplacements Occ Niv.3 rechargent sur repos court, donc dépensez-les sans hésiter
+2. Gardez une **Réaction** pour <Tooltip id="bouclier-sort" term="Bouclier" client:load /> (GOO) ou <Tooltip name="Contresort" type="Réaction — annule un sort ennemi" stats="Niv.3 auto, DC 10+niv si supérieur" imageUrl="https://bg3.wiki/w/images/e/eb/Counterspell_Icon.png" client:idle>Annule un sort ennemi en cours de lancement. En Mode Honneur, contrer la Boule de Feu d'un boss peut sauver toute l'équipe.</Tooltip> (Contresort) si un sort de boss arrive
 
 <CalloutBlock type="tip" title="L'Apothéose — Niveau 12">
-Les 2 emplacements Occultiste Niv.3 sur repos court vous transforment en **machine à Smites inépuisable**. Entre chaque combat difficile, faites un repos court : vos emplacements sont récupérés. Vous pouvez Smite 2 fois par groupe d'ennemis sans jamais épuiser vos ressources sur repos long.
+Les 2 emplacements Occultiste Niv.3 sur repos court vous transforment en **machine à Smites inépuisable**. En pratique, un repos court prend une action hors combat et ne coûte aucune ressource — prenez-en un dès que vous avez dépensé vos emplacements Occ, avant chaque boss. Vous pouvez Smiter sans jamais être à cours entre les grands combats.
 </CalloutBlock>
 
 </section>
