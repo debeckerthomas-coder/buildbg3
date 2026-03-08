@@ -193,10 +193,11 @@
 
   /* Encart hover polish */
   .encart {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
   .encart:hover {
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+    transform: translateY(-1px);
   }
 
   /* Tableau stylé BG3 */

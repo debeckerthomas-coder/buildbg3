@@ -38,10 +38,12 @@ const { title, compact = false, class: extraClass = '' } = Astro.props;
     </div>
   )}
 
-  <table class="w-full"
-         role="table">
-    <tbody class:list={['divide-y divide-white/4', compact && 'text-xs']}>
-      <slot />
-    </tbody>
-  </table>
+  <div class="overflow-x-auto">
+    <table class="w-full"
+           role="table">
+      <tbody class:list={['divide-y divide-white/[0.04]', compact && 'text-xs']}>
+        <slot />
+      </tbody>
+    </table>
+  </div>
 </div>

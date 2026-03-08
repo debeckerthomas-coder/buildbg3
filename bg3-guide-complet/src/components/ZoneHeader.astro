@@ -163,7 +163,7 @@ const fallbackImage = cfg.bgFallback;
     'zone-header relative w-full rounded-xl overflow-hidden mb-6 not-prose',
     extraClass,
   ]}
-  style={`min-height: 140px;`}
+  style={`min-height: clamp(120px, 20vw, 160px);`}
 >
   <!-- Image de fond avec fallback automatique -->
   <img
