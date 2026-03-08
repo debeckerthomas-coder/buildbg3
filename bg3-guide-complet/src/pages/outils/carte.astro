@@ -14,8 +14,8 @@ const acts = [
     sublabel: 'Forêt Interdite',
     color: '#4ade80',
     colorRgb: '74,222,128',
-    mapgenieUrl: 'https://mapgenie.io/baldurs-gate-3/maps/faerun?embed=1',
-    mapgenieLink: 'https://mapgenie.io/baldurs-gate-3/maps/faerun',
+    mapgenieUrl: 'https://mapgenie.io/baldurs-gate-3/maps/wilderness?embed=1',
+    mapgenieLink: 'https://mapgenie.io/baldurs-gate-3/maps/wilderness',
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const acts = [
   },
 ];
 
-const lockadинPoints = [
+const lockadinPoints = [
   {
     act: 1,
     actLabel: 'Acte 1',
@@ -223,10 +223,10 @@ const lockadинPoints = [
       </p>
 
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        {lockadинPoints.map(pt => {
-          const typeColors: Record<string, string> = { weapon: '#ef4444', armor: '#818cf8', accessory: '#d4a857' };
-          const typeIcons: Record<string, string> = { weapon: '⚔', armor: '🛡', accessory: '💎' };
-          const priorityColors: Record<string, string> = { S: '#d4a857', A: '#4ade80' };
+        {lockadinPoints.map(pt => {
+          const typeColors = { weapon: '#ef4444', armor: '#818cf8', accessory: '#d4a857' };
+          const typeIcons = { weapon: '⚔', armor: '🛡', accessory: '💎' };
+          const priorityColors = { S: '#d4a857', A: '#4ade80' };
           const c = typeColors[pt.type] || '#9a8a72';
           const ic = typeIcons[pt.type] || '★';
           const pc = priorityColors[pt.priority] || '#9a8a72';
