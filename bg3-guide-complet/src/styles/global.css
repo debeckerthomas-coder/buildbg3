@@ -35,10 +35,15 @@
   }
 
   /* Scrollbar custom — discret, cohérent avec la palette */
-  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar       { width: 7px; height: 7px; }
   ::-webkit-scrollbar-track { background: #05060a; }
-  ::-webkit-scrollbar-thumb { background: rgba(212,168,87,0.3); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(212,168,87,0.55); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212,168,87,0.25);
+    border-radius: 4px;
+    border: 1px solid rgba(212,168,87,0.1);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(212,168,87,0.55); border-color: rgba(212,168,87,0.3); }
+  ::-webkit-scrollbar-corner { background: #05060a; }
 
   /* Focus visible accessible */
   :focus-visible {
@@ -60,6 +65,14 @@
     border: 1px solid rgba(212, 168, 87, 0.14);
     border-radius: 0.5rem;
     backdrop-filter: blur(8px);
+  }
+
+  /* Wrapper responsive pour les tableaux — évite le débordement sur mobile */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0.5rem;
   }
 
   .card-bg-hover {
@@ -189,20 +202,56 @@
   /* Tableau stylé BG3 */
   .table-bg3 {
     @apply w-full text-sm border-collapse;
+    min-width: 480px; /* force le scroll horizontal plutôt que de casser */
   }
   .table-bg3 thead th {
-    @apply px-3 py-2 text-left font-ui font-semibold text-gold-light uppercase tracking-widest text-xs
+    @apply px-3 py-2.5 text-left font-ui font-semibold text-gold-light uppercase tracking-widest text-xs
            bg-bg-surface border-b border-gold/25;
+    white-space: nowrap;
   }
   .table-bg3 tbody td {
-    padding: 0.5rem 0.75rem; color: rgb(232 224 240); border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 0.5rem 0.75rem; color: rgb(232 224 240);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+  }
+  .table-bg3 tbody tr:nth-child(even) td {
+    background-color: rgba(212,168,87,0.03);
   }
   .table-bg3 tbody tr:last-child td {
     @apply border-b-0;
   }
   .table-bg3 tbody tr:hover td {
-    background-color: rgba(212,168,87,0.04);
+    background-color: rgba(212,168,87,0.07);
+    transition: background-color 0.15s ease;
   }
+
+  /* Prose BG3 — h2 spacing correct, ne colle pas au bord */
+  .prose-bg3 h2 {
+    scroll-margin-top: 5.5rem;
+    padding-top: 0.25rem;
+  }
+  .prose-bg3 h2:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+
+  /* Prose tables — responsive wrapping */
+  .prose-bg3 table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── Animations globales ────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
 }
 
 /* ── Utilities ──────────────────────────────────────────────────── */

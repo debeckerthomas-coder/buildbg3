@@ -102,26 +102,38 @@ La création du personnage suit l'ordre exact de l'interface de BG3. Chaque éta
 
 ### Étape 2 — Race
 
-**Recommandé : Zariel Tiefling**
+**Recommandé : Demi-Orc**
 
-Le Zariel Tiefling apporte le modificateur de Charisme directement utilisé pour les attaques de <Tooltip id="pacte-lame" term="Pacte de la Lame" client:load />, une résistance aux dégâts de feu et des sorts innés utiles tout au long de la progression.
+Le Demi-Orc est le choix racial optimal pour le Lockadin en Patch 8, et ce pour des raisons mathématiquement démontrables. Ses deux traits raciaux créent une synergie directe avec les mécaniques centrales du build.
 
 | Trait racial | Effet |
 |---|---|
-| Sombre Bénédiction | +1 Charisme (CHA) — renforce attaques, auras et sorts DC |
-| Résistance au feu | Réduit de moitié les dégâts de feu — précieux en Acte 2 |
-| Thaumaturgie | Sort mineur gratuit (utile en roleplay et en exploration) |
-| Feux Follets (niv. 3) | Illumine une zone — désavantage aux attaques ennemies cachées |
-| Ténèbres (niv. 5) | Zone d'obscurité — contrôle tactique avancé |
+| **Endurance Implacable** | 1×/repos long : si une attaque devait vous tuer, vous tombez à 1 PV à la place |
+| **Brutalité du Critique** | Sur un coup critique, lancez 1 dé d'arme supplémentaire |
 
-Le Charisme est la **statistique principale du Lockadin** : il gouverne les jets d'attaque au corps à corps (via <Tooltip id="pacte-lame" term="Pacte de la Lame" client:load />), les dégâts bonus (Aura de Haine), et tous les sorts DC. Chaque point de CHA compte.
+**Pourquoi Brutalité du Critique est décisif :** le <Tooltip id="chatiment-divin" term="Châtiment Divin" client:load /> double tous ses dés sur un critique. Avec Brutalité du Critique, ce dé supplémentaire est lui aussi doublé. Sur un Smite de Niveau 3 critique :
+
+| Composant | Dés normaux | Dés sur critique (Demi-Orc) |
+|---|---|---|
+| Arme (ex. longsword) | 1d8 | 2d8 |
+| Châtiment Divin Niv.3 | 4d8 | 8d8 |
+| Brutalité du Critique | +1d8 | **+2d8** |
+| **Total (moy.)** | **~27** | **~58** |
+
+Un seul coup critique avec Smite Niv.3 inflige en moyenne **58 dégâts** — presque le double d'un critique sans Brutalité. C'est ce qui permet de one-shot la quasi-totalité des mini-boss.
+
+**Pourquoi les stats de race importent peu :** le Demi-Orc donne +2 FOR et +1 CON — des statistiques que vous n'utilisez pas directement, puisque vous couvrez la Force via les Élixirs de Géant du Feu (FOR 25). Mais dans BG3 (Patch 8), vous placez librement votre +2 et votre +1 sur les caractéristiques de votre choix. Placez votre **+2 sur le Charisme** et votre **+1 sur la Constitution** — vous obtenez CHA 18 dès la création sans perdre aucune des racial features.
+
+**Endurance Implacable** est le second pilier : en Mode Honneur, une seule mort signifie la fin de la partie. Ce filet de sécurité absolu vous sauve d'un one-shot imprévu — notamment des Actions Légendaires de boss qui peuvent dépasser 80 dégâts en un seul coup.
 
 <details>
 <summary>Voir les alternatives →</summary>
 
-**Drow** : vision supérieure dans le noir, sorts innés Lueurs Féeriques et <Tooltip id="tenebres" term="Ténèbres" client:load />. Bonne synergie tactique mais pas de bonus offensif direct sur le CHA.
+**Zariel Tiefling** : +1 CHA via Sombre Bénédiction si vous placez votre bonus racial sur le CHA, résistance au feu, et sorts innés (Feux Follets, Ténèbres) utiles tactiquement. Solide, mais l'absence de Brutalité du Critique et d'Endurance Implacable en fait un choix inférieur au Demi-Orc pour le Mode Honneur. À considérer si vous préférez le roleplay Tiefling.
 
-**Demi-Elfe** : Pas Brumeux gratuit (mobilité en armure lourde), Connaissance Astrale applicable au CHA pour les dialogues. Absence de vision dans le noir — handicap notable en Acte 2.
+**Drow** : vision supérieure dans le noir, sorts innés Lueurs Féeriques et <Tooltip id="tenebres" term="Ténèbres" client:load />. Bonne synergie tactique mais aucun apport offensif sur les dégâts de critique. Pas de filet de sécurité en Mode Honneur.
+
+**Demi-Elfe** : Pas Brumeux gratuit (mobilité en armure lourde), Connaissance Astrale applicable au CHA pour les dialogues. Absence de vision dans le noir — handicap notable en Acte 2. Sans Brutalité du Critique, vous perdez le principal avantage offensif du Demi-Orc.
 
 **Githyanki** : +2 INT inutile pour ce build, mais accès aux Armures Moyennes dès le départ et à Sauter Psionique (mobilité). À réserver aux joueurs expérimentés voulant varier.
 
@@ -135,16 +147,16 @@ Le Charisme est la **statistique principale du Lockadin** : il gouverne les jets
 
 ### Étape 3 — Sous-race
 
-**Zariel Tiefling** — il n'y a pas d'autre sous-race à considérer dans ce build.
+**Demi-Orc** — pas de sous-race à choisir. Le Demi-Orc est une race unique sans variante.
 
-La sous-race Zariel est la seule variante de Tiefling qui confère le bonus de Charisme (Sombre Bénédiction +1 CHA) combiné aux sorts innés offensifs (Feux Follets, <Tooltip id="tenebres" term="Ténèbres" client:load />). Les autres sous-races Tiefling (Asmodée, Mephistophélès) orientent sur l'Intelligence, inutile ici.
+Vous obtenez directement les deux traits raciaux décisifs sans aucune étape supplémentaire.
 
-| Bonus Zariel Tiefling | Détail |
+| Trait Demi-Orc | Détail |
 |---|---|
-| Sombre Bénédiction | +1 CHA permanent |
-| Résistance au feu | Dégâts feu ÷ 2 |
-| Feux Follets (sort inné) | Disponible dès le niveau 3 de personnage |
-| Ténèbres (sort inné) | Disponible dès le niveau 5 de personnage |
+| Endurance Implacable | 1×/repos long — survie à 0 PV, passage à 1 PV |
+| Brutalité du Critique | +1 dé d'arme supplémentaire sur un critique (doublé par Divine Smite) |
+
+> Si vous avez choisi le Zariel Tiefling comme alternative, sélectionnez la sous-race **Zariel** et non Asmodée ou Mephistophélès — seul Zariel accorde le bonus CHA (Sombre Bénédiction +1 CHA) combiné aux sorts innés offensifs utiles (Feux Follets, Ténèbres).
 
 </section>
 
@@ -224,7 +236,7 @@ Le Charisme est la priorité absolue — il gouverne les attaques (<Tooltip id="
 | Sagesse (WIS) | 10 | +0 |
 | Charisme (CHA) | 16 | +3 |
 
-> Avec Zariel Tiefling, la Sombre Bénédiction ajoute +1 CHA — vous démarrez à **CHA 17** (+3). Le Don du Niveau 4 (+2 CHA) vous amènera à **CHA 19**, puis le Don du Niveau 9 à **CHA 20**.
+> Avec le Demi-Orc, placez votre bonus racial **+2 sur le Charisme** — vous démarrez à **CHA 18** (+4) dès la création. Le Don du Niveau 4 (+2 CHA) vous amènera directement à **CHA 20** — le cap ultime atteint dès le Niveau 4, sans attendre le Niveau 9. Votre +1 racial va sur la Constitution (→ 15, puis 16 avec Point Buy).
 
 <details>
 <summary>Voir les alternatives →</summary>
