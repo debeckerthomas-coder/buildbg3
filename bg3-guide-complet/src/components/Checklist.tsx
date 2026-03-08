@@ -92,10 +92,16 @@ export default function Checklist({
   const toggle = useCallback((id: string) => {
     setChecked(prev => {
       const next = { ...prev, [id]: !prev[id] };
-      save(next);
+      // save via effet secondaire hors du setter pour éviter double setChecked
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(next));
+        window.dispatchEvent(new Event('bg3:progress-updated'));
+      } catch {
+        // silencieux
+      }
       return next;
     });
-  }, [save]);
+  }, [storageKey]);
 
   // ── Tout cocher / décocher ────────────────────────────────────
   const toggleAll = useCallback((value: boolean) => {
@@ -119,7 +125,7 @@ export default function Checklist({
           <div key={i} className="flex items-center gap-3 py-2">
             <div className="w-4 h-4 rounded bg-white/5 animate-pulse shrink-0" />
             <div className="h-3 bg-white/5 rounded animate-pulse"
-                 style={{ width: `${60 + Math.random() * 30}%` }} />
+                 style={{ width: `${60 + (i * 7) % 30}%` }} />
           </div>
         ))}
       </div>
