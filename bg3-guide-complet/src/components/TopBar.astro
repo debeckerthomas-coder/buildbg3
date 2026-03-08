@@ -36,7 +36,7 @@ const navItems = [
   class="fixed top-0 left-0 right-0 z-50 h-14 flex items-center
          bg-bg-deep/90 backdrop-blur-md
          border-b border-gold/10"
-  style="box-shadow: 0 1px 24px rgba(0,0,0,0.6), 0 1px 0 rgba(212,168,87,0.08);"
+  style="box-shadow: 0 2px 32px rgba(0,0,0,0.7), 0 1px 0 rgba(212,168,87,0.10);"
 >
   <!-- Filet or décoratif en haut -->
   <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
@@ -78,10 +78,10 @@ const navItems = [
           <a
             href={item.href}
             class:list={[
-              'flex items-center gap-2 px-3 py-1.5 rounded font-ui text-sm transition-all duration-150',
+              'flex items-center gap-2 px-3 py-1.5 rounded font-ui text-sm transition-all duration-200',
               isActive
                 ? 'bg-gold/15 text-gold-light border border-gold/30'
-                : 'text-text-secondary border border-transparent hover:text-text-primary hover:bg-gold/8 hover:border-gold/15',
+                : 'text-text-secondary border border-transparent hover:text-text-primary hover:bg-gold/[0.08] hover:border-gold/[0.15]',
             ]}
             aria-current={isActive ? 'page' : undefined}
           >

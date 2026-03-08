@@ -86,20 +86,21 @@ const displayTitle = title ?? c.defaultTitle;
 
 <div
   class:list={[
-    'callout-block rounded-lg border-l-[3px] px-4 py-3 my-4',
+    'callout-block rounded-lg border-l-4 px-4 py-3.5 my-5',
     'not-prose',            // sort du mode prose Tailwind pour ce bloc
     c.border, c.bg,
     extraClass,
   ]}
+  style="border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid; border-right-color: transparent; border-top-color: transparent; border-bottom-color: transparent;"
 >
   <!-- Titre avec icône -->
-  <div class:list={['flex items-center gap-2 mb-1.5', c.iconColor]}>
+  <div class:list={['flex items-center gap-2 mb-2', c.iconColor]}>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-         class="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+         class="w-4 h-4 shrink-0" aria-hidden="true">
       <Fragment set:html={c.icon} />
     </svg>
-    <span class="font-ui text-xs font-semibold uppercase tracking-wide">
+    <span class="font-ui text-xs font-bold uppercase tracking-wider">
       {displayTitle}
     </span>
   </div>
@@ -110,9 +111,10 @@ const displayTitle = title ?? c.defaultTitle;
     c.textColor,
     '[&_strong]:font-bold [&_strong]:text-inherit',
     '[&_em]:italic',
-    '[&_code]:font-mono [&_code]:text-xs [&_code]:bg-white/5 [&_code]:px-1 [&_code]:rounded',
-    '[&_a]:underline [&_a]:decoration-current',
-    '[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-0.5',
+    '[&_p]:mb-1.5 [&_p:last-child]:mb-0',
+    '[&_code]:font-mono [&_code]:text-xs [&_code]:bg-white/8 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded',
+    '[&_a]:underline [&_a]:decoration-current [&_a]:underline-offset-2',
+    '[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ul]:mt-1',
     '[&_li]:leading-snug',
   ]}>
     <slot />

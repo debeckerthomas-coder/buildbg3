@@ -66,12 +66,12 @@ const crownIcon = `<path d="m2 4 3 12h14l3-12-6 5-4-5-4 5-6-5zm3 16h14"/>`;
 
 <div
   class:list={[
-    'loot-item relative flex items-start gap-3 py-2.5 px-2 -mx-2 rounded-lg border transition-all duration-200',
-    'hover:border-white/10',
+    'loot-item relative flex items-start gap-3 py-3 px-3 rounded-lg border transition-all duration-200',
+    'hover:shadow-[0_2px_16px_rgba(0,0,0,0.4)]',
     optional && 'opacity-60',
     rc.shimmer && 'legendary-item',
   ]}
-  style={`border-color: ${rc.borderColor}; background: ${rc.bgColor};`}
+  style={`border-color: ${rc.borderColor}; background: ${rc.bgColor === 'transparent' ? 'rgba(12,14,22,0.5)' : rc.bgColor}; transition: border-color 0.2s ease, box-shadow 0.2s ease;`}
 >
   <!-- Shimmer overlay pour les items légendaires -->
   {rc.shimmer && (
@@ -210,6 +210,10 @@ const crownIcon = `<path d="m2 4 3 12h14l3-12-6 5-4-5-4 5-6-5zm3 16h14"/>`;
 </div>
 
 <style>
+  .loot-item:hover {
+    transform: translateY(-1px);
+  }
+
   .legendary-shimmer {
     animation: legendary-sweep 3s ease-in-out infinite;
   }

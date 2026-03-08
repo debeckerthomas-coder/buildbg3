@@ -21,7 +21,7 @@ const arrowRight = `<polyline points="9 18 15 12 9 6"/>`;
 
 {(prev || next) && (
   <nav
-    class="flex items-center justify-between gap-4 mt-12 pt-6
+    class="flex items-center justify-between gap-3 mt-12 pt-6
            border-t border-gold/15"
     aria-label="Navigation entre les pages"
   >
@@ -30,23 +30,24 @@ const arrowRight = `<polyline points="9 18 15 12 9 6"/>`;
       <a
         href={prev.href}
         class="group flex items-center gap-3 px-4 py-3 rounded-lg flex-1
-               border border-gold/15 hover:border-gold/35
+               border border-gold/[0.15] hover:border-gold/40
                bg-bg-raised/50 hover:bg-bg-surface
-               transition-all duration-200 max-w-[48%]"
+               transition-all duration-200 max-w-[48%]
+               hover:shadow-[0_0_16px_rgba(212,168,87,0.06)]"
         rel="prev"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="w-4 h-4 text-gold/50 group-hover:text-gold shrink-0 transition-colors"
+             class="w-4 h-4 text-gold/40 group-hover:text-gold shrink-0 transition-colors duration-200"
              aria-hidden="true">
           <Fragment set:html={arrowLeft} />
         </svg>
-        <div class="overflow-hidden">
+        <div class="overflow-hidden min-w-0">
           <div class="font-ui text-[10px] uppercase tracking-widest text-text-muted mb-0.5">
             Précédent
           </div>
-          <div class="font-ui text-sm text-text-secondary group-hover:text-text-primary
-                      truncate transition-colors">
+          <div class="font-ui text-sm text-text-secondary group-hover:text-gold-light
+                      truncate transition-colors duration-200 leading-snug">
             {prev.shortLabel ?? prev.label}
           </div>
         </div>
@@ -60,23 +61,24 @@ const arrowRight = `<polyline points="9 18 15 12 9 6"/>`;
       <a
         href={next.href}
         class="group flex items-center gap-3 px-4 py-3 rounded-lg flex-1
-               border border-gold/15 hover:border-gold/35
+               border border-gold/[0.15] hover:border-gold/40
                bg-bg-raised/50 hover:bg-bg-surface
-               transition-all duration-200 max-w-[48%] text-right ml-auto"
+               transition-all duration-200 max-w-[48%] text-right ml-auto
+               hover:shadow-[0_0_16px_rgba(212,168,87,0.06)]"
         rel="next"
       >
-        <div class="overflow-hidden flex-1">
+        <div class="overflow-hidden flex-1 min-w-0">
           <div class="font-ui text-[10px] uppercase tracking-widest text-text-muted mb-0.5">
             Suivant
           </div>
-          <div class="font-ui text-sm text-text-secondary group-hover:text-text-primary
-                      truncate transition-colors">
+          <div class="font-ui text-sm text-text-secondary group-hover:text-gold-light
+                      truncate transition-colors duration-200 leading-snug">
             {next.shortLabel ?? next.label}
           </div>
         </div>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="w-4 h-4 text-gold/50 group-hover:text-gold shrink-0 transition-colors"
+             class="w-4 h-4 text-gold/40 group-hover:text-gold shrink-0 transition-colors duration-200"
              aria-hidden="true">
           <Fragment set:html={arrowRight} />
         </svg>

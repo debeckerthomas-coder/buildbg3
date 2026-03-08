@@ -293,4 +293,54 @@
   .reveal.visible {
     @apply opacity-100 translate-y-0;
   }
+
+  /* Truncation forcée sur les longs labels sidebar */
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ── Media Queries Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Tableaux : forcer le scroll horizontal sur mobile */
+  .table-bg3 {
+    font-size: 0.75rem;
+  }
+
+  /* PageNav : labels tronqués proprement sur mobile */
+  .page-nav-label {
+    max-width: 10rem;
+  }
+
+  /* CalloutBlock : padding réduit sur mobile */
+  .callout-block {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+
+  /* Zone header : hauteur minimale réduite sur mobile */
+  .zone-header {
+    min-height: 110px !important;
+  }
+
+  /* LootItem : marges ajustées sur mobile */
+  .loot-item {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Très petits écrans : réduire le padding de la topbar */
+  #topbar .font-display {
+    font-size: 0.6875rem;
+  }
+
+  /* BossFiche : badge de type sur mobile */
+  .boss-fiche .flex-wrap {
+    gap: 0.25rem;
+  }
 }
