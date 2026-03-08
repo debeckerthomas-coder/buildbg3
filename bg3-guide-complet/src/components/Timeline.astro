@@ -106,12 +106,12 @@ const defaultColor = { dot: '#d4a857', text: '#fde68a', bg: 'rgba(212,168,87,0.0
             <div
               class:list={[
                 'flex-1 ml-4 px-3 py-2 rounded-lg border transition-all duration-200',
-                'group-hover:border-white/15',
+                'group-hover:border-white/[0.15] group-hover:shadow-[0_1px_8px_rgba(0,0,0,0.3)]',
                 isPoNR
                   ? 'border-danger/20 bg-danger/5'
                   : isMilestone
-                    ? 'border-gold/20 bg-gold/5'
-                    : 'border-white/5 bg-white/2',
+                    ? 'border-gold/20 bg-gold/[0.05]'
+                    : 'border-white/[0.05]',
               ]}
               style={!isPoNR && !isMilestone ? `background: ${colors.bg};` : ''}
             >

@@ -24,7 +24,7 @@ import StatRow from '../../components/StatRow.astro';
 
 </Encart>
 
-<Encart type="danger" title="Erreurs fatales — Top 6" slot="encarts">
+<Encart type="danger" title="Erreurs fatales — Top 10" slot="encarts">
 
 <StatBlock compact>
   <StatRow label="1. Pack de 4"            value="Boule de Feu → wipe"       danger note="→ 4-6m d'espacement" />
@@ -33,6 +33,10 @@ import StatRow from '../../components/StatRow.astro';
   <StatRow label="4. Dos au vide"          value="Poussée = mort"            danger note="→ Dos au mur plein" />
   <StatRow label="5. Usure Myrkul"         value="Bone Chill bloque soins"   danger note="→ Alpha Strike tour 1-3" />
   <StatRow label="6. Concentration perdue" value="Hâte tombe → ralenti"      danger note="→ Potions jetées" />
+  <StatRow label="7. Pacte non lié"        value="Attaque à la FOR"          danger note="→ Vérifier après Repos Long" />
+  <StatRow label="8. Isobel négligée"      value="Auberge perdue"            danger note="→ Préparer avant dialogue" />
+  <StatRow label="9. Pod trop tôt"         value="Usage unique gaspillé"     danger note="→ Après exploration Colonie" />
+  <StatRow label="10. Radiant vs Raphaël"  value="Cambions reflètent × 2"   danger note="→ Désactiver Châtiment Divin" />
 </StatBlock>
 
 </Encart>
@@ -51,6 +55,46 @@ import StatRow from '../../components/StatRow.astro';
 - Consommez une larve pour débloquer "Chance des Royaumes Lointains" — compense largement
 
 </Encart>
+
+<section id="faq-patch8">
+
+## 9.0 — FAQ Patch 8 — Nouveautés & Sous-classes
+
+**Quelles nouvelles sous-classes le Patch 8 apporte-t-il ?**
+
+Le Patch 8 (2025) est l'une des mises à jour les plus importantes depuis la sortie officielle. Il ajoute **12 nouvelles sous-classes** dont plusieurs impactent directement les builds autour du Lockadin :
+
+| Classe | Nouvelle sous-classe Patch 8 | Impact pour le Lockadin / équipe |
+|---|---|---|
+| **Paladin** | Paladin Briseur de Serment (déjà présent — amélioré) | Aucun changement majeur sur le multiclasse Pal7/Occ5 |
+| **Roublard** | Malfaiteur (Arcane Trickster amélioré) | Astarion — alternative mineure à Assassin |
+| **Magicien** | Abjuration (renforcée) | Gale peut tanker les Contresorts plus facilement |
+| **Clerc** | Domaine de la Forge | Sombrecœur alternatif avec armure intégrée |
+| **Barde** | Collège de la Bravoure (rééquilibré) | Option pour Minthara |
+| **Druide** | Cercle des Étoiles | Halsin avec tirs radiants |
+| **Ensorceleur** | Draconic Bloodline révisé | Wyll Sorlock légèrement amélioré |
+
+<CalloutBlock type="tip" title="Patch 8 — Ce qui change (et ne change pas) pour le build Lockadin">
+Le build **Paladin Parjure 7 / Occultiste 5** n'est **pas affecté** par le Patch 8. Aucune nerf n'a touché les synergies Smite + Pacte de la Lame, ni les auras. Les améliorations de Patch 8 bénéficient surtout aux **compagnons** : Gale peut prendre de nouvelles options de sous-classe, et Sombrecœur a accès à davantage de sous-classes de Clerc viables. Le build de base reste S-Tier.
+</CalloutBlock>
+
+**Les nouvelles sous-classes du Patch 8 sont-elles accessibles via respec ?**
+
+Oui. Flétrissure permet de respécialiser n'importe quel personnage, y compris les compagnons, pour accéder à toutes les sous-classes du Patch 8 dès leur niveau de déverrouillage habituel. Aucun DLC supplémentaire n'est requis — ces sous-classes sont incluses dans la mise à jour gratuite.
+
+**Puis-je jouer ce build en Tactician avant de tenter le Mode Honneur ?**
+
+**Absolument recommandé.** Le Mode Honneur est un format où une seule Hécatombe (mort de toute l'équipe) supprime définitivement la sauvegarde. Avant de s'y lancer, il est fortement conseillé de :
+
+1. **Faire au moins une run complète en Tactician** — pour mémoriser les mécaniques des boss (Légendaires, positionnement, timing des Légendaires), les points de non-retour, et l'ordre optimal des zones.
+2. **Tester les combats critiques** : Grym, Ketheric, Myrkul, Gortash, Raphaël, Ansur, Netherbrain. Chacun a une mécanique qui tue sur incompréhension.
+3. **Rodez la routine de Camp Casting** (Aide + Festin des Héros + Lien de Protection) jusqu'à ce qu'elle devienne automatique.
+
+Le Tactician en Mode Honneur est presque identique en termes de difficulté des combats — la seule différence est l'absence de save-scum. Une run Tactician préalable divise par deux le risque de wipe sur votre première tentative Honneur.
+
+</section>
+
+---
 
 <section id="faq-build">
 
@@ -86,6 +130,26 @@ Selon votre Serment de départ :
 - **Vengeance :** Épargner un grand méchant, ou s'allier avec les forces du mal (ex: pactiser avec Gortash).
 - **Dévotion :** Mentir, trahir, attaquer des innocents, ou attaquer dans le dos sans provocation.
 - **Anciens :** Détruire la nature, tuer des animaux non hostiles (ex: l'Ours-hibou mère).
+
+**Quand briser mon Serment — le timing optimal ?**
+
+Le timing idéal pour briser votre serment dépend de votre style de jeu et du Serment choisi :
+
+| Timing | Avantages | Inconvénients |
+|---|---|---|
+| **Prologue / Acte 1 Début** | Aura de Haine active très tôt (+CHA dégâts dès Niv.7) | Perte de certaines quêtes de Paladin pur, dialogue limité |
+| **Avant le Niv.7 (recommandé)** | Vous respécialisez directement en Parjure au moment de l'Aura | Aucun — c'est le timing parfait |
+| **Acte 2 (trop tard)** | Plus de roleplay "tentation" | L'Aura de Haine était déjà active si vous avez joué Parjure dès Niv.7 |
+
+<CalloutBlock type="tip" title="Timing recommandé : briser le Serment avant d'atteindre le Niveau 7">
+Pour ce build, le meilleur moment est de briser le Serment **juste avant d'atteindre le Niveau 7** (fin d'Acte 1 / début de l'Outreterre). Ainsi, lorsque vous montez au Niv.7, vous choisissez directement la sous-classe **Parjure (Oathbreaker)** et obtenez l'**Aura de Haine** immédiatement — sans jamais avoir joué plusieurs niveaux en Paladin pur post-serment brisé.
+
+**Méthode la plus propre :** Jouez en Paladin de Dévotion jusqu'au Niveau 6. Avant de récupérer le dernier XP qui vous fait monter au Niv.7, commettez l'acte briseur de serment (ex : tuer un civil non hostile, pactiser avec Gut). Le Chevalier Parjure apparaît au prochain repos. Faites un Repos Long → dialogue avec le Chevalier → acceptez votre nouvelle voie → montez Niv.7 en Parjure.
+</CalloutBlock>
+
+**Que faire si j'ai brisé mon Serment par accident trop tôt (avant Niv.7) ?**
+
+Pas de panique. Votre Paladin devient automatiquement Parjure au prochain repos long, quelle que soit votre progression. Vous perdrez simplement l'accès à certains sorts de Paladin pur le temps d'atteindre le Niv.7 et de choisir la sous-classe Parjure. Les capacités du Parjure (Ondulation Mortelle, Lever Mort) compensent largement — et l'Aura de Haine vous attend au Niv.7.
 
 **L'Aura de Haine n'est-elle pas dangereuse pour l'équipe ?**
 
@@ -151,6 +215,10 @@ Chaque erreur listée ici a terminé des centaines de runs en Mode Honneur.
 | **4. Dos au vide** | Vague Tonnante / flèche de recul = chute fatale | Dos au mur plein — évitez les ponts |
 | **5. Usure contre Myrkul** | Bone Chill bloque toute guérison au CàC | Alpha Strike Tour 1-3. Aveuglir au Sunbeam Tour 1 |
 | **6. Concentration perdue sur Hâte** | Le Paladin devient Ralenti (−2 attaques) | Privilégiez les Potions de Vitesse jetées (sans concentration) |
+| **7. Arme de Pacte non liée** | Attaque au CHA perdue → attaque à la FOR (inutile) | Vérifier "Lier l'arme de Pacte" après chaque Repos Long |
+| **8. Isobel négligée** | Marcus l'enlève → l'Auberge tombe → Dammon et Jaheira morts | Préparez le combat AVANT de lui parler (bloquez les accès) |
+| **9. Pod de restauration trop tôt** | Usage unique — gaspillé avant la Colonie Illithid | N'utilisez le Pod qu'après exploration complète de la Colonie |
+| **10. Châtiment Divin actif contre Raphaël** | Cambions réfléchissent Radiant × 2 en Feu → mort par vos propres dégâts | Désactivez le Châtiment Divin AVANT d'entrer dans la Maison de l'Espoir |
 
 </section>
 

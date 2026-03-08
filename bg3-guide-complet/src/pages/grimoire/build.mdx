@@ -87,7 +87,8 @@ La création du personnage suit l'ordre exact de l'interface de BG3. Chaque éta
 
 **Recommandé : Personnage personnalisé** (Custom Origin) — cette option vous laisse choisir librement votre race et votre historique, ce qui est indispensable pour optimiser le Lockadin.
 
-<details><summary>Voir les alternatives →</summary>
+<details>
+<summary>Voir les alternatives →</summary>
 
 **Dark Urge** : bénéficie d'un anneau exclusif en début d'Acte 1 (Anneau de la Bien-aimée du Tueur, qui force les critiques) et d'un arc narratif riche. Si vous connaissez déjà le jeu, c'est la seconde meilleure option. Vous perdez cependant la liberté de choix de race si vous voulez garder la cohérence roleplay.
 
@@ -101,25 +102,38 @@ La création du personnage suit l'ordre exact de l'interface de BG3. Chaque éta
 
 ### Étape 2 — Race
 
-**Recommandé : Zariel Tiefling**
+**Recommandé : Demi-Orc**
 
-Le Zariel Tiefling apporte le modificateur de Charisme directement utilisé pour les attaques de <Tooltip id="pacte-lame" term="Pacte de la Lame" client:load />, une résistance aux dégâts de feu et des sorts innés utiles tout au long de la progression.
+Le Demi-Orc est le choix racial optimal pour le Lockadin en Patch 8, et ce pour des raisons mathématiquement démontrables. Ses deux traits raciaux créent une synergie directe avec les mécaniques centrales du build.
 
 | Trait racial | Effet |
 |---|---|
-| Sombre Bénédiction | +1 Charisme (CHA) — renforce attaques, auras et sorts DC |
-| Résistance au feu | Réduit de moitié les dégâts de feu — précieux en Acte 2 |
-| Thaumaturgie | Sort mineur gratuit (utile en roleplay et en exploration) |
-| Feux Follets (niv. 3) | Illumine une zone — désavantage aux attaques ennemies cachées |
-| Ténèbres (niv. 5) | Zone d'obscurité — contrôle tactique avancé |
+| **Endurance Implacable** | 1×/repos long : si une attaque devait vous tuer, vous tombez à 1 PV à la place |
+| **Brutalité du Critique** | Sur un coup critique, lancez 1 dé d'arme supplémentaire |
 
-Le Charisme est la **statistique principale du Lockadin** : il gouverne les jets d'attaque au corps à corps (via <Tooltip id="pacte-lame" term="Pacte de la Lame" client:load />), les dégâts bonus (Aura de Haine), et tous les sorts DC. Chaque point de CHA compte.
+**Pourquoi Brutalité du Critique est décisif :** le <Tooltip id="chatiment-divin" term="Châtiment Divin" client:load /> double tous ses dés sur un critique. Avec Brutalité du Critique, ce dé supplémentaire est lui aussi doublé. Sur un Smite de Niveau 3 critique :
 
-<details><summary>Voir les alternatives →</summary>
+| Composant | Dés normaux | Dés sur critique (Demi-Orc) |
+|---|---|---|
+| Arme (ex. longsword) | 1d8 | 2d8 |
+| Châtiment Divin Niv.3 | 4d8 | 8d8 |
+| Brutalité du Critique | +1d8 | **+2d8** |
+| **Total (moy.)** | **~27** | **~58** |
 
-**Drow** : vision supérieure dans le noir, sorts innés Lueurs Féeriques et <Tooltip id="tenebres" term="Ténèbres" client:load />. Bonne synergie tactique mais pas de bonus offensif direct sur le CHA.
+Un seul coup critique avec Smite Niv.3 inflige en moyenne **58 dégâts** — presque le double d'un critique sans Brutalité. C'est ce qui permet de one-shot la quasi-totalité des mini-boss.
 
-**Demi-Elfe** : Pas Brumeux gratuit (mobilité en armure lourde), Connaissance Astrale applicable au CHA pour les dialogues. Absence de vision dans le noir — handicap notable en Acte 2.
+**Pourquoi les stats de race importent peu :** le Demi-Orc donne +2 FOR et +1 CON — des statistiques que vous n'utilisez pas directement, puisque vous couvrez la Force via les Élixirs de Géant du Feu (FOR 25). Mais dans BG3 (Patch 8), vous placez librement votre +2 et votre +1 sur les caractéristiques de votre choix. Placez votre **+2 sur le Charisme** et votre **+1 sur la Constitution** — vous obtenez CHA 18 dès la création sans perdre aucune des racial features.
+
+**Endurance Implacable** est le second pilier : en Mode Honneur, une seule mort signifie la fin de la partie. Ce filet de sécurité absolu vous sauve d'un one-shot imprévu — notamment des Actions Légendaires de boss qui peuvent dépasser 80 dégâts en un seul coup.
+
+<details>
+<summary>Voir les alternatives →</summary>
+
+**Zariel Tiefling** : +1 CHA via Sombre Bénédiction si vous placez votre bonus racial sur le CHA, résistance au feu, et sorts innés (Feux Follets, Ténèbres) utiles tactiquement. Solide, mais l'absence de Brutalité du Critique et d'Endurance Implacable en fait un choix inférieur au Demi-Orc pour le Mode Honneur. À considérer si vous préférez le roleplay Tiefling.
+
+**Drow** : vision supérieure dans le noir, sorts innés Lueurs Féeriques et <Tooltip id="tenebres" term="Ténèbres" client:load />. Bonne synergie tactique mais aucun apport offensif sur les dégâts de critique. Pas de filet de sécurité en Mode Honneur.
+
+**Demi-Elfe** : Pas Brumeux gratuit (mobilité en armure lourde), Connaissance Astrale applicable au CHA pour les dialogues. Absence de vision dans le noir — handicap notable en Acte 2. Sans Brutalité du Critique, vous perdez le principal avantage offensif du Demi-Orc.
 
 **Githyanki** : +2 INT inutile pour ce build, mais accès aux Armures Moyennes dès le départ et à Sauter Psionique (mobilité). À réserver aux joueurs expérimentés voulant varier.
 
@@ -133,16 +147,16 @@ Le Charisme est la **statistique principale du Lockadin** : il gouverne les jets
 
 ### Étape 3 — Sous-race
 
-**Zariel Tiefling** — il n'y a pas d'autre sous-race à considérer dans ce build.
+**Demi-Orc** — pas de sous-race à choisir. Le Demi-Orc est une race unique sans variante.
 
-La sous-race Zariel est la seule variante de Tiefling qui confère le bonus de Charisme (Sombre Bénédiction +1 CHA) combiné aux sorts innés offensifs (Feux Follets, <Tooltip id="tenebres" term="Ténèbres" client:load />). Les autres sous-races Tiefling (Asmodée, Mephistophélès) orientent sur l'Intelligence, inutile ici.
+Vous obtenez directement les deux traits raciaux décisifs sans aucune étape supplémentaire.
 
-| Bonus Zariel Tiefling | Détail |
+| Trait Demi-Orc | Détail |
 |---|---|
-| Sombre Bénédiction | +1 CHA permanent |
-| Résistance au feu | Dégâts feu ÷ 2 |
-| Feux Follets (sort inné) | Disponible dès le niveau 3 de personnage |
-| Ténèbres (sort inné) | Disponible dès le niveau 5 de personnage |
+| Endurance Implacable | 1×/repos long — survie à 0 PV, passage à 1 PV |
+| Brutalité du Critique | +1 dé d'arme supplémentaire sur un critique (doublé par Divine Smite) |
+
+> Si vous avez choisi le Zariel Tiefling comme alternative, sélectionnez la sous-race **Zariel** et non Asmodée ou Mephistophélès — seul Zariel accorde le bonus CHA (Sombre Bénédiction +1 CHA) combiné aux sorts innés offensifs utiles (Feux Follets, Ténèbres).
 
 </section>
 
@@ -165,12 +179,12 @@ Choisissez le Paladin comme classe de départ. Le serment initial importe peu : 
 | 1 | Paladin 1 | Armure lourde, Imposition des Mains |
 | 2 | Paladin 2 | **Châtiment Divin (Smite)**, Style Défense (+1 CA) |
 | 3 | Paladin 3 | Rupture du Serment → **Briseur de Serment** |
-| 4 | Paladin 4 | **Don : +2 CHA (→ 18)** |
+| 4 | Paladin 4 | **Don : +2 CHA (→ 20)** — cap ultime atteint dès maintenant |
 | 5 | Paladin 5 | **Extra Attaque** (2 frappes par tour) |
 | 6 | Paladin 6 | **Aura de Protection** (+CHA aux JS alliés) |
 | 7 | Paladin 7 | **Aura de Haine** (+CHA aux dégâts de mêlée) |
 | 8 | Pal 5 / Occ 3 | **RESPEC — Pacte de la Lame** (attaques via CHA) |
-| 9 | Pal 5 / Occ 4 | **Don : +2 CHA (→ 20)** — cap ultime |
+| 9 | Pal 5 / Occ 4 | **Don : Sentinelle ou Maître des Armes** — CHA déjà à 20 |
 | 10 | Pal 6 / Occ 4 | Aura de Protection restaurée |
 | 11 | Pal 7 / Occ 4 | Aura de Haine restaurée |
 | 12 | Pal 7 / Occ 5 | **Smites Niv. 3 sur repos court** + Contresort |
@@ -192,7 +206,8 @@ L'historique Noble accorde la maîtrise de **Histoire** et **Persuasion** — de
 | Histoire | Intelligence | Checks narratifs, dialogues érudits |
 | Persuasion | Charisme | Checks sociaux principaux — très fréquent |
 
-<details><summary>Voir les alternatives →</summary>
+<details>
+<summary>Voir les alternatives →</summary>
 
 **Acolyte** : accorde Religion + Perspicacité. Religion est une compétence INT (peu utile), mais Perspicacité (SAG) aide à détecter les mensonges. À considérer uniquement si vous prévoyez un Lockadin orienté SAG ou roleplay religieux.
 
@@ -221,9 +236,10 @@ Le Charisme est la priorité absolue — il gouverne les attaques (<Tooltip id="
 | Sagesse (WIS) | 10 | +0 |
 | Charisme (CHA) | 16 | +3 |
 
-> Avec Zariel Tiefling, la Sombre Bénédiction ajoute +1 CHA — vous démarrez à **CHA 17** (+3). Le Don du Niveau 4 (+2 CHA) vous amènera à **CHA 19**, puis le Don du Niveau 9 à **CHA 20**.
+> Avec le Demi-Orc, placez votre bonus racial **+2 sur le Charisme** — vous démarrez à **CHA 18** (+4) dès la création. Le Don du Niveau 4 (+2 CHA) vous amènera directement à **CHA 20** — le cap ultime atteint dès le Niveau 4, sans attendre le Niveau 9. Votre +1 racial va sur la Constitution (→ 15, puis 16 avec Point Buy).
 
-<details><summary>Voir les alternatives →</summary>
+<details>
+<summary>Voir les alternatives →</summary>
 
 **Variante DEX (pour un Lockadin mêlée à finesse)** : Si vous préférez jouer sans Élixirs de Force et utiliser des armes à finesse (dague, rapière), vous pouvez inverser STR et DEX :
 
@@ -261,7 +277,8 @@ Le Paladin vous permet de choisir **2 compétences** parmi sa liste. Avec l'hist
 
 > Si vous avez pris l'historique **Soldat** à la place de Noble, Intimidation est déjà acquise — prenez alors **Perspicacité** en lieu et place de Religion pour couvrir les checks de SAG.
 
-<details><summary>Voir les alternatives →</summary>
+<details>
+<summary>Voir les alternatives →</summary>
 
 **Perspicacité (Insight)** : compétence SAG utile pour détecter les mensonges en dialogue. À préférer à Religion si vous trouvez les checks religieux trop rares.
 
@@ -283,27 +300,37 @@ Le Paladin vous permet de choisir **2 compétences** parmi sa liste. Avec l'hist
 
 Dans BG3, les races ne confèrent **aucun bonus de caractéristique fixe** — vous placez votre +2 et votre +1 où vous le souhaitez. Le choix de la race repose entièrement sur les **traits raciaux**.
 
-**🥇 Demi-Orc — Recommandation Mode Honneur**
+**Demi-Orc — Seul choix optimal en Patch 8 Mode Honneur**
 
-- <Tooltip name="Attaques Sauvages" type="Passif Racial" stats="Coup critique : +1 dé d'arme supplémentaire" imageUrl="https://bg3.wiki/w/images/b/b6/Savage_Attacks_Icon.png" client:idle>Se cumule avec tous les dés de Smite sur un critique. Un critique Paladin avec Attaques Sauvages en Demi-Orc sur un Smite Niv.3 = dégâts cataclysmiques.</Tooltip> : Sur un coup critique, lancez un dé de dégât d'arme supplémentaire. Synergie parfaite avec le Châtiment Divin.
-- <Tooltip name="Endurance Implacable" type="Passif Racial" stats="1×/long repos : survivez à 0 PV avec 1 PV" imageUrl="https://bg3.wiki/w/images/0/00/Relentless_Endurance_Icon.png" client:idle>Le filet de sécurité absolu du Mode Honneur. Un coup inattendu qui vous amènerait à 0 PV vous laisse à 1 PV à la place — vous donnant une chance de vous soigner ou de fuir.</Tooltip> : Le filet de sécurité absolu du Mode Honneur. Un one-shot vous laisse à 1 PV.
-- **Verdict :** Choix OPTIMAL pour le Mode Honneur — dégâts maximum et sécurité maximum.
+Le Demi-Orc est la race objectivement supérieure pour ce build. Ses deux traits raciaux répondent précisément aux deux besoins critiques du Lockadin en Mode Honneur : **maximiser les dégâts de critique** et **survivre à l'imprévisible**.
 
-**🥈 Duergar — Alternative tactique**
+- <Tooltip name="Brutalité du Critique (Attaques Sauvages)" type="Passif Racial" stats="Coup critique : +1 dé d'arme supplémentaire (doublé sur critique)" imageUrl="https://bg3.wiki/w/images/b/b6/Savage_Attacks_Icon.png" client:idle>Ce dé supplémentaire est intégré au calcul du critique — il est donc lui aussi doublé, comme tous les autres dés. Sur un Smite Niv.3 critique, cela représente +2d8 supplémentaires par rapport à une race sans ce trait. Se cumule avec l'Anneau de la Bien-aimée du Tueur (critique forcé) pour des alpha strikes dévastateurs.</Tooltip> : Sur un coup critique, lancez 1 dé d'arme supplémentaire — et ce dé est **doublé** comme tous les dés de critique. La synergie avec Divine Smite est directe et massive.
 
-- Vision supérieure dans le noir (24m) — idéal pour l'Acte 2.
-- <Tooltip name="Invisibilité Duergar" type="Sort Racial" stats="Invisibilité sur soi-même sans emplacement de sort" imageUrl="https://bg3.wiki/w/images/e/e6/Duergar_Invisibility_Icon.png" client:idle>Disponible au niveau 5. Hors combat uniquement, mais permet d'engager chaque affrontement par surprise. Parfait pour repositionner votre groupe avant un combat difficile.</Tooltip> : Au niveau 5, invisibilité à l'infini hors combat — parfait pour engager chaque boss par surprise.
-- Vitesse de déplacement réduite (7,5m) — unique inconvénient.
-- **Verdict :** Excellent pour les joueurs tactiques qui aiment initier en furtivité.
+- <Tooltip name="Endurance Implacable" type="Passif Racial" stats="1×/long repos : survivez à 0 PV avec 1 PV" imageUrl="https://bg3.wiki/w/images/0/00/Relentless_Endurance_Icon.png" client:idle>Le filet de sécurité absolu du Mode Honneur. Un coup inattendu qui vous amènerait à 0 PV vous laisse à 1 PV à la place — vous donnant une chance de vous soigner ou de fuir. Particulièrement précieux contre les Actions Légendaires de boss qui peuvent infliger plus de 80 dégâts en une seule réaction.</Tooltip> : 1×/repos long, une attaque fatale vous laisse à 1 PV. En Mode Honneur, ce trait vaut à lui seul le choix de la race.
 
-**🥉 Demi-Elfe — Alternative polyvalente**
+**L'argument CHA ne change rien :** certains guides citent le +1 CHA du Tiefling (Zariel) comme argument. Mais avec Demi-Orc, vous placez votre **+2 racial sur le Charisme** — vous démarrez à CHA 18, soit mieux que n'importe quel Tiefling (CHA 17). Vous atteignez CHA 20 dès le Niveau 4 via un seul Don. Les traits raciaux du Demi-Orc s'ajoutent par-dessus sans aucun compromis.
 
-- Pas Brumeux gratuit : compense le manque de mobilité du Paladin en armure lourde.
-- Connaissance Astrale : appliquez-le sur le Charisme pour réussir tous vos jets de dialogue.
-- Pas de vision dans le noir — handicap notable en Acte 2.
+| Race | CHA départ | CHA Niv.4 | Brutalité critique | Filet de sécurité |
+|---|---|---|---|---|
+| **Demi-Orc** | **18** | **20** | **Oui (+2d8 sur crit)** | **Oui (1 PV)** |
+| Zariel Tiefling | 17 | 19 | Non | Non |
+| Demi-Elfe | 18 | 20 | Non | Non |
+| Duergar | 18 | 20 | Non | Invisibilité (hors combat) |
 
-<CalloutBlock type="loot" title="Recommandation finale">
-Pour assurer votre Mode Honneur, choisissez le **Demi-Orc**. Si vous êtes un joueur très tactique aimant manipuler le champ de bataille avant le combat, le **Duergar** est une alternative exceptionnelle.
+**Verdict sans appel :** le Demi-Orc offre un CHA égal ou supérieur aux alternatives ET deux traits raciaux sans équivalent pour ce build. Il n'existe aucune raison objective de choisir une autre race pour le Lockadin en Mode Honneur.
+
+---
+
+**Alternatives (si vous avez une contrainte roleplay)**
+
+**Duergar** : Vision supérieure dans le noir (24m), invisibilité hors combat au Niveau 5 — utile pour engager chaque boss par surprise. Vitesse de déplacement réduite (7,5m). Solide tactiquement, mais vous sacrifiez Brutalité du Critique et Endurance Implacable — ce qui en fait une option nettement inférieure pour le Mode Honneur.
+
+**Zariel Tiefling** : Résistance au feu, sorts innés (Feux Follets, Ténèbres), Sombre Bénédiction. Acceptable, mais démarre à CHA 17 (contre 18 pour le Demi-Orc) et n'offre aucun bonus sur les critiques ni de survivabilité dédiée. À considérer uniquement pour le roleplay ou si vous n'avez pas encore débloqué la race Demi-Orc.
+
+**Demi-Elfe** : Pas Brumeux gratuit (mobilité en armure lourde), Connaissance Astrale. CHA 18 atteignable comme le Demi-Orc, mais zéro avantage offensif sur les critiques et aucun filet de sécurité.
+
+<CalloutBlock type="loot" title="Recommandation sans compromis — Patch 8">
+Choisissez le **Demi-Orc**. Placez **+2 sur le CHA** et **+1 sur la CON**. Vous démarrez à CHA 18, atteignez CHA 20 au Niveau 4, et vos critiques avec Smite infligent en moyenne le double des dégâts d'une autre race. Endurance Implacable vous sauve d'une mort certaine 1×/repos long. Il n'y a pas de débat.
 </CalloutBlock>
 
 </section>
@@ -324,16 +351,16 @@ Fixez la Force à 10 et consommez un <Tooltip name="Élixir de Force de Géant d
 
 Jouez comme un Paladin classique avec Force élevée jusqu'au Niveau 8, puis respécialisez pour basculer en Charisme pur.
 
-| Stat | Phase 1 (Niv.1–7) | Phase 2 (après respec Niv.8+) |
-|---|---|---|
-| FOR | 10 (21 via Élixir) | 10 (21 via Élixir) |
-| DEX | 12 | 12 |
-| CON | 16 (+1 bonus) | 16 (+1 bonus) |
-| INT | 8 | 8 |
-| SAG | 10 | 10 |
-| CHA | 16 (+2 bonus) | 16 (+2 bonus → 20 via Dons) |
+| Stat | Point Buy | +Racial Demi-Orc | Phase 2 (après respec Niv.8+) |
+|---|---|---|---|
+| FOR | 8 | 8 (25 via Élixir Géant du Feu) | 8 (25 via Élixir Géant du Feu) |
+| DEX | 10 | 10 | 10 |
+| CON | 14 | **15** (+1 racial) | 15 |
+| INT | 8 | 8 | 8 |
+| SAG | 10 | 10 | 10 |
+| CHA | 16 | **18** (+2 racial) | **20** (Don Niv.4 +2) |
 
-**Priorité absolue : Charisme.** Votre +2 de race va sur le **Charisme (→ 16)**, votre +1 sur la **Constitution (→ 16 base + bonus)**. Toute la mécanique du build — attaque, dégâts, auras, sorts DC — repose sur le Charisme.
+**Priorité absolue : Charisme.** Votre +2 racial (Demi-Orc) va sur le **Charisme (→ 18)**, votre +1 racial sur la **Constitution**. Avec CHA 18 dès la création, un seul Don au Niveau 4 suffit pour atteindre CHA 20 — le cap ultime. Toute la mécanique du build — attaque, dégâts, auras, sorts DC — repose sur le Charisme.
 
 </section>
 
@@ -367,12 +394,12 @@ Ne commencez **pas** votre multiclassage Occultiste niveau par niveau après le 
 | 1 | Paladin 1 | Armure lourde, Imposition des mains | — |
 | 2 | Paladin 2 | **Châtiment Divin (Smite)**, Style Défense (+1 CA bouclier) | ⭐ |
 | 3 | Paladin 3 | Rupture du Serment → **Briseur de Serment** | — |
-| 4 | Paladin 4 | **Don : +2 Charisme (→ 18)** | ⭐ |
+| 4 | Paladin 4 | **Don : +2 Charisme (→ 20)** — cap ultime dès maintenant (Demi-Orc CHA 18) | ⭐⭐ |
 | 5 | Paladin 5 | **Extra Attaque** (2 frappes / tour) | ⭐⭐ |
 | 6 | Paladin 6 | **Aura de Protection** (+CHA à tous les JS alliés) | ⭐⭐⭐ |
 | 7 | Paladin 7 | **Aura de Haine** (+CHA aux dégâts de mêlée) | ⭐⭐ |
 | **8** | **Pal 5 / Occ 3** | **⭐ RESPEC : Pacte de la Lame** — fin des Élixirs FOR | ⭐⭐⭐ |
-| 9 | Pal 5 / Occ 4 | **Don : +2 Charisme (→ 20)** — le cap ultime | ⭐⭐ |
+| 9 | Pal 5 / Occ 4 | **Don : Sentinelle ou Maître des Armes** — CHA déjà à 20 | ⭐⭐ |
 | 10 | Pal 6 / Occ 4 | Aura de Protection restaurée | ⭐⭐ |
 | 11 | Pal 7 / Occ 4 | Aura de Haine restaurée | ⭐ |
 | 12 | Pal 7 / Occ 5 | **Smites Niv.3 sur repos court**, Contresort | ⭐⭐⭐ |
@@ -500,12 +527,12 @@ Vous pouvez enfin **lier votre arme**. Vos attaques de mêlée utilisent désorm
 
 ## 1.10 — Dons (Feats)
 
-Vous n'obtenez que **2 Dons** dans ce build. Le Charisme est si vital qu'il ne laisse pas de place à la créativité en Mode Honneur.
+Vous obtenez **2 Dons** dans ce build. Grâce au Demi-Orc (CHA 18 au départ), le premier Don suffit à atteindre CHA 20 — votre second Don est entièrement libre pour une utilisation offensive.
 
-- **Don 1 (Paladin 4) :** +2 Charisme (→ 18).
-- **Don 2 (Occultiste 4 / Niveau global 11) :** +2 Charisme (→ 20).
+- **Don 1 (Paladin 4) :** +2 Charisme (16 → **18** Point Buy + **2** racial = **18**, +2 Don → **20**). Cap ultime atteint au Niveau 4.
+- **Don 2 (Occultiste 4 / Niveau global 11) :** <Tooltip name="Sentinelle" type="Don" stats="Attaque d'opportunité même si l'ennemi se désengage · Réduit sa vitesse à 0" imageUrl="https://bg3.wiki/w/images/5/56/Sentinel_Icon.png" client:idle>Bloque les ennemis qui tentent de passer devant vous pour attaquer vos alliés plus fragiles. Excellent en tandem avec la Souffrance Malveillante (Avantage sur la cible marquée).</Tooltip> **Sentinelle** (contrôle de zone) ou **Maître des Armes de Guerre** (attaque bonus avec une arme de guerre à 1 main). Choix selon votre style de jeu.
 
-**Astuce Endgame :** Si vous atteignez 20 de Charisme grâce aux Cheveux d'Ethel (+1) et au Miroir de la Perte (+2), vous pouvez remplacer le second Don par <Tooltip name="Sentinelle" type="Don" stats="Attaque d'opportunité même si l'ennemi se désengage · Réduit sa vitesse à 0" imageUrl="https://bg3.wiki/w/images/5/56/Sentinel_Icon.png" client:idle>Bloque les ennemis qui tentent de passer devant vous pour attaquer vos alliés plus fragiles. Excellent en tandem avec la Souffrance Malveillante (Avantage sur la cible marquée).</Tooltip> ou Maître des Armes de guerre (Armes de guerre en attaque bonus).
+**Avantage décisif du Demi-Orc :** avec Zariel Tiefling (CHA 17 au départ), il fallait deux Dons pour atteindre CHA 20 — vous n'aviez aucun Don offensif. Avec le Demi-Orc, votre second Don est toujours disponible pour Sentinelle ou Maître des Armes. C'est un gain substantiel sur toute la durée de l'Acte 2 et de l'Acte 3.
 
 </section>
 
@@ -526,22 +553,88 @@ Pendant les 7 premiers niveaux, vous jouez un **Paladin pur**. Vous commencez av
 
 ---
 
+<section id="math-degats">
+
+## 1.12 — Mathématiques des Dégâts — Pourquoi Ça Marche
+
+Comprendre les chiffres derrière le build est la clé pour jouer sans hésiter.
+
+### Dégâts par attaque — Progression Milestones
+
+| Niveau | Situation | Dégâts par frappe (moy.) | Total Tour |
+|--------|-----------|--------------------------|-----------|
+| **Pal 2** | Smite Niv.1 + arme | 1d6+2 + 2d8 ≈ **16** | 16 (1 attaque) |
+| **Pal 5** | Extra Attaque + Sang de Lathandre | 1d8+4 + 1d6 ≈ **15** × 2 = **30** | 30 (sans Smite) |
+| **Pal 5** | + Smite Niv.2 × 2 | +3d8 ≈ 13 par attaque | **56** (avec Smites) |
+| **Pal 7 / Occ 3** | + Aura de Haine (CHA 18 → +4) | +4 par frappe | **64** (sans Smite) |
+| **Pal 7 / Occ 5** | CHA 20, Nyrulna +3, Maléfice +1d6 | 1d6+8 + 1d6 ≈ **22** × 2 | **44** passif |
+
+### Alpha Strike — Scénario Paralysie + Critique
+
+Quand le boss est paralysé, **toutes les attaques au corps à corps deviennent des critiques** (tous les dés de dégâts sont doublés) :
+
+| Composant | Dés normaux | Doublés (critique) | Moy. |
+|-----------|------------|-------------------|------|
+| Arme (Nyrulna +3) | 1d6+8 | 2d6+8 | **15** |
+| Smite Niv.3 | 4d8 | 8d8 | **36** |
+| Attaques Sauvages (Demi-Orc) | +1d6 | +2d6 | **+7** |
+| Anneau Bien-aimée | — | Critique forcé | — |
+| **Total par frappe (critique)** | | | **≈ 58** |
+| **× 2 attaques** | | | **≈ 116** |
+| **+ Astarion (Embuscade)** | | | **+90–130** |
+| **TOTAL TOUR 1** | | | **≈ 200–250** |
+
+> La quasi-totalité des boss de l'Acte 3 ont 250–350 PV. **Un tour suffit** si le combo passe.
+
+### Pourquoi Oathbreaker bat Devotion — Mathématiquement
+
+| Comparaison | Serment du Dévouement | Briseur de Serment |
+|-------------|----------------------|-------------------|
+| Aura niv.6 | Immunité Charme | **+CHA dégâts (passif)** |
+| Aura niv.7 | +CHA JS contre charme | **+CHA TOUTES frappes** |
+| DPS passif supplémentaire (CHA 20) | 0 | **+10 dégâts / frappe** |
+| Sur 2 attaques / tour | +0 dégâts | **+20 dégâts passifs** |
+| Sur un combat de 5 tours | +0 | **+200 dégâts cumulés** |
+
+**L'Aura de Haine équivaut à un bonus de +3 magique permanent** sur votre arme. C'est pourquoi le Briseur de Serment est objectivement supérieur offensivement.
+
+### Budget CHA — Comment Atteindre 20
+
+| Source | CHA gagné | Disponibilité |
+|--------|-----------|--------------|
+| Point Buy création | **16** | Dès la création |
+| **Bonus racial Demi-Orc (+2 sur CHA)** | **+2 → 18** | Dès la création |
+| **Don Niv.4 (Pal 4) +2 CHA** | **+2 → 20** | Niveau 4 — cap atteint |
+| **Bonus hors-build** | | |
+| Cheveux d'Ethel (Acte 1) | +1 à n'importe quelle stat | Acte 1 — tôt |
+| Miroir de la Perte (Acte 2) | +2 à n'importe quelle stat | Acte 2 — milieu |
+
+> Avec le Demi-Orc, le cap CHA 20 est atteint dès le Niveau 4 avec un seul Don — contre Niveau 9 pour le Zariel Tiefling. Cela libère votre second Don (Occultiste 4) pour **Sentinelle** ou **Maître des Armes de Guerre** sans attendre Ethel ou le Miroir.
+
+<CalloutBlock type="tip" title="Build Extrême — CHA 23 + 2 Dons offensifs avec Demi-Orc">
+Avec Demi-Orc (CHA 18 à la création) + Don Niv.4 (+2 → 20) + Cheveux d'Ethel (+1 → 21) + Miroir de la Perte (+2 → 23), vous pouvez atteindre **CHA 23** tout en gardant votre second Don (Niveau 11) libre pour **Sentinelle** + **Maître des Armes de Guerre**. Ce chemin n'est possible qu'avec le Demi-Orc — aucune autre race ne permet d'atteindre CHA 20 dès le Niveau 4 et de libérer ainsi le second Don pour une utilisation offensive.
+</CalloutBlock>
+
+</section>
+
+---
+
 <section id="phase2">
 
-## 1.12 — Phase 2 : L'Éveil Magique (Niv. 8 → 12)
+## 1.13 — Phase 2 : L'Éveil Magique (Niv. 8 → 12)
 
 L'heure de vérité. Vous combinez la fureur du Paladin avec le Pacte de l'Occultiste sans perdre votre Extra Attaque.
 
 **Au Niveau 8 — Marche à suivre stricte :**
 
 1. Rachetez votre Serment auprès du Chevalier Parjure.
-2. Allez chez Flétrissure → respécialisez : FOR 10, CHA 16+2.
+2. Allez chez Flétrissure → respécialisez : FOR 8, CHA 16 (Point Buy) + bonus racial Demi-Orc +2 = **CHA 18**, puis le Don Pal 4 déjà actif vous laisse à **CHA 20**.
 3. **Patron :** Grand Ancien (critiques) ou Fiélon (survie).
 4. **Sorts & Invocations :** Décharge Occulte, Bouclier (si GOO), Armure d'Agathys, Décharge Agonisante, Décharge Répulsive.
 5. **Niv.3 Occultiste :** Liez votre arme chaque matin pour utiliser le Charisme. Vous regagnez 2 emplacements Niv.3 à chaque repos court.
 6. Rebrisez immédiatement votre serment pour récupérer l'Aura de Haine.
 
-**Au Niveau 9 — Don +2 CHA (→ 20) :** Le cap ultime. Tout s'améliore simultanément — attaque (+8 au total), dégâts bonus, sorts DC à 16. Si vous avez eu les Cheveux d'Ethel (+1 CON), vous pouvez investir ce don en CHA et utiliser votre seconde occasion pour Sentinelle.
+**Au Niveau 9 — Don offensif :** CHA 20 étant déjà atteint depuis le Niveau 4 (Demi-Orc), ce Don est entièrement libre. Prenez **Sentinelle** pour verrouiller les ennemis qui tentent de contourner votre ligne, ou **Maître des Armes de Guerre** pour ajouter une attaque bonus avec votre arme. Attaque totale au corps à corps : **+14** (CHA 20 + Maîtrise Pal 7 + Pacte Lame).
 
 <CalloutBlock type="tip" title="L'Apothéose — Niveau 12">
 Les 2 emplacements Occultiste Niv.3 sur repos court vous transforment en **machine à Smites inépuisable**. Entre chaque combat difficile, faites un repos court : vos emplacements sont récupérés. Vous pouvez Smite 2 fois par groupe d'ennemis sans jamais épuiser vos ressources sur repos long.

@@ -50,7 +50,7 @@ const hasSidebar = !!currentPage && section !== 'dashboard';
   <TopBar currentSection={section} currentPath={currentPath} />
 
   <!-- Wrapper principal pleine hauteur -->
-  <div class="flex min-h-[calc(100vh-3.5rem)]">
+  <div class="flex min-h-[calc(100vh-3.5rem)] overflow-x-hidden">
 
     <!-- ── Sidebar contextuelle (desktop uniquement) ─────────── -->
     {hasSidebar && (

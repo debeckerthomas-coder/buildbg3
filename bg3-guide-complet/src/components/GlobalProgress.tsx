@@ -44,7 +44,7 @@ function computeProgress(): ProgressData {
     total += actTotal;
     return {
       key,
-      label: key.replace('bg3-checklist-', 'Acte ').replace('acte', ''),
+      label: key.replace('bg3-checklist-acte', 'Acte '),
       completed: actCompleted,
       total: actTotal,
     };
@@ -146,7 +146,7 @@ export default function GlobalProgress() {
                 <div key={act.key}>
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-ui text-xs text-text-secondary capitalize">
-                      {act.key.replace('bg3-checklist-', 'Acte ')}
+                      {act.label}
                     </span>
                     <span className="font-ui text-xs text-text-muted">
                       {act.completed}/{act.total}
@@ -171,7 +171,11 @@ export default function GlobalProgress() {
               <button
                 onClick={() => {
                   if (confirm('Réinitialiser toute la progression ?')) {
-                    CHECKLIST_KEYS.forEach(k => localStorage.removeItem(k));
+                    try {
+                      CHECKLIST_KEYS.forEach(k => localStorage.removeItem(k));
+                    } catch {
+                      // localStorage non disponible
+                    }
                     setProgress(computeProgress());
                     window.dispatchEvent(new Event('bg3:progress-updated'));
                     setOpen(false);

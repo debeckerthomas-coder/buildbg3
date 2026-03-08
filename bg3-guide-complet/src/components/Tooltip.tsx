@@ -237,7 +237,7 @@ export default function Tooltip(props: TooltipProps) {
     return () => document.removeEventListener('mousedown', handler);
   }, [visible]);
 
-  const tooltipId = `tt-${resolvedName.replace(/[\s']/g, '-')}`;
+  const tooltipId = `tt-${(resolvedName || 'unknown').replace(/[^\w-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}`;
 
   // Détermine si on affiche le nouveau style enrichi ou l'ancien style
   const isEnriched = !!(resolvedDesc || resolvedType);
@@ -466,6 +466,10 @@ export default function Tooltip(props: TooltipProps) {
                       alt={resolvedName}
                       style={{ width: 36, height: 36, objectFit: 'contain' }}
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        const parent = e.currentTarget.parentElement as HTMLElement | null;
+                        if (parent) parent.style.display = 'none';
+                      }}
                     />
                   </div>
                 )}

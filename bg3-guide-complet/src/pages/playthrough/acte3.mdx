@@ -290,6 +290,10 @@ La forteresse du **Roc du Ver** est le QG de Gortash. Assistez à son couronneme
 
 La Ville basse regorge de quêtes, marchands et trésors. Atteignez le **niveau 12** en complétant les quêtes secondaires. Achetez l'équipement définitif **avant** d'engager le moindre boss majeur.
 
+<CalloutBlock type="tip" title="Patch 8 — Ville basse : nouvelles quêtes et marchands">
+Le Patch 8 n'a pas modifié la structure de la Ville basse ni les emplacements des items BiS. Les stratégies de cette section restent valides. Si vous avez accès à de nouvelles sous-classes via respec, c'est le bon moment pour finaliser la configuration de vos compagnons chez Flétrissure avant les boss majeurs.
+</CalloutBlock>
+
 <Checklist
   client:load
   storageKey="bg3-checklist-acte3"
@@ -368,6 +372,20 @@ Vous pouvez **accepter** l'alliance de Gortash (il vous donne sa Pierre Néthér
 - **Le Hack Immobilisation :** Gortash est **humanoïde** ! Lancez <Tooltip name="Immobilisation de Personne" type="Sort Mage/Clerc Niv.2" stats="JS Sagesse — Paralysie + critiques garantis" imageUrl="https://bg3.wiki/w/images/b/b3/Hold_Person_Icon.png" client:idle>Si Gortash rate son jet de sauvegarde, il est paralysé : votre Lockadin a 100% de chances de critique sur chaque attaque. Combo dévastateur avec un Smite de Niveau 3.</Tooltip>. S'il rate, 100% de critiques.
 - **Positionnement :** Attirez-le sur le **balcon extérieur** — les lance-flammes muraux ne le suivent pas.
 
+<CalloutBlock type="tip" title="Synergie Gale + Lockadin — Immobilisation → Critique garanti">
+Le combo Immobilisation de Personne (Gale) + Smite de Niveau 3 (Lockadin) est l'un des DPS bursts les plus élevés du jeu contre les boss humanoïdes. Sur un critique : 6d8 dégâts de Smite Radiant (max 48) + dégâts arme crités + Maléfice. Gortash peut perdre 40 à 60% de ses PV en un seul round. Conservez ce combo pour le premier round où vous l'avez isolé sur le balcon.
+</CalloutBlock>
+
+**Checklist pré-combat Gortash :**
+
+| Préparation | Obligatoire ? | Détail |
+|---|---|---|
+| Fonderie détruite | Oui — critique | Sans ça, des Gardes d'Acier rejoignent le combat |
+| Sombrecœur avec Délivrance prête | Oui — critique | Un slot Niv.3 réservé — NE PAS le dépenser avant |
+| Gale avec Immobilisation de Personne | Recommandé | Niv.2 upcasté (Niv.3 ou 4 = DC plus haute) |
+| Lien de Protection sur Lockadin | Recommandé | Via mercenaire de camp avant l'ascenseur |
+| Anneau Bien-aimée du Tueur prêt | Recommandé | Activez juste avant le Smite post-Immobilisation |
+
 </section>
 
 ---
@@ -396,6 +414,18 @@ Les cultistes en hauteur maintiennent l'invocation de Bhaal et disposent de **Sa
 - **Anneau Bien-aimée du Tueur :** Activez avant un gros Smite pour garantir un critique.
 - **Légendaire — Assaut du Porteur de Mort :** 4 coups à ~50 dégâts. Ayez Protection contre les armes et une CA maximale.
 - **Duel (Sombres Pulsions) :** Si vous êtes Dark Urge, c'est un duel 1v1 sans cultistes.
+
+<CalloutBlock type="tip" title="Patch 8 — Orin l'Écorcheur : mécaniques inchangées">
+Les 12 charges d'Implacable d'Orin sont inchangées en Patch 8. Projectile Magique upcasté reste la seule méthode fiable pour vider les boucliers en un tour. Notez que l'état **Immobilisation de Personne (Hold Person) est inefficace sur Orin en forme d'Écorcheur** — elle n'est plus humanoïde dans cette phase. Gardez Immobilisation pour la Phase 1 uniquement (forme humanoïde), puis passez aux Smites purs en Phase 2.
+</CalloutBlock>
+
+**Résumé des phases Orin :**
+
+| Phase | État | Stratégie clé | Ce qui NE fonctionne PAS |
+|---|---|---|---|
+| Phase 1 (humanoïde) | Cultistes avec Sanctuaire | Dégâts de zone pour lever les Sanctuaires | Cibler directement les cultistes sous Sanctuaire |
+| Phase 2 (Écorcheur) | 12 charges Implacable | Projectile Magique × 9 fléchettes → vide les boucliers | Immobilisation de Personne (non-humanoïde) |
+| Phase 2 (combat) | Légendaire active | Smites Niv.3 + Bien-aimée du Tueur | Concentration — elle frappe 4× par round |
 
 </section>
 
@@ -536,9 +566,44 @@ Si le Lockadin fonce au Tour 1 et inflige Contondant + Radiant + Tonnerre, au To
         },
         {
           id: "final3-05",
-          label: "<strong>🏆 Dé d'Or obtenu !</strong> Votre Mode Honneur est victorieux.",
+          label: "<strong>Dé d'Or obtenu !</strong> Votre Mode Honneur est victorieux.",
           priority: "critical",
-          tag: "🏆 Victoire"
+          tag: "Victoire"
+        },
+      ]
+    },
+    {
+      title: "Équipement BiS Lockadin — Avant le combat final",
+      items: [
+        {
+          id: "bis-01",
+          label: "<strong>Armure du Crépuscule Infernal</strong> (21 CA, immunité Feu & Crits) — drop Raphaël.",
+          priority: "critical",
+          tag: "BiS Acte 3"
+        },
+        {
+          id: "bis-02",
+          label: "<strong>Forteresse Ambulante de Viconia</strong> (+3 CA, Renvoi de sorts) — drop Viconia.",
+          priority: "critical",
+          tag: "BiS Acte 3"
+        },
+        {
+          id: "bis-03",
+          label: "<strong>Heaume de Balduran</strong> (Immunité Étourdissement & Crits) — drop Ansur.",
+          priority: "important",
+          tag: "BiS Acte 3"
+        },
+        {
+          id: "bis-04",
+          label: "<strong>Héritage des Maîtres</strong> (+2 attaque & dégâts) — Sorcerie de l'Archmage.",
+          priority: "critical",
+          tag: "BiS Acte 3"
+        },
+        {
+          id: "bis-05",
+          label: "<strong>Anneau Bien-aimée du Tueur</strong> (critique forcé 1×/repos) — Shadowfell Acte 2.",
+          priority: "important",
+          tag: "BiS"
         },
       ]
     }
